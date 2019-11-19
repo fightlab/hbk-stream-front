@@ -1,23 +1,17 @@
 import * as React from 'react';
-// routing, etc.
+import {
+  Switch,
+  Route,
+} from 'react-router-dom';
 
-interface Person {
-  firstName: string,
-  lastName: string
-}
-
-const greeter = (person: Person): string => `Hello ${person.firstName} ${person.lastName}!`;
+import Home from '~/ui/Routes/Home';
 
 export default function App() {
-  const user: Person = {
-    firstName: 'Mahesh',
-    lastName: 'Makani',
-  };
-
   return (
-    <div>
-      <h1>hbk stream front</h1>
-      <h2>{greeter(user)}</h2>
-    </div>
+    <Switch>
+      <Route path="/">
+        <Home />
+      </Route>
+    </Switch>
   );
 }

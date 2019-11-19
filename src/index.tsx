@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { render } from 'react-dom';
-// App wrapped with redux Provider, store, etc.
+import { BrowserRouter as Router } from 'react-router-dom';
+import 'typeface-roboto';
 
 import App from '~/ui/App';
 
 render(
-  <App />,
+  <Router>
+    <App />
+  </Router>,
   document.getElementById('root'),
 );
