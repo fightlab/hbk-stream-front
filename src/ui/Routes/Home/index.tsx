@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -11,37 +12,37 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import AspectRatio from '@material-ui/icons/AspectRatio';
 import PictureInPictureIcon from '@material-ui/icons/PictureInPicture';
 
-export default function Home() {
-  return (
-    <>
-      <CssBaseline />
-      <Container maxWidth="sm">
-        <Box my={4}>
-          <Typography variant="h4" component="h1" gutterBottom>
+const Home = () => (
+  <>
+    <CssBaseline />
+    <Container maxWidth="sm">
+      <Box my={4}>
+        <Typography variant="h4" component="h1" gutterBottom>
           Habrewken Stream Tool Front
-          </Typography>
-          <List component="nav" aria-label="main mailbox folders">
-            <ListItem button>
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary="Tool" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <AspectRatio />
-              </ListItemIcon>
-              <ListItemText primary="Scoreboard" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <PictureInPictureIcon />
-              </ListItemIcon>
-              <ListItemText primary="Camera" />
-            </ListItem>
-          </List>
-        </Box>
-      </Container>
-    </>
-  );
-}
+        </Typography>
+        <List component="nav">
+          <ListItem button component={Link} to="/tool">
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Tool" />
+          </ListItem>
+          <ListItem button component={Link} to="/scoreboard">
+            <ListItemIcon>
+              <AspectRatio />
+            </ListItemIcon>
+            <ListItemText primary="Scoreboard" />
+          </ListItem>
+          <ListItem button component={Link} to="/camera">
+            <ListItemIcon>
+              <PictureInPictureIcon />
+            </ListItemIcon>
+            <ListItemText primary="Camera" />
+          </ListItem>
+        </List>
+      </Box>
+    </Container>
+  </>
+);
+
+export default withRouter(Home);

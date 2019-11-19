@@ -2,16 +2,29 @@ import * as React from 'react';
 import {
   Switch,
   Route,
+  withRouter,
 } from 'react-router-dom';
 
 import Home from '~/ui/Routes/Home';
+import Camera from '~/ui/Routes/Camera';
+import Scoreboard from '~/ui/Routes/Scoreboard';
+import Tool from '~/ui/Routes/Tool';
 
-export default function App() {
-  return (
-    <Switch>
-      <Route path="/">
-        <Home />
-      </Route>
-    </Switch>
-  );
-}
+const App = () => (
+  <Switch>
+    <Route exact path="/">
+      <Home />
+    </Route>
+    <Route exact path="/tool">
+      <Tool />
+    </Route>
+    <Route exact path="/camera">
+      <Camera />
+    </Route>
+    <Route exact path="/scoreboard">
+      <Scoreboard />
+    </Route>
+  </Switch>
+);
+
+export default withRouter(App);
