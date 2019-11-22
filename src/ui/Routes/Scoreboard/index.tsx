@@ -2,7 +2,9 @@ import * as React from 'react';
 import withStyles from 'react-jss';
 
 import Socket from '~/ui/Services/socket';
-import ScoreboardText from '~/ui/Components/ScoreboardText';
+import ScoreboardTextBox from '~ui/Components/ScoreboardTextBox';
+import Text from '~ui/Components/Text';
+import theme from '../../../theme';
 
 interface IScoreboardProps {
   classes: {
@@ -14,13 +16,7 @@ interface IScoreboardState {
 }
 
 const styles = {
-  root: {
-    position: 'absolute',
-    height: 1080,
-    width: 1920,
-    top: 0,
-    left: 0,
-  },
+  root: theme.container,
 };
 
 class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
@@ -37,12 +33,12 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
 
     return (
       <div className={classes.root}>
-        <ScoreboardText
+        <ScoreboardTextBox
           left={0}
           right={0}
         >
-          <span>HBK</span>
-        </ScoreboardText>
+          <Text>HBK</Text>
+        </ScoreboardTextBox>
       </div>
     );
   }
