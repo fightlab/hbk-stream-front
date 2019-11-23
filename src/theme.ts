@@ -1,33 +1,3 @@
-interface ITheme {
-  container: IThemeContainer
-  white: string
-  transparent: string
-  orange: string
-  grey: string
-  darkGrey: string
-  rawlineBold: IThemeFont
-  border: IThemeBorder
-  cabin: IThemeFont
-}
-
-interface IThemeContainer {
-  position: string
-  height: number|string
-  width: number|string
-  top: number
-  left: number
-}
-
-interface IThemeFont {
-  fontFamily: string
-  fontWeight?: number
-  fontStyle?: string
-}
-
-interface IThemeBorder {
-  borderRadius: number|string
-}
-
 const theme: ITheme = {
   container: {
     position: 'absolute',
@@ -45,9 +15,22 @@ const theme: ITheme = {
     fontFamily: "'rawline', sans-serif",
     fontWeight: 700,
     fontStyle: 'normal',
+    fontVariant: 'small-caps',
   },
   border: {
     borderRadius: '3px',
+  },
+  borderTop: {
+    borderRadius: '3px 3px 0px 0px',
+  },
+  borderBottom: {
+    borderRadius: '0px 0px 3px 3px',
+  },
+  borderRight: {
+    borderRadius: '0px 3px 0px 3px',
+  },
+  borderLeft: {
+    borderRadius: '3px 0px 3px 0px',
   },
   cabin: {
     fontFamily: "'Cabin', sans-serif",

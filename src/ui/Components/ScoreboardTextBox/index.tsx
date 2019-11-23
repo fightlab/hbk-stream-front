@@ -1,5 +1,6 @@
 import * as React from 'react';
 import withStyles from 'react-jss';
+import theme from '~theme';
 
 interface IScoreboardTextBoxProps {
   children?: any
@@ -15,6 +16,7 @@ interface IScoreboardTextBoxProps {
   textAlign?: string
   backgroundColor?: string
   padding?: string|number
+  border?: IThemeBorder
   classes: {
     root: string
   }
@@ -34,6 +36,7 @@ const styles = {
     textAlign: props.textAlign,
     backgroundColor: props.backgroundColor,
     padding: props.padding,
+    borderRadius: props.border.borderRadius,
   }),
 };
 
@@ -48,6 +51,7 @@ class ScoreboardTextBox extends React.PureComponent<IScoreboardTextBoxProps> {
     padding: '0px 10px 0px 10px',
     children: '',
     textAlign: 'center',
+    border: theme.border,
     zIndex: 1,
   }
 

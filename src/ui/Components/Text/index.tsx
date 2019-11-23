@@ -1,14 +1,12 @@
 import * as React from 'react';
 import withStyles from 'react-jss';
+import { merge } from 'lodash';
+import theme from '~theme';
 
 interface ITextProps {
   children?: any
   color?: string
-  fontFamily?: string
-  fontWeight?: number
-  fontStyle?: string
-  fontSize?: string|number
-  fontVariant?: string
+  font?: IThemeFont
   classes: {
     root: string
   }
@@ -17,22 +15,25 @@ interface ITextProps {
 const styles = {
   root: (props: ITextProps) => ({
     color: props.color,
-    fontFamily: props.fontFamily,
-    fontWeight: props.fontWeight,
-    fontStyle: props.fontStyle,
-    fontSize: props.fontSize,
-    fontVariant: props.fontVariant,
+    fontFamily: props.font.fontFamily,
+    fontWeight: props.font.fontWeight,
+    fontStyle: props.font.fontStyle,
+    fontSize: props.font.fontSize,
+    fontVariant: props.font.fontVariant,
   }),
 };
+
+const defaultFont: IThemeFont = merge({}, theme.rawlineBold, {
+  fontSize: '36pt',
+  fontVariant: 'small-caps',
+});
 
 class Text extends React.PureComponent<ITextProps> {
   static defaultProps: ITextProps = {
     children: '',
     classes: { root: '' },
-    color: '#FFFFFF',
-    fontFamily: "'rawline', sans-serif",
-    fontSize: '36pt',
-    fontVariant: 'small-caps',
+    color: theme.white,
+    font: defaultFont,
   }
 
   render() {
