@@ -4,9 +4,10 @@ import { merge } from 'lodash';
 import theme from '~theme';
 
 interface ITextProps {
-  children?: any
+  children?: string|number
   color?: string
   font?: IThemeFont
+  lowerCase?: boolean
   classes: {
     root: string
   }
@@ -35,12 +36,19 @@ class Text extends React.PureComponent<ITextProps> {
     classes: { root: '' },
     color: theme.white,
     font: defaultFont,
+    lowerCase: false,
   }
 
   render() {
-    const { children, classes } = this.props;
+    const { children, classes, lowerCase } = this.props;
     return (
-      <span className={classes.root}>{children}</span>
+      <span className={classes.root}>
+        {
+          lowerCase
+            ? children.toString().toLowerCase()
+            : children
+        }
+      </span>
     );
   }
 }

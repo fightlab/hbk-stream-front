@@ -5,7 +5,10 @@ interface ITheme {
   orange: string
   grey: string
   darkGrey: string
+  rawline: IThemeFont
+  raleway: IThemeFont
   rawlineBold: IThemeFont
+  ralewayBold: IThemeFont
   border: IThemeBorder
   borderTop: IThemeBorder
   borderBottom: IThemeBorder

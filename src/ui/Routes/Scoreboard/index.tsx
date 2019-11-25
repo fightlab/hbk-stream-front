@@ -3,9 +3,9 @@ import withStyles from 'react-jss';
 import { merge } from 'lodash';
 
 import Socket from '~/ui/Services/socket';
-import ScoreboardTextBox from '~ui/Components/ScoreboardTextBox';
+import TextBox from '~ui/Components/TextBox';
 import Text from '~ui/Components/Text';
-import theme from '../../../theme';
+import theme from '~theme';
 
 interface IScoreboardProps {
   classes: {
@@ -36,7 +36,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
       io: new Socket(),
       p1n: 'Player 1',
       p2n: 'Player 2',
-      p1s: 0,
+      p1s: 3,
       p2s: 0,
       tl: 'HBK',
       tr: '#000',
@@ -57,7 +57,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
 
     return (
       <div className={classes.root}>
-        <ScoreboardTextBox
+        <TextBox
           // hbk text
           left={0}
           right={0}
@@ -74,40 +74,40 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           >
             {tr}
           </Text>
-        </ScoreboardTextBox>
-        <ScoreboardTextBox
+        </TextBox>
+        <TextBox
           // player 1 name
           right={1216}
           textAlign="right"
           border={theme.borderBottom}
         >
           <Text>{p1n}</Text>
-        </ScoreboardTextBox>
-        <ScoreboardTextBox
+        </TextBox>
+        <TextBox
           // player 1 score
           left={714}
           width={50}
           border={theme.borderBottom}
         >
           <Text>{p1s}</Text>
-        </ScoreboardTextBox>
-        <ScoreboardTextBox
+        </TextBox>
+        <TextBox
           // player 2 name
           left={1216}
           textAlign="left"
           border={theme.borderBottom}
         >
           <Text>{p2n}</Text>
-        </ScoreboardTextBox>
-        <ScoreboardTextBox
+        </TextBox>
+        <TextBox
           // player 2 score
           right={714}
           width={50}
           border={theme.borderBottom}
         >
           <Text>{p2s}</Text>
-        </ScoreboardTextBox>
-        <ScoreboardTextBox
+        </TextBox>
+        <TextBox
           // bottom text
           left={0}
           right={0}
@@ -122,7 +122,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           >
             {br}
           </Text>
-        </ScoreboardTextBox>
+        </TextBox>
       </div>
     );
   }

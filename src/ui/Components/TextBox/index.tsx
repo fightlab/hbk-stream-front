@@ -2,7 +2,7 @@ import * as React from 'react';
 import withStyles from 'react-jss';
 import theme from '~theme';
 
-interface IScoreboardTextBoxProps {
+interface ITextBoxProps {
   children?: any
   position?: string
   marginLeft?: string|number
@@ -23,7 +23,7 @@ interface IScoreboardTextBoxProps {
 }
 
 const styles = {
-  root: (props: IScoreboardTextBoxProps) => ({
+  root: (props: ITextBoxProps) => ({
     position: props.position,
     marginLeft: props.marginLeft,
     marginRight: props.marginRight,
@@ -40,8 +40,8 @@ const styles = {
   }),
 };
 
-class ScoreboardTextBox extends React.PureComponent<IScoreboardTextBoxProps> {
-  static defaultProps: IScoreboardTextBoxProps = {
+class TextBox extends React.PureComponent<ITextBoxProps> {
+  static defaultProps: ITextBoxProps = {
     classes: { root: '' },
     position: 'absolute',
     marginLeft: 'auto',
@@ -63,4 +63,4 @@ class ScoreboardTextBox extends React.PureComponent<IScoreboardTextBoxProps> {
   }
 }
 
-export default withStyles(styles)(ScoreboardTextBox);
+export default withStyles(styles)(TextBox);

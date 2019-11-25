@@ -2,12 +2,14 @@ import * as React from 'react';
 import withStyles from 'react-jss';
 import Icon from '@mdi/react';
 import { mdiFacebookBox, mdiTwitterBox, mdiWebBox } from '@mdi/js';
+import { merge } from 'lodash';
 
 import cameraImage from './hbk_camera.png';
 import Socket from '~/ui/Services/socket';
 import Image from '~/ui/Components/Image';
 import theme from '~theme';
 import Text from '~ui/Components/Text';
+import TextBox from '~ui/Components/TextBox';
 
 interface ICameraProps {
   classes: {
@@ -60,12 +62,12 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
       io: new Socket(),
       hbk: 'Habrewken #000',
       brewdog: 'Brewdog Brighton',
-      fgc: 'Brighton FGC',
-      date: new Date().toLocaleDateString(),
+      fgc: 'Brighton Fighting Game Community',
+      date: 'Wednesday XXth MONTH 20XX',
       facebook: 'fightlabbrighton',
       twitter: 'fight_lab',
       web: 'hbk.gg',
-      game: 'GAME NAME',
+      game: 'Street Fighter V',
     };
   }
 
@@ -75,31 +77,209 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
       hbk, brewdog, fgc, date, facebook, twitter, web, game,
     } = this.state;
 
+    const { transparent, orange, cabin, rawline, rawlineBold } = theme;
+
     return (
       <div className={classes.root}>
         <Image
           src={cameraImage}
           alt="camera"
         />
-        <Text>{facebook}</Text>
+        <TextBox
+          // hbk text
+          top={5}
+          left={5}
+          textAlign="left"
+          backgroundColor={transparent}
+        >
+          <Text
+            font={
+              merge(
+                {},
+                rawlineBold,
+                {
+                  fontSize: '72pt',
+                },
+              )
+            }
+          >
+            {hbk}
+          </Text>
+        </TextBox>
+        <TextBox
+          // game text
+          top={5}
+          right={5}
+          textAlign="right"
+          backgroundColor={transparent}
+        >
+          <Text
+            color={orange}
+            font={
+              merge(
+                {},
+                rawlineBold,
+                {
+                  fontSize: '72pt',
+                },
+              )
+            }
+          >
+            {game}
+          </Text>
+        </TextBox>
+        <TextBox
+          // venue text
+          bottom={30 + 50 * 2}
+          left={5}
+          textAlign="left"
+          backgroundColor={transparent}
+        >
+          <Text
+            font={
+              merge(
+                {},
+                rawlineBold,
+                {
+                  fontSize: '56pt',
+                },
+              )
+            }
+          >
+            {brewdog}
+          </Text>
+        </TextBox>
+        <TextBox
+          // date text
+          bottom={50 * 1}
+          left={5}
+          textAlign="left"
+          backgroundColor={transparent}
+        >
+          <Text
+            color={orange}
+            font={
+              merge(
+                {},
+                cabin,
+                {
+                  fontSize: '42pt',
+                },
+              )
+            }
+          >
+            {date}
+          </Text>
+        </TextBox>
+        <TextBox
+          // facebook text
+          bottom={5 + 50 * 2}
+          right={50 * 1}
+          textAlign="right"
+          backgroundColor={transparent}
+        >
+          <Text
+            lowerCase
+            font={
+              merge(
+                {},
+                {
+                  fontVariant: 'small-caps',
+                  fontSize: '36pt',
+                },
+                cabin,
+              )
+            }
+          >
+            {facebook}
+          </Text>
+        </TextBox>
         <Icon
           className={classes.iconFacebook}
           path={mdiFacebookBox}
           size="36pt"
-          color={theme.orange}
+          color={orange}
         />
+        <TextBox
+          // twitter text
+          bottom={5 + 50 * 1}
+          right={50 * 1}
+          textAlign="right"
+          backgroundColor={transparent}
+        >
+          <Text
+            lowerCase
+            font={
+              merge(
+                {},
+                {
+                  fontVariant: 'small-caps',
+                  fontSize: '36pt',
+                },
+                cabin,
+              )
+            }
+          >
+            {twitter}
+          </Text>
+        </TextBox>
         <Icon
           className={classes.iconTwitter}
           path={mdiTwitterBox}
           size="36pt"
-          color={theme.orange}
+          color={orange}
         />
+        <TextBox
+          // web text
+          bottom={5 + 50 * 0}
+          right={50 * 1}
+          textAlign="right"
+          backgroundColor={transparent}
+        >
+          <Text
+            lowerCase
+            font={
+              merge(
+                {},
+                {
+                  fontVariant: 'small-caps',
+                  fontSize: '36pt',
+                },
+                cabin,
+              )
+            }
+          >
+            {web}
+          </Text>
+        </TextBox>
         <Icon
           className={classes.iconWeb}
           path={mdiWebBox}
           size="36pt"
-          color={theme.orange}
+          color={orange}
         />
+        <TextBox
+          // fgc text
+          bottom={5 + 50 * 3}
+          right={5}
+          textAlign="right"
+          backgroundColor={transparent}
+        >
+          <Text
+            color={orange}
+            font={
+              merge(
+                {},
+                rawline,
+                {
+                  fontSize: '42pt',
+                },
+              )
+            }
+          >
+            {fgc}
+          </Text>
+        </TextBox>
       </div>
     );
   }

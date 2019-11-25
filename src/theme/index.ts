@@ -11,8 +11,22 @@ const theme: ITheme = {
   grey: '#424242',
   darkGrey: '#303030',
   transparent: 'rgba(0,0,0,0)',
+  rawline: {
+    fontFamily: "'rawline', sans-serif",
+    fontVariant: 'small-caps',
+  },
+  raleway: {
+    fontFamily: "'Raleway', sans-serif",
+    fontVariant: 'small-caps',
+  },
   rawlineBold: {
     fontFamily: "'rawline', sans-serif",
+    fontWeight: 700,
+    fontStyle: 'normal',
+    fontVariant: 'small-caps',
+  },
+  ralewayBold: {
+    fontFamily: "'Raleway', sans-serif",
     fontWeight: 700,
     fontStyle: 'normal',
     fontVariant: 'small-caps',
