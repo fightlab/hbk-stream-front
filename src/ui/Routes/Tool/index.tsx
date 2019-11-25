@@ -13,6 +13,7 @@ import Grid from '@material-ui/core/Grid';
 import withStyles from 'react-jss';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Files from 'react-files'
 
 import Socket from '~/ui/Services/socket'
 
@@ -25,6 +26,8 @@ const styles = {
 
 class Tool extends React.Component<IToolProps, IToolState> {
   private io = new Socket();
+
+  private importFileReader = new FileReader();
 
   constructor(props) {
     super(props);
@@ -74,6 +77,12 @@ class Tool extends React.Component<IToolProps, IToolState> {
         this.setState({ bracket, participants });
       },
     );
+
+    this.importFileReader.onload = (event) => {
+      const json = event.target.result;
+      const parsed = JSON.parse(json.toString());
+      this.setState(parsed);
+    };
   }
 
   componentDidMount() {
@@ -109,6 +118,21 @@ class Tool extends React.Component<IToolProps, IToolState> {
     const { camera } = this.state;
     camera[name] = value;
     this.setState({ camera });
+  }
+
+  private importFilesChange(files) {
+    const [file = {}] = files;
+    this.importFileReader.readAsText(file);
+  }
+
+  private export() {
+    const state = JSON.stringify(this.state);
+    const blob = new Blob([state], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.download = 'export.json';
+    link.href = url;
+    link.click();
   }
 
   render() {
@@ -349,9 +373,11 @@ class Tool extends React.Component<IToolProps, IToolState> {
                   alignItems="flex-start"
                   spacing={2}
                 >
-                  <Typography variant="overline" display="block" gutterBottom>
-                      Get Participants from Challonge/Smash.gg Tournament
-                  </Typography>
+                  <Grid item xs={12}>
+                    <Typography variant="overline" display="block" gutterBottom>
+                      Get Players from Challonge/Smash.gg Tournament
+                    </Typography>
+                  </Grid>
                   <Grid item xs={12} sm={8}>
                     <TextField
                       label="Tournament URL"
@@ -368,6 +394,28 @@ class Tool extends React.Component<IToolProps, IToolState> {
                     >
                       Get Participants
                     </Button>
+                  </Grid>
+                  <Grid item xs={12} sm={4}>
+                    <Typography variant="overline" display="block" gutterBottom>
+                        Import/Export Values
+                    </Typography>
+                    <ButtonGroup>
+                      <Button>
+                        <Files
+                          onChange={(file) => this.importFilesChange(file)}
+                          multiple={false}
+                          accepts={['application/json', '.json']}
+                          clickable
+                        >
+                          Import
+                        </Files>
+                      </Button>
+                      <Button
+                        onClick={() => this.export()}
+                      >
+                        Export
+                      </Button>
+                    </ButtonGroup>
                   </Grid>
                 </Grid>
               </ExpansionPanelDetails>
