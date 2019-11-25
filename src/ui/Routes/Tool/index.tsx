@@ -145,22 +145,18 @@ class Tool extends React.Component<IToolProps, IToolState> {
       scoreboard.p1s = 0;
       scoreboard.p2s = 0;
     }
-    this.setState({ scoreboard }, () => this.io.emit('scoreboard-update', scoreboard));
+    this.setState({ scoreboard });
   }
 
   private swap({ names = false, scores = false }) {
     const { scoreboard } = this.state;
 
     if (names) {
-      const temp = scoreboard.p1n;
-      scoreboard.p1n = scoreboard.p2n;
-      scoreboard.p2n = temp;
+      [scoreboard.p1n, scoreboard.p2n] = [scoreboard.p2n, scoreboard.p1n];
     }
 
     if (scores) {
-      const temp = scoreboard.p1s;
-      scoreboard.p1s = scoreboard.p2s;
-      scoreboard.p2s = temp;
+      [scoreboard.p1s, scoreboard.p2s] = [scoreboard.p2s, scoreboard.p1s];
     }
 
     this.setState({ scoreboard }, () => this.io.emit('scoreboard-update', scoreboard));
@@ -241,7 +237,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <Typography variant="overline" display="block" gutterBottom>
-                        Reset
+                        Reset - Be sure to hit &quot;Update Scoreboard&quot;
                       </Typography>
                       <ButtonGroup
                         color="secondary"
