@@ -16,16 +16,6 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 import Socket from '~/ui/Services/socket'
 
-interface IToolProps {
-  classes: {
-    form: string
-  }
-}
-
-interface IToolState {
-  io: Socket
-}
-
 const styles = {
   form: {
     width: '100%',
@@ -34,28 +24,99 @@ const styles = {
 
 
 class Tool extends React.Component<IToolProps, IToolState> {
+  private io = new Socket();
+
   constructor(props) {
     super(props);
 
     this.state = {
-      io: new Socket()
+      bracket: '',
+      scoreboard: {
+        p1n: 'Player 1',
+        p2n: 'Player 2',
+        p1s: 3,
+        p2s: 0,
+        tl: 'HBK',
+        tr: '#000',
+        bl: 'Brewdog',
+        br: 'Brighton',
+      },
+      camera: {
+        hbk: 'Habrewken #000',
+        brewdog: 'Brewdog Brighton',
+        fgc: 'Brighton Fighting Game Community',
+        date: 'Wednesday XXth MONTH 20XX',
+        facebook: 'fightlabbrighton',
+        twitter: 'fight_lab',
+        web: 'hbk.gg',
+        game: 'Street Fighter V',
+      },
+      participants: [],
     };
+
+    this.io.on(
+      'scoreboard',
+      (scoreboard) => {
+        this.setState({ scoreboard });
+      },
+    );
+
+    this.io.on(
+      'camera',
+      (camera) => {
+        this.setState({ camera });
+      },
+    );
+
+    this.io.on(
+      'participants',
+      ({ bracket, participants }) => {
+        this.setState({ bracket, participants });
+      },
+    );
+  }
+
+  componentDidMount() {
+    this.io.emit('scoreboard-get');
+    this.io.emit('camera-get');
+    this.io.emit('participants-get');
+  }
+
+  private updateParticipants() {
+    const { bracket } = this.state;
+    this.io.emit('bracket-get', bracket);
+  }
+
+  private updateScoreboard(e) {
+    e.preventDefault();
+    const { scoreboard } = this.state;
+    this.io.emit('scoreboard-update', scoreboard);
+  }
+
+  private updateCamera(e) {
+    e.preventDefault();
+    const { camera } = this.state;
+    this.io.emit('camera-update', camera);
+  }
+
+  private changeScoreboardValue(name, value) {
+    const { scoreboard } = this.state;
+    scoreboard[name] = value;
+    this.setState({ scoreboard });
+  }
+
+  private changeCameraValue(name, value) {
+    const { camera } = this.state;
+    camera[name] = value;
+    this.setState({ camera });
   }
 
   render() {
     const { classes } = this.props;
+    const {
+      scoreboard, camera, bracket, participants,
+    } = this.state;
 
-    const names = [
-      {
-        handle: 'ColdLink',
-      },
-      {
-        handle: 'Abra',
-      },
-      {
-        handle: 'Kadabra',
-      },
-    ];
     return (
       <>
         <CssBaseline />
@@ -71,7 +132,11 @@ class Tool extends React.Component<IToolProps, IToolState> {
                 <Typography>Scoreboard</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <form className={classes.form} noValidate>
+                <form
+                  onSubmit={(e) => this.updateScoreboard(e)}
+                  className={classes.form}
+                  noValidate
+                >
                   <Grid
                     container
                     alignItems="flex-start"
@@ -80,10 +145,12 @@ class Tool extends React.Component<IToolProps, IToolState> {
                     <Grid item xs={10} sm={5}>
                       <Autocomplete
                         freeSolo
-                        options={names.map((option) => option.handle)}
+                        options={participants.map((player) => player.displayName)}
                         renderInput={(params) => (
                           <TextField {...params} label="Player 1" margin="normal" fullWidth />
                         )}
+                        value={scoreboard.p1n}
+                        onInputChange={(_, value) => this.changeScoreboardValue('p1n', value)}
                       />
                     </Grid>
                     <Grid item xs={2} sm={1}>
@@ -92,6 +159,8 @@ class Tool extends React.Component<IToolProps, IToolState> {
                         type="number"
                         margin="normal"
                         fullWidth
+                        value={scoreboard.p1s}
+                        onChange={(e) => this.changeScoreboardValue('p1s', +e.target.value)}
                       />
                     </Grid>
                     <Grid item xs={2} sm={1}>
@@ -100,15 +169,19 @@ class Tool extends React.Component<IToolProps, IToolState> {
                         type="number"
                         margin="normal"
                         fullWidth
+                        value={scoreboard.p2s}
+                        onChange={(e) => this.changeScoreboardValue('p2s', +e.target.value)}
                       />
                     </Grid>
                     <Grid item xs={10} sm={5}>
                       <Autocomplete
                         freeSolo
-                        options={names.map((option) => option.handle)}
+                        options={participants.map((player) => player.displayName)}
                         renderInput={(params) => (
                           <TextField {...params} label="Player 2" margin="normal" fullWidth />
                         )}
+                        value={scoreboard.p2n}
+                        onInputChange={(_, value) => this.changeScoreboardValue('p2n', value)}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -137,24 +210,32 @@ class Tool extends React.Component<IToolProps, IToolState> {
                       <TextField
                         label="Top (White/Left)"
                         fullWidth
+                        value={scoreboard.tl}
+                        onChange={(e) => this.changeScoreboardValue('tl', e.target.value)}
                       />
                     </Grid>
                     <Grid item xs={6} sm={3}>
                       <TextField
                         label="Top (Orange/Right)"
                         fullWidth
+                        value={scoreboard.tr}
+                        onChange={(e) => this.changeScoreboardValue('tr', e.target.value)}
                       />
                     </Grid>
                     <Grid item xs={6} sm={3}>
                       <TextField
                         label="Bottom (Orange/Left)"
                         fullWidth
+                        value={scoreboard.bl}
+                        onChange={(e) => this.changeScoreboardValue('bl', e.target.value)}
                       />
                     </Grid>
                     <Grid item xs={6} sm={3}>
                       <TextField
                         label="Bottom (White/Right)"
                         fullWidth
+                        value={scoreboard.br}
+                        onChange={(e) => this.changeScoreboardValue('br', e.target.value)}
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -173,7 +254,11 @@ class Tool extends React.Component<IToolProps, IToolState> {
                 <Typography>Camera</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <form className={classes.form} noValidate>
+                <form
+                  onSubmit={(e) => this.updateCamera(e)}
+                  className={classes.form}
+                  noValidate
+                >
                   <Grid
                     container
                     alignItems="flex-start"
@@ -183,48 +268,64 @@ class Tool extends React.Component<IToolProps, IToolState> {
                       <TextField
                         label="Event Name (Top Left)"
                         fullWidth
+                        value={camera.hbk}
+                        onChange={(e) => this.changeCameraValue('hbk', e.target.value)}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <TextField
                         label="Game Name (Top Right)"
                         fullWidth
+                        value={camera.game}
+                        onChange={(e) => this.changeCameraValue('game', e.target.value)}
                       />
                     </Grid>
                     <Grid item xs={12} sm={4}>
                       <TextField
                         label="Venue Name (Bottom Left)"
                         fullWidth
+                        value={camera.brewdog}
+                        onChange={(e) => this.changeCameraValue('brewdog', e.target.value)}
                       />
                     </Grid>
                     <Grid item xs={12} sm={4}>
                       <TextField
                         label="Date (Bottom Left)"
                         fullWidth
+                        value={camera.date}
+                        onChange={(e) => this.changeCameraValue('date', e.target.value)}
                       />
                     </Grid>
                     <Grid item xs={12} sm={4}>
                       <TextField
                         label="FGC Name (Bottom Right)"
                         fullWidth
+                        value={camera.fgc}
+                        onChange={(e) => this.changeCameraValue('fgc', e.target.value)}
                       />
                     </Grid>
                     <Grid item xs={12} sm={4}>
                       <TextField
                         label="Facebook"
                         fullWidth
+                        value={camera.facebook}
+                        onChange={(e) => this.changeCameraValue('facebook', e.target.value)}
                       />
                     </Grid>
                     <Grid item xs={12} sm={4}>
                       <TextField
                         label="Twitter"
                         fullWidth
+                        value={camera.twitter}
+                        onChange={(e) => this.changeCameraValue('twitter', e.target.value)}
                       />
                     </Grid>
                     <Grid item xs={12} sm={4}>
                       <TextField
                         label="Website"
                         fullWidth
+                        value={camera.web}
+                        onChange={(e) => this.changeCameraValue('web', e.target.value)}
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -255,10 +356,16 @@ class Tool extends React.Component<IToolProps, IToolState> {
                     <TextField
                       label="Tournament URL"
                       fullWidth
+                      value={bracket}
                     />
                   </Grid>
                   <Grid item xs={12} sm={4}>
-                    <Button type="submit" variant="contained" color="primary">
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      onClick={() => this.updateParticipants()}
+                    >
                       Get Participants
                     </Button>
                   </Grid>

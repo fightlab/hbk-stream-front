@@ -11,27 +11,6 @@ import theme from '~theme';
 import Text from '~ui/Components/Text';
 import TextBox from '~ui/Components/TextBox';
 
-interface ICameraProps {
-  classes: {
-    root: string
-    iconFacebook: string
-    iconTwitter: string
-    iconWeb: string
-  }
-}
-
-interface ICameraState {
-  io: Socket
-  hbk: string
-  brewdog: string
-  fgc: string
-  date: string
-  facebook: string
-  twitter: string
-  web: string
-  game: string
-}
-
 const styles = {
   root: theme.container,
   iconFacebook: {
@@ -55,11 +34,12 @@ const styles = {
 };
 
 class Camera extends React.Component<ICameraProps, ICameraState> {
+  private io =  new Socket();
+
   constructor(props) {
     super(props);
 
     this.state = {
-      io: new Socket(),
       hbk: 'Habrewken #000',
       brewdog: 'Brewdog Brighton',
       fgc: 'Brighton Fighting Game Community',
@@ -77,7 +57,9 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
       hbk, brewdog, fgc, date, facebook, twitter, web, game,
     } = this.state;
 
-    const { transparent, orange, cabin, rawline, rawlineBold } = theme;
+    const {
+      transparent, orange, cabin, rawline, rawlineBold,
+    } = theme;
 
     return (
       <div className={classes.root}>

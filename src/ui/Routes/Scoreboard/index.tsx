@@ -7,36 +7,20 @@ import TextBox from '~ui/Components/TextBox';
 import Text from '~ui/Components/Text';
 import theme from '~theme';
 
-interface IScoreboardProps {
-  classes: {
-    root: string
-  }
-}
-interface IScoreboardState {
-  io: Socket
-  p1n: string
-  p2n: string
-  p1s: number
-  p2s: number
-  tl: string
-  tr: string
-  bl: string
-  br: string
-}
-
 const styles = {
   root: theme.container,
 };
 
 class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
+  private io = new Socket();
+
   constructor(props) {
     super(props);
 
     this.state = {
-      io: new Socket(),
       p1n: 'Player 1',
       p2n: 'Player 2',
-      p1s: 3,
+      p1s: 0,
       p2s: 0,
       tl: 'HBK',
       tr: '#000',
