@@ -173,9 +173,67 @@ class Tool extends React.Component<IToolProps, IToolState> {
                 <Typography>Camera</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <Typography>
-                  Hello World!
-                </Typography>
+                <form className={classes.form} noValidate>
+                  <Grid
+                    container
+                    alignItems="flex-start"
+                    spacing={2}
+                  >
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        label="Event Name (Top Left)"
+                        fullWidth
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        label="Game Name (Top Right)"
+                        fullWidth
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                      <TextField
+                        label="Venue Name (Bottom Left)"
+                        fullWidth
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                      <TextField
+                        label="Date (Bottom Left)"
+                        fullWidth
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                      <TextField
+                        label="FGC Name (Bottom Right)"
+                        fullWidth
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                      <TextField
+                        label="Facebook"
+                        fullWidth
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                      <TextField
+                        label="Twitter"
+                        fullWidth
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                      <TextField
+                        label="Website"
+                        fullWidth
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Button type="submit" variant="contained" color="primary">
+                        Update Camera
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </form>
               </ExpansionPanelDetails>
             </ExpansionPanel>
             <ExpansionPanel>
@@ -185,9 +243,26 @@ class Tool extends React.Component<IToolProps, IToolState> {
                 <Typography>Settings</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <Typography>
-                  Hello World!
-                </Typography>
+                <Grid
+                  container
+                  alignItems="flex-start"
+                  spacing={2}
+                >
+                  <Typography variant="overline" display="block" gutterBottom>
+                      Get Participants from Challonge/Smash.gg Tournament
+                  </Typography>
+                  <Grid item xs={12} sm={8}>
+                    <TextField
+                      label="Tournament URL"
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={4}>
+                    <Button type="submit" variant="contained" color="primary">
+                      Get Participants
+                    </Button>
+                  </Grid>
+                </Grid>
               </ExpansionPanelDetails>
             </ExpansionPanel>
           </Box>
