@@ -24,7 +24,9 @@
   },
   "scripts": {
     "build": "parcel build src/index.html",
-    "dev": "set -e && tsc --noEmit --watch & parcel ./src/index.html"
+    "dev": "set -e && tsc --noEmit --watch & parcel ./src/index.html",
+    "tar": "tar -cvf ./deploy.tar --exclude='*.map' ./captain-definition ./dist/*",
+    "deploy": "npm run build && npm run tar && caprover deploy -t ./deploy.tar"
   },
   "dependencies": {
     "@material-ui/core": "^4.6.1",
