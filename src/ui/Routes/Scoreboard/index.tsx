@@ -13,7 +13,7 @@ interface IScoreboardProps {
   }
 }
 interface IScoreboardState {
-  io: Socket,
+  io: Socket
   p1n: string
   p2n: string
   p1s: number
