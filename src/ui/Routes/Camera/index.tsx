@@ -34,7 +34,7 @@ const styles = {
 };
 
 class Camera extends React.Component<ICameraProps, ICameraState> {
-  private io =  new Socket();
+  private io = new Socket();
 
   constructor(props) {
     super(props);
@@ -49,6 +49,17 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
       web: 'hbk.gg',
       game: 'Street Fighter V',
     };
+
+    this.io.on(
+      'camera',
+      (camera) => {
+        this.setState(camera);
+      },
+    );
+  }
+
+  componentDidMount() {
+    this.io.emit('camera-get');
   }
 
   render() {

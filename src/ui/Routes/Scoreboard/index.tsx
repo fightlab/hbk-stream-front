@@ -27,6 +27,17 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
       bl: 'Brewdog',
       br: 'Brighton',
     };
+
+    this.io.on(
+      'scoreboard',
+      (scoreboard) => {
+        this.setState(scoreboard);
+      },
+    );
+  }
+
+  componentDidMount() {
+    this.io.emit('scoreboard-get');
   }
 
   render() {
