@@ -13,9 +13,9 @@ import Grid from '@material-ui/core/Grid';
 import withStyles from 'react-jss';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Files from 'react-files'
+import Files from 'react-files';
 
-import Socket from '~/ui/Services/socket'
+import Socket from '~/ui/Services/socket';
 
 const styles = {
   form: {
@@ -37,7 +37,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
       scoreboard: {
         p1n: 'Player 1',
         p2n: 'Player 2',
-        p1s: 3,
+        p1s: 0,
         p2s: 0,
         tl: 'HBK',
         tr: '#000',
@@ -135,6 +135,37 @@ class Tool extends React.Component<IToolProps, IToolState> {
     link.click();
   }
 
+  private reset({ names = false, scores = false }) {
+    const { scoreboard } = this.state;
+    if (names) {
+      scoreboard.p1n = '';
+      scoreboard.p2n = '';
+    }
+    if (scores) {
+      scoreboard.p1s = 0;
+      scoreboard.p2s = 0;
+    }
+    this.setState({ scoreboard }, () => this.io.emit('scoreboard-update', scoreboard));
+  }
+
+  private swap({ names = false, scores = false }) {
+    const { scoreboard } = this.state;
+
+    if (names) {
+      const temp = scoreboard.p1n;
+      scoreboard.p1n = scoreboard.p2n;
+      scoreboard.p2n = temp;
+    }
+
+    if (scores) {
+      const temp = scoreboard.p1s;
+      scoreboard.p1s = scoreboard.p2s;
+      scoreboard.p2s = temp;
+    }
+
+    this.setState({ scoreboard }, () => this.io.emit('scoreboard-update', scoreboard));
+  }
+
   render() {
     const { classes } = this.props;
     const {
@@ -147,7 +178,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
         <Container>
           <Box my={4}>
             <Typography variant="h4" component="h1" gutterBottom>
-              Tool
+              HBK Stream Tool
             </Typography>
             <ExpansionPanel>
               <ExpansionPanelSummary
@@ -215,9 +246,21 @@ class Tool extends React.Component<IToolProps, IToolState> {
                       <ButtonGroup
                         color="secondary"
                       >
-                        <Button>Both</Button>
-                        <Button>Names</Button>
-                        <Button>Scores</Button>
+                        <Button
+                          onClick={() => this.reset({ names: true, scores: true })}
+                        >
+                          Both
+                        </Button>
+                        <Button
+                          onClick={() => this.reset({ names: true })}
+                        >
+                          Names
+                        </Button>
+                        <Button
+                          onClick={() => this.reset({ scores: true })}
+                        >
+                          Scores
+                        </Button>
                       </ButtonGroup>
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -225,9 +268,21 @@ class Tool extends React.Component<IToolProps, IToolState> {
                         Swap
                       </Typography>
                       <ButtonGroup>
-                        <Button>Both</Button>
-                        <Button>Names</Button>
-                        <Button>Scores</Button>
+                        <Button
+                          onClick={() => this.swap({ names: true, scores: true })}
+                        >
+                          Both
+                        </Button>
+                        <Button
+                          onClick={() => this.swap({ names: true })}
+                        >
+                          Names
+                        </Button>
+                        <Button
+                          onClick={() => this.swap({ scores: true })}
+                        >
+                          Scores
+                        </Button>
                       </ButtonGroup>
                     </Grid>
                     <Grid item xs={6} sm={3}>
