@@ -20,6 +20,7 @@ const styles = {
     fontStyle: props.font.fontStyle,
     fontSize: props.font.fontSize,
     fontVariant: props.font.fontVariant,
+    zIndex: 1,
   }),
 };
 
