@@ -3,3 +3,4 @@ dist
 .cache
 .env
 deploy.tar
+.env.production
