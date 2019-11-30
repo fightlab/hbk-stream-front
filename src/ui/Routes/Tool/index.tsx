@@ -120,6 +120,10 @@ class Tool extends React.Component<IToolProps, IToolState> {
     this.setState({ camera });
   }
 
+  private changeBracketValue(bracket) {
+    this.setState({ bracket });
+  }
+
   private importFilesChange(files) {
     const [file = {}] = files;
     this.importFileReader.readAsText(file);
@@ -434,6 +438,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
                       label="Tournament URL"
                       fullWidth
                       value={bracket}
+                      onChange={(e) => this.changeBracketValue(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12} sm={4}>
