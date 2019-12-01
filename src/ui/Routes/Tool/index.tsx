@@ -55,6 +55,10 @@ class Tool extends React.Component<IToolProps, IToolState> {
         game: 'Street Fighter V',
       },
       participants: [],
+      nightbot: {
+        bracket: 'https://hbk.challonge.com',
+        social: '• FOLLOW US ON • WEB: https://hbk.gg • FACEBOOK: https://www.facebook.com/FightLabBrighton/ • TWITTER: https://twitter.com/fight_lab • DISCORD: https://discord.gg/rjpDJdz •',
+      },
     };
 
     this.io.on(
@@ -78,6 +82,13 @@ class Tool extends React.Component<IToolProps, IToolState> {
       },
     );
 
+    this.io.on(
+      'nightbot',
+      (nightbot) => {
+        this.setState({ nightbot });
+      },
+    );
+
     this.importFileReader.onload = (event) => {
       const json = event.target.result;
       const parsed = JSON.parse(json.toString());
@@ -89,6 +100,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
     this.io.emit('scoreboard-get');
     this.io.emit('camera-get');
     this.io.emit('participants-get');
+    this.io.emit('nightbot-get');
   }
 
   private updateParticipants() {
@@ -108,6 +120,12 @@ class Tool extends React.Component<IToolProps, IToolState> {
     this.io.emit('camera-update', camera);
   }
 
+  private updateNightbot(e) {
+    e.preventDefault();
+    const { nightbot } = this.state;
+    this.io.emit('nightbot-update', nightbot);
+  }
+
   private changeScoreboardValue(name, value) {
     const { scoreboard } = this.state;
     scoreboard[name] = value;
@@ -118,6 +136,12 @@ class Tool extends React.Component<IToolProps, IToolState> {
     const { camera } = this.state;
     camera[name] = value;
     this.setState({ camera });
+  }
+
+  private changeNightbotValue(name, value) {
+    const { nightbot } = this.state;
+    nightbot[name] = value;
+    this.setState({ nightbot });
   }
 
   private changeBracketValue(bracket) {
@@ -169,7 +193,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
   render() {
     const { classes } = this.props;
     const {
-      scoreboard, camera, bracket, participants,
+      scoreboard, camera, bracket, participants, nightbot,
     } = this.state;
 
     return (
@@ -474,6 +498,48 @@ class Tool extends React.Component<IToolProps, IToolState> {
                     </ButtonGroup>
                   </Grid>
                 </Grid>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <ExpansionPanel>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+              >
+                <Typography>Nightbot</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <form
+                  onSubmit={(e) => this.updateNightbot(e)}
+                  className={classes.form}
+                  noValidate
+                >
+                  <Grid
+                    container
+                    alignItems="flex-start"
+                    spacing={2}
+                  >
+                    <Grid item xs={12}>
+                      <TextField
+                        label="Bracket - Command: '!bracket' or '!brackets'"
+                        fullWidth
+                        value={nightbot.bracket}
+                        onChange={(e) => this.changeNightbotValue('bracket', e.target.value)}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        label="Social Media Info - Command: '!social' or '!follow'"
+                        fullWidth
+                        value={nightbot.social}
+                        onChange={(e) => this.changeNightbotValue('social', e.target.value)}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Button type="submit" variant="contained" color="primary">
+                        Update Nightbot
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </form>
               </ExpansionPanelDetails>
             </ExpansionPanel>
           </Box>

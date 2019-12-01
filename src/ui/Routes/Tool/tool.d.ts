@@ -9,9 +9,15 @@ interface IToolProps {
   }
 }
 
+interface IToolNightbot {
+  bracket: string
+  social: string
+}
+
 interface IToolState {
   scoreboard: IScoreboardState
   camera: ICameraState
   bracket: string
   participants: Array<IToolPlayer>
+  nightbot: IToolNightbot
 }
