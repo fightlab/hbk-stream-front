@@ -63,6 +63,8 @@ $ yarn build
 ```
 This creates a static production build in the `dist` folder, which you can then deploy on any static site.
 
+If you're deploying to a server, be sure to set the `STREAM_SERVER` environment variable to point to the remote server first in `.env` before building and deploying!
+
 We use [CapRover](https://caprover.com/) as the platform we run on, so the scripts in `package.json` are setup for that, but you can deploy to anywhere.
 To deploy to CapRover, it's as sinple as running `yarn deploy` if you have a CapRover server setup.
 
