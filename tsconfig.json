@@ -4,7 +4,7 @@
     "paths": {
       "~*": ["./*"]
     },
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": ["node_modules/@types", "./src/typings"],
     "jsx": "preserve"
   },
   "include": ["src/**/*"]
