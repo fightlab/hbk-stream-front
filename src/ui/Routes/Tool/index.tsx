@@ -14,6 +14,10 @@ import withStyles from 'react-jss';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Files from 'react-files';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 import Socket from '~/ui/Services/socket';
 
@@ -59,6 +63,8 @@ class Tool extends React.Component<IToolProps, IToolState> {
         bracket: 'https://hbk.challonge.com',
         social: '• FOLLOW US ON • WEB: https://hbk.gg • FACEBOOK: https://www.facebook.com/FightLabBrighton/ • TWITTER: https://twitter.com/fight_lab • DISCORD: https://discord.gg/rjpDJdz •',
       },
+      matches: [],
+      match: {},
     };
 
     this.io.on(
@@ -77,8 +83,8 @@ class Tool extends React.Component<IToolProps, IToolState> {
 
     this.io.on(
       'participants',
-      ({ bracket, participants }) => {
-        this.setState({ bracket, participants });
+      ({ bracket, participants, matches }) => {
+        this.setState({ bracket, participants, matches });
       },
     );
 
@@ -130,6 +136,15 @@ class Tool extends React.Component<IToolProps, IToolState> {
     const { scoreboard } = this.state;
     scoreboard[name] = value;
     this.setState({ scoreboard });
+  }
+
+  private changeMatch(e) {
+    console.log(e);
+    e.preventDefault();
+    const { matches } = this.state;
+    const match = matches.find((m) => m.id === e.target.value);
+    console.log(match);
+    this.setState({ match });
   }
 
   private changeCameraValue(name, value) {
@@ -193,8 +208,18 @@ class Tool extends React.Component<IToolProps, IToolState> {
   render() {
     const { classes } = this.props;
     const {
-      scoreboard, camera, bracket, participants, nightbot,
+      scoreboard,
+      camera,
+      bracket,
+      participants,
+      nightbot,
+      matches,
+      match,
     } = this.state;
+
+    const { id: matchId = '' } = match;
+
+    console.log(matches);
 
     return (
       <>
@@ -221,6 +246,23 @@ class Tool extends React.Component<IToolProps, IToolState> {
                     alignItems="flex-start"
                     spacing={2}
                   >
+                    <Grid item xs={12}>
+                      <FormControl
+                        fullWidth
+                      >
+                        <InputLabel>Match From Challonge</InputLabel>
+                        <Select
+                          value={matchId}
+                          onChange={(e) => this.changeMatch(e)}
+                        >
+                          {
+                            matches.map((m) => (
+                              <MenuItem key={m.id} value={m.id}>{`${m.id}: ${participants.find((player) => player.id === m.player1Id).displayName || 'Player'} vs ${participants.find((player) => player.id === m.player2Id).displayName || 'Player'}`}</MenuItem>
+                            ))
+                          }
+                        </Select>
+                      </FormControl>
+                    </Grid>
                     <Grid item xs={10} sm={5}>
                       <Autocomplete
                         freeSolo
