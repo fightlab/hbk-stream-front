@@ -9,6 +9,7 @@ import Home from '~/ui/Routes/Home';
 import Camera from '~/ui/Routes/Camera';
 import Scoreboard from '~/ui/Routes/Scoreboard';
 import Tool from '~/ui/Routes/Tool';
+import Playground from '~ui/Routes/Playground';
 
 const App = () => (
   <Switch>
@@ -23,6 +24,9 @@ const App = () => (
     </Route>
     <Route exact path="/scoreboard">
       <Scoreboard />
+    </Route>
+    <Route exact path="/playground">
+      <Playground />
     </Route>
   </Switch>
 );
