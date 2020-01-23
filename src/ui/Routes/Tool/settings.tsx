@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Files from 'react-files';
+import { toggleDarkMode } from '~ui/Services/helper';
 
 const SettingsExpansionPanel = (props: IToolSettingsExpansionPanelProps) => {
   const {
@@ -17,6 +18,7 @@ const SettingsExpansionPanel = (props: IToolSettingsExpansionPanelProps) => {
     updateParticipants,
     importFilesChange,
     exportFiles,
+    setDarkMode,
   } = props;
 
   return (
@@ -76,6 +78,19 @@ const SettingsExpansionPanel = (props: IToolSettingsExpansionPanelProps) => {
                 Export
               </Button>
             </ButtonGroup>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Typography variant="overline" display="block" gutterBottom>
+              Light/Dark Mode
+            </Typography>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={() => setDarkMode(toggleDarkMode())}
+            >
+              Toggle
+            </Button>
           </Grid>
         </Grid>
       </ExpansionPanelDetails>

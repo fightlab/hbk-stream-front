@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
@@ -10,9 +11,11 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AspectRatio from '@material-ui/icons/AspectRatio';
+import SettingsBrightnessIcon from '@material-ui/icons/SettingsBrightness';
 import PictureInPictureIcon from '@material-ui/icons/PictureInPicture';
+import { toggleDarkMode } from '../../Services/helper';
 
-const Home = () => (
+const Home = (props) => (
   <>
     <CssBaseline />
     <Container maxWidth="sm">
@@ -38,6 +41,12 @@ const Home = () => (
               <PictureInPictureIcon />
             </ListItemIcon>
             <ListItemText primary="Camera" />
+          </ListItem>
+          <ListItem button onClick={() => props.setDarkMode(toggleDarkMode())}>
+            <ListItemIcon>
+              <SettingsBrightnessIcon />
+            </ListItemIcon>
+            <ListItemText primary="Toogle Dark Mode" />
           </ListItem>
         </List>
       </Box>

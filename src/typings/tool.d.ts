@@ -7,6 +7,7 @@ interface IToolProps {
   classes: {
     form: string
   }
+  setDarkMode: Function
 }
 
 interface IToolNightbot {
@@ -49,6 +50,7 @@ interface IToolSettingsExpansionPanelProps {
   updateParticipants: Function
   importFilesChange: Function
   exportFiles: Function
+  setDarkMode: Function
 }
 
 interface IToolNightbotExpansionPanelProps {

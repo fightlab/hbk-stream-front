@@ -185,7 +185,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, setDarkMode } = this.props;
     const {
       scoreboard, camera, bracket, participants, nightbot,
     } = this.state;
@@ -219,6 +219,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
               updateParticipants={this.updateParticipants}
               importFilesChange={this.importFilesChange}
               exportFiles={this.exportFiles}
+              setDarkMode={setDarkMode}
             />
             <NightbotExpansionPanel
               classes={classes}
