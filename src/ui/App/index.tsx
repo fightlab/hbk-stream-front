@@ -5,6 +5,8 @@ import {
   withRouter,
 } from 'react-router-dom';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { deepOrange } from '@material-ui/core/colors';
+
 import { hasDarkMode } from '../Services/helper';
 
 import Home from '~/ui/Routes/Home';
@@ -20,6 +22,7 @@ const App = () => {
     () => createMuiTheme({
       palette: {
         type: darkMode ? 'dark' : 'light',
+        primary: deepOrange,
       },
     }),
     [darkMode],
