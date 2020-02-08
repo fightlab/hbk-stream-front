@@ -4,7 +4,6 @@ import Icon from '@mdi/react';
 import { mdiFacebookBox, mdiTwitterBox, mdiWebBox } from '@mdi/js';
 import { merge } from 'lodash';
 
-import CameraImage from './hbk_camera.png';
 import Socket from '~/ui/Services/socket';
 import theme from '~theme';
 import Text from '~ui/Components/Text';

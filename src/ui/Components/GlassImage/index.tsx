@@ -23,7 +23,7 @@ const styles = {
     top: props.top,
     left: props.left,
     backgroundColor: props.bgCol,
-    maskImage: `url('${props.maskImage}')`,
+    maskImage: props.maskImage ? `url('${props.maskImage}')` : null,
   }),
 };
 

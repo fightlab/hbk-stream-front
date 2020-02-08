@@ -13,6 +13,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import AspectRatio from '@material-ui/icons/AspectRatio';
 import SettingsBrightnessIcon from '@material-ui/icons/SettingsBrightness';
 import PictureInPictureIcon from '@material-ui/icons/PictureInPicture';
+import QueuePlayNext from '@material-ui/icons/QueuePlayNext';
 import { toggleDarkMode } from '../../Services/helper';
 
 const Home = (props) => (
@@ -41,6 +42,12 @@ const Home = (props) => (
               <PictureInPictureIcon />
             </ListItemIcon>
             <ListItemText primary="Camera" />
+          </ListItem>
+          <ListItem button component={Link} to="/prestream">
+            <ListItemIcon>
+              <QueuePlayNext />
+            </ListItemIcon>
+            <ListItemText primary="Pre-stream" />
           </ListItem>
           <ListItem button onClick={() => props.setDarkMode(toggleDarkMode())}>
             <ListItemIcon>

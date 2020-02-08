@@ -20,7 +20,7 @@ const styles = {
     top: props.top,
     left: props.left,
     zIndex: props.zIndex,
-    maskImage: `url('${props.maskImage}')`,
+    maskImage: props.maskImage ? `url('${props.maskImage}')` : null,
   }),
 };
 

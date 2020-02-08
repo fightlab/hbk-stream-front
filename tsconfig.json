@@ -5,7 +5,8 @@
       "~*": ["./*"]
     },
     "typeRoots": ["node_modules/@types", "./src/typings"],
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "esModuleInterop": true
   },
   "include": ["src/**/*"]
 }
