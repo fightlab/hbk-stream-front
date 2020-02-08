@@ -1,6 +1,5 @@
 import * as React from 'react';
 import withStyles from 'react-jss';
-import Mask from './mask.png';
 
 interface IImageProps {
   src: any
@@ -12,27 +11,17 @@ interface IImageProps {
   classes: {
     root: string
   }
-  mask?: boolean
+  maskImage?: string
 }
 
 const styles = {
-  root: (props: IImageProps) => {
-    const style = {
-      position: props.position,
-      top: props.top,
-      left: props.left,
-      zIndex: props.zIndex,
-      maskImage: null,
-      // maskType: null,
-    };
-
-    if (props.mask) {
-      style.maskImage = `url(${Mask})`;
-      // style.maskType = 'luminance';
-    }
-
-    return style;
-  },
+  root: (props: IImageProps) => ({
+    position: props.position,
+    top: props.top,
+    left: props.left,
+    zIndex: props.zIndex,
+    maskImage: `url('${props.maskImage}')`,
+  }),
 };
 
 class Image extends React.PureComponent<IImageProps> {
@@ -44,7 +33,7 @@ class Image extends React.PureComponent<IImageProps> {
    left: 0,
    zIndex: -1,
    classes: { root: '' },
-   mask: false,
+   maskImage: null,
  }
 
  render() {
