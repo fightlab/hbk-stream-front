@@ -4,3 +4,4 @@ dist
 .env
 deploy.tar
 .env.production
+.env.local
