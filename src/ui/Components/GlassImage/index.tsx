@@ -12,7 +12,6 @@ interface IGlassImageProps {
   top?: number,
   left?: number,
   bgCol?: string,
-  backdropFilter?: string,
   maskImage?: string,
 }
 
@@ -24,8 +23,7 @@ const styles = {
     top: props.top,
     left: props.left,
     backgroundColor: props.bgCol,
-    backdropFilter: props.backdropFilter,
-    maskImage: `url('${props.maskImage}'`,
+    maskImage: `url('${props.maskImage}')`,
   }),
 };
 
@@ -40,7 +38,6 @@ class GlassImage extends React.PureComponent<IGlassImageProps> {
     top: 0,
     left: 0,
     bgCol: 'rgba(0,0,0,0.5)',
-    backdropFilter: 'blur(25px)',
     maskImage: null,
   }
 
@@ -48,13 +45,7 @@ class GlassImage extends React.PureComponent<IGlassImageProps> {
     const { classes, maskImage, src } = this.props;
     return (
       <>
-        <img
-          // style={{
-          //   '-webkit-mask-image': `url('${maskImage}')`,
-          // }}
-          className={classes.container}
-          alt=""
-        />
+        <div className={classes.container} />
         <Image src={src} maskImage={maskImage} />
       </>
     );

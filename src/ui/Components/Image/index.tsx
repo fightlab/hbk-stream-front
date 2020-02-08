@@ -39,9 +39,7 @@ class Image extends React.PureComponent<IImageProps> {
  render() {
    const { classes, src, alt } = this.props;
    return (
-     <div>
-       <img className={classes.root} src={src} alt={alt} />
-     </div>
+     <img className={classes.root} src={src} alt={alt} />
    );
  }
 }
