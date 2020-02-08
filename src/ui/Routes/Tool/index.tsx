@@ -47,6 +47,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
         twitter: 'fight_lab',
         web: 'hbk.gg',
         game: 'Street Fighter V',
+        bg: 'hbk',
       },
       participants: [],
       nightbot: {

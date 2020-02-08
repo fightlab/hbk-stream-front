@@ -98,6 +98,14 @@ const CameraExpansionPanel = (props: IToolCameraExpansionPanelProps) => {
                 onChange={(e) => changeCameraValue('web', e.target.value)}
               />
             </Grid>
+            <Grid item xs={12} sm={4}>
+              <TextField
+                label="Background"
+                fullWidth
+                value={camera.bg}
+                onChange={(e) => changeCameraValue('bg', e.target.value)}
+              />
+            </Grid>
             <Grid item xs={12}>
               <Button type="submit" variant="contained" color="primary">
                 Update Camera

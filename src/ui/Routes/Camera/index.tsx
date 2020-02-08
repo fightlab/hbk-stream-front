@@ -4,12 +4,13 @@ import Icon from '@mdi/react';
 import { mdiFacebookBox, mdiTwitterBox, mdiWebBox } from '@mdi/js';
 import { merge } from 'lodash';
 
-import cameraImage from './hbk_camera.png';
+import CameraImage from './hbk_camera.png';
 import Socket from '~/ui/Services/socket';
-import Image from '~/ui/Components/Image';
 import theme from '~theme';
 import Text from '~ui/Components/Text';
 import TextBox from '~ui/Components/TextBox';
+import GlassImage from '~ui/Components/GlassImage';
+import MaskImage from './mask.png';
 
 const styles = {
   root: theme.container,
@@ -48,6 +49,7 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
       twitter: 'fight_lab',
       web: 'hbk.gg',
       game: 'Street Fighter V',
+      bg: 'hbk',
     };
 
     this.io.on(
@@ -65,7 +67,7 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
   render() {
     const { classes } = this.props;
     const {
-      hbk, brewdog, fgc, date, facebook, twitter, web, game,
+      hbk, brewdog, fgc, date, facebook, twitter, web, game, bg,
     } = this.state;
 
     const {
@@ -74,9 +76,9 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
 
     return (
       <div className={classes.root}>
-        <Image
-          src={cameraImage}
-          alt="camera"
+        <GlassImage
+          src={`https://res.cloudinary.com/mkn-sh/image/upload/c_lfill,e_blur:2000,g_center,h_1080,w_1920/v1539443572/fgc/${bg}.jpg`}
+          maskImage={MaskImage}
         />
         <TextBox
           // hbk text

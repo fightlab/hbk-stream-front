@@ -16,4 +16,5 @@ interface ICameraState {
   twitter: string
   web: string
   game: string
+  bg: string
 }
