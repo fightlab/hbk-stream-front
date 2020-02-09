@@ -1,6 +1,7 @@
 import * as React from 'react';
 import withStyles from 'react-jss';
 import { merge } from 'lodash';
+import moment from 'moment';
 
 import Countdown from 'react-countdown-now';
 import theme from '~theme';
@@ -9,14 +10,20 @@ import GlassImage from '~ui/Components/GlassImage';
 import TextBox from '~ui/Components/TextBox';
 import Text from '~ui/Components/Text';
 
-
 const styles = {
   root: theme.container,
 };
 
-const TimerComplete: any = (text = '...', color = theme.orange, font = theme.cabin, fontSize = '50px') => (
+const formatTime = ({ hours = 0, minutes = 0, seconds = 0 }): string => {
+  const now = moment();
+  const timer = moment(now).add(hours, 'hour').add(minutes, 'minute').add(seconds, 'second');
+
+  return timer.fromNow();
+};
+
+const TimerComplete: any = (text = 'now', color = theme.white, font = theme.rawline, fontSize = '70px') => (
   <TextBox
-    bottom={5}
+    bottom={55}
     left={0}
     textAlign="center"
     width="100%"
@@ -40,15 +47,15 @@ const TimerComplete: any = (text = '...', color = theme.orange, font = theme.cab
   </TextBox>
 );
 
-const countdownRenderer = (color = theme.white, font = theme.cabin, fontSize = '50px') => ({
+const countdownRenderer = (color = theme.white, font = theme.rawline, fontSize = '70px') => ({
   hours, minutes, seconds, completed,
 }): JSX.Element => {
   if (completed) {
-    return <TimerComplete />;
+    return TimerComplete();
   }
   return (
     <TextBox
-      bottom={5}
+      bottom={55}
       left={0}
       textAlign="center"
       width="100%"
@@ -58,16 +65,16 @@ const countdownRenderer = (color = theme.white, font = theme.cabin, fontSize = '
       <Text
         color={color}
         font={
-  merge(
-    {},
-    font,
-    {
-      fontSize,
-    },
-  )
-}
+          merge(
+            {},
+            font,
+            {
+              fontSize,
+            },
+          )
+        }
       >
-        {`${minutes}:${seconds}`}
+        {`${formatTime({ hours, minutes, seconds })}`}
       </Text>
     </TextBox>
   );
@@ -83,7 +90,7 @@ class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
       event: 'Habrewken #000',
       game: 'Game Fighter Name',
       bg: 'hbk',
-      countdown: 3600000,
+      countdown: 3000,
       venue: 'BrewDog Brighton',
     };
   }
@@ -140,7 +147,7 @@ class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
             font={
               merge(
                 {},
-                rawlineBold,
+                rawline,
                 {
                   fontSize: '70px',
                 },
@@ -148,6 +155,28 @@ class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
             }
           >
             {venue}
+          </Text>
+        </TextBox>
+        <TextBox
+          bottom={125}
+          left={0}
+          textAlign="center"
+          width="100%"
+          padding={0}
+          backgroundColor={transparent}
+        >
+          <Text
+            font={
+              merge(
+                {},
+                rawline,
+                {
+                  fontSize: '70px',
+                },
+              )
+            }
+          >
+            Stream starts
           </Text>
         </TextBox>
         <Countdown
