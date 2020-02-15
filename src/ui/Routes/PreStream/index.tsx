@@ -102,7 +102,7 @@ class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
     return (
       <div className={classes.root}>
         <GlassImage
-          src={`https://res.cloudinary.com/mkn-sh/image/upload/c_lfill,e_blur:2000,g_center,h_1080,w_1920/v1539443572/fgc/${bg}.jpg`}
+          src={`https://res.cloudinary.com/mkn-sh/image/upload/c_fill,e_blur:2000,g_center,h_1080,w_1920/v1539443572/fgc/${bg}.jpg`}
         />
         <TextBox
           // event text
