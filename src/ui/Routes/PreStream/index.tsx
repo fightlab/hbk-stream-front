@@ -1,7 +1,6 @@
 import * as React from 'react';
 import withStyles from 'react-jss';
 import { merge } from 'lodash';
-import moment from 'moment';
 
 import Countdown from 'react-countdown-now';
 import theme from '~theme';
@@ -14,12 +13,7 @@ const styles = {
   root: theme.container,
 };
 
-const formatTime = ({ hours = 0, minutes = 0, seconds = 0 }): string => {
-  const now = moment();
-  const timer = moment(now).add(hours, 'hour').add(minutes, 'minute').add(seconds, 'second');
-
-  return timer.fromNow();
-};
+const formatTime = ({ hours = 0, minutes = 0, seconds = 0 }): string => `in ${hours ? `${hours} hour${hours === 1 ? '' : 's'}` : ''} ${minutes ? `${minutes} minute${minutes === 1 ? '' : 's'}` : ''} ${seconds ? `${seconds} second${seconds === 1 ? '' : 's'}` : ''}`;
 
 const TimerComplete: any = (text = 'now', color = theme.white, font = theme.rawline, fontSize = '70px') => (
   <TextBox
@@ -90,7 +84,7 @@ class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
       event: 'Habrewken #000',
       game: 'Game Fighter Name',
       bg: 'hbk',
-      countdown: 3000,
+      countdown: 70000,
       venue: 'BrewDog Brighton',
     };
   }
@@ -102,7 +96,7 @@ class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
     } = this.state;
 
     const {
-      transparent, orange, cabin, rawline, rawlineBold,
+      transparent, orange, rawline, rawlineBold,
     } = theme;
 
     return (
@@ -158,6 +152,29 @@ class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
           </Text>
         </TextBox>
         <TextBox
+          // game text
+          top={235}
+          left={0}
+          textAlign="center"
+          width="100%"
+          padding={0}
+          backgroundColor={transparent}
+        >
+          <Text
+            font={
+              merge(
+                {},
+                rawlineBold,
+                {
+                  fontSize: '64px',
+                },
+              )
+            }
+          >
+            {game}
+          </Text>
+        </TextBox>
+        <TextBox
           bottom={125}
           left={0}
           textAlign="center"
@@ -176,7 +193,7 @@ class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
               )
             }
           >
-            Stream starts
+            Starts
           </Text>
         </TextBox>
         <Countdown
