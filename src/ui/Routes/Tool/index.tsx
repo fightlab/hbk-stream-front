@@ -10,6 +10,7 @@ import ScoreboardExpansionPanel from './scoreboard';
 import CameraExpansionPanel from './camera';
 import SettingsExpansionPanel from './settings';
 import NightbotExpansionPanel from './nightbot';
+import PreStreamExpansionPanel from './prestream';
 
 const styles = {
   form: {
@@ -54,6 +55,13 @@ class Tool extends React.Component<IToolProps, IToolState> {
         bracket: 'https://hbk.challonge.com',
         social: '• FOLLOW US ON • WEB: https://hbk.gg • FACEBOOK: https://www.facebook.com/FightLabBrighton/ • TWITTER: https://twitter.com/fight_lab • DISCORD: https://discord.gg/rjpDJdz •',
       },
+      prestream: {
+        event: 'Habrewken #000',
+        game: 'Game Fighter Name',
+        bg: 'hbk',
+        countdown: 70000,
+        venue: 'BrewDog Brighton',
+      },
     };
 
     this.io.on(
@@ -84,6 +92,13 @@ class Tool extends React.Component<IToolProps, IToolState> {
       },
     );
 
+    this.io.on(
+      'prestream',
+      (prestream) => {
+        this.setState({ prestream });
+      },
+    );
+
     this.importFileReader.onload = (event) => {
       const json = event.target.result;
       const parsed = JSON.parse(json.toString());
@@ -96,6 +111,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
     this.io.emit('camera-get');
     this.io.emit('participants-get');
     this.io.emit('nightbot-get');
+    this.io.emit('prestream-get');
   }
 
   private updateParticipants = () => {
@@ -121,6 +137,12 @@ class Tool extends React.Component<IToolProps, IToolState> {
     this.io.emit('nightbot-update', nightbot);
   }
 
+  private updatePrestream = (e) => {
+    e.preventDefault();
+    const { prestream } = this.state;
+    this.io.emit('prestream-update', prestream);
+  }
+
   private changeScoreboardValue = (name, value) => {
     const { scoreboard } = this.state;
     scoreboard[name] = value;
@@ -137,6 +159,12 @@ class Tool extends React.Component<IToolProps, IToolState> {
     const { nightbot } = this.state;
     nightbot[name] = value;
     this.setState({ nightbot });
+  }
+
+  private changePrestreamValue = (name, value) => {
+    const { prestream } = this.state;
+    prestream[name] = value;
+    this.setState({ prestream });
   }
 
   private changeBracketValue = (bracket) => {
@@ -188,7 +216,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
   render() {
     const { classes, setDarkMode } = this.props;
     const {
-      scoreboard, camera, bracket, participants, nightbot,
+      scoreboard, camera, bracket, participants, nightbot, prestream,
     } = this.state;
 
     return (
@@ -213,6 +241,12 @@ class Tool extends React.Component<IToolProps, IToolState> {
               camera={camera}
               updateCamera={this.updateCamera}
               changeCameraValue={this.changeCameraValue}
+            />
+            <PreStreamExpansionPanel
+              classes={classes}
+              prestream={prestream}
+              changePrestreamValue={this.changePrestreamValue}
+              updatePrestream={this.updatePrestream}
             />
             <SettingsExpansionPanel
               bracket={bracket}

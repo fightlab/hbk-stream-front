@@ -84,9 +84,20 @@ class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
       event: 'Habrewken #000',
       game: 'Game Fighter Name',
       bg: 'hbk',
-      countdown: 70000,
+      countdown: 300,
       venue: 'BrewDog Brighton',
     };
+
+    this.io.on(
+      'prestream',
+      (prestream) => {
+        this.setState(prestream);
+      },
+    );
+  }
+
+  componentDidMount() {
+    this.io.emit('prestream-get');
   }
 
   render() {
@@ -197,7 +208,7 @@ class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
           </Text>
         </TextBox>
         <Countdown
-          date={Date.now() + countdown}
+          date={Date.now() + countdown * 1000}
           renderer={countdownRenderer()}
         />
       </div>

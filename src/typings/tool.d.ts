@@ -21,6 +21,7 @@ interface IToolState {
   bracket: string
   participants: Array<IToolPlayer>
   nightbot: IToolNightbot
+  prestream: IPreStreamState
 }
 
 interface IToolScoreboardExpansionPanelProps {
@@ -42,6 +43,15 @@ interface IToolCameraExpansionPanelProps {
   camera: ICameraState
   updateCamera: Function
   changeCameraValue: Function
+}
+
+interface IToolPreStreamExpansionPanelProps {
+  classes: {
+    form: string
+  }
+  prestream: IPreStreamState
+  updatePrestream: Function
+  changePrestreamValue: Function
 }
 
 interface IToolSettingsExpansionPanelProps {
