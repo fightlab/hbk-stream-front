@@ -7,6 +7,8 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
   const {
@@ -68,11 +70,31 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                label="Start Text"
+                fullWidth
+                value={prestream.startText}
+                onChange={(e) => changePrestreamValue('startText', e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <TextField
                 label="Countdown (Seconds)"
                 fullWidth
                 type="number"
                 value={prestream.countdown}
                 onChange={(e) => changePrestreamValue('countdown', e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <FormControlLabel
+                control={(
+                  <Switch
+                    checked={prestream.showTimer}
+                    onChange={(e) => changePrestreamValue('showTimer', e.target.checked)}
+                    color="primary"
+                  />
+                )}
+                label="Show Timer"
               />
             </Grid>
             <Grid item xs={12}>

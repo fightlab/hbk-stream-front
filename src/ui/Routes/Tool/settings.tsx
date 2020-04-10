@@ -9,7 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Files from 'react-files';
-import { toggleDarkMode } from '~ui/Services/helper';
+import { toggleDarkMode } from '~/ui/Services/helper';
 
 const SettingsExpansionPanel = (props: IToolSettingsExpansionPanelProps) => {
   const {

@@ -10,4 +10,6 @@ interface IPreStreamState {
   bg: string
   countdown: number
   venue: string
+  showTimer: boolean
+  startText: string
 }

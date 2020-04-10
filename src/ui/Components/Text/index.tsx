@@ -1,7 +1,7 @@
 import * as React from 'react';
 import withStyles from 'react-jss';
 import { merge } from 'lodash';
-import theme from '~theme';
+import theme from '~/theme';
 
 interface ITextProps {
   children?: string|number

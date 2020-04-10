@@ -61,6 +61,8 @@ class Tool extends React.Component<IToolProps, IToolState> {
         bg: 'hbk',
         countdown: 70000,
         venue: 'BrewDog Brighton',
+        showTimer: true,
+        startText: 'Starts',
       },
     };
 

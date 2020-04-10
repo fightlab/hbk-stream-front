@@ -1,6 +1,6 @@
 import * as React from 'react';
 import withStyles from 'react-jss';
-import theme from '~theme';
+import theme from '~/theme';
 
 interface ITextBoxProps {
   children?: any

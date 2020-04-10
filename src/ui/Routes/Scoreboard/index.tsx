@@ -3,9 +3,9 @@ import withStyles from 'react-jss';
 import { merge } from 'lodash';
 
 import Socket from '~/ui/Services/socket';
-import TextBox from '~ui/Components/TextBox';
-import Text from '~ui/Components/Text';
-import theme from '~theme';
+import TextBox from '~/ui/Components/TextBox';
+import Text from '~/ui/Components/Text';
+import theme from '~/theme';
 
 const styles = {
   root: theme.container,

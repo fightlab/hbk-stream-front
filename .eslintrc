@@ -25,6 +25,17 @@
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
         "react/static-property-placement": 0,
-        "react/jsx-props-no-spreading": 0
+        "react/jsx-props-no-spreading": 0,
+        "import/extensions": 0
+    },
+    "settings": {
+        "import/resolver": {
+            "alias": {
+                "map": [
+                    ["~", "./src"]
+                ],
+                "extensions": [".ts", ".js", ".jsx", ".json", ".tsx"]
+            }
+        }
     }
 }

@@ -5,3 +5,4 @@ dist
 deploy.tar
 .env.production
 .env.local
+.env.development

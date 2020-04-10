@@ -13,8 +13,8 @@ import Home from '~/ui/Routes/Home';
 import Camera from '~/ui/Routes/Camera';
 import Scoreboard from '~/ui/Routes/Scoreboard';
 import Tool from '~/ui/Routes/Tool';
-import Playground from '~ui/Routes/Playground';
-import PreStream from '~ui/Routes/PreStream';
+import Playground from '~/ui/Routes/Playground';
+import PreStream from '~/ui/Routes/PreStream';
 
 const App = () => {
   const [darkMode, setDarkMode] = React.useState(hasDarkMode());

@@ -3,11 +3,11 @@ import withStyles from 'react-jss';
 import { merge } from 'lodash';
 
 import Countdown from 'react-countdown-now';
-import theme from '~theme';
-import Socket from '~ui/Services/socket';
-import GlassImage from '~ui/Components/GlassImage';
-import TextBox from '~ui/Components/TextBox';
-import Text from '~ui/Components/Text';
+import theme from '~/theme';
+import Socket from '~/ui/Services/socket';
+import GlassImage from '~/ui/Components/GlassImage';
+import TextBox from '~/ui/Components/TextBox';
+import Text from '~/ui/Components/Text';
 
 const styles = {
   root: theme.container,
@@ -86,6 +86,8 @@ class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
       bg: 'hbk',
       countdown: 300,
       venue: 'BrewDog Brighton',
+      showTimer: false,
+      startText: 'Starts',
     };
 
     this.io.on(
@@ -103,7 +105,7 @@ class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
   render() {
     const { classes } = this.props;
     const {
-      event, game, bg, countdown, venue,
+      event, game, bg, countdown, venue, showTimer, startText,
     } = this.state;
 
     const {
@@ -204,13 +206,18 @@ class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
               )
             }
           >
-            Starts
+            {startText}
           </Text>
         </TextBox>
-        <Countdown
-          date={Date.now() + countdown * 1000}
-          renderer={countdownRenderer()}
-        />
+        {
+          showTimer
+          && (
+          <Countdown
+            date={Date.now() + countdown * 1000}
+            renderer={countdownRenderer()}
+          />
+          )
+        }
       </div>
     );
   }

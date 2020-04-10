@@ -5,10 +5,10 @@ import { mdiFacebookBox, mdiTwitterBox, mdiWebBox } from '@mdi/js';
 import { merge } from 'lodash';
 
 import Socket from '~/ui/Services/socket';
-import theme from '~theme';
-import Text from '~ui/Components/Text';
-import TextBox from '~ui/Components/TextBox';
-import GlassImage from '~ui/Components/GlassImage';
+import theme from '~/theme';
+import Text from '~/ui/Components/Text';
+import TextBox from '~/ui/Components/TextBox';
+import GlassImage from '~/ui/Components/GlassImage';
 import MaskImage from './mask.png';
 
 const styles = {
