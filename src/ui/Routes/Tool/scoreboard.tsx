@@ -57,7 +57,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 margin="normal"
                 fullWidth
                 value={scoreboard.p1s}
-                onChange={(e) => changeScoreboardValue('p1s', +e.target.value)}
+                onChange={(e) => changeScoreboardValue('p1s', e.target.value)}
               />
             </Grid>
             <Grid item xs={2} sm={1}>
@@ -67,7 +67,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 margin="normal"
                 fullWidth
                 value={scoreboard.p2s}
-                onChange={(e) => changeScoreboardValue('p2s', +e.target.value)}
+                onChange={(e) => changeScoreboardValue('p2s', e.target.value)}
               />
             </Grid>
             <Grid item xs={10} sm={5}>
