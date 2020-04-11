@@ -17,11 +17,12 @@ interface IToolNightbot {
 
 interface IToolState {
   scoreboard: IScoreboardState
-  camera: ICameraState
+  camera: ICamera
   bracket: string
   participants: Array<IToolPlayer>
   nightbot: IToolNightbot
   prestream: IPreStreamState
+  social: ISocial
 }
 
 interface IToolScoreboardExpansionPanelProps {
@@ -40,7 +41,7 @@ interface IToolCameraExpansionPanelProps {
   classes: {
     form: string
   }
-  camera: ICameraState
+  camera: ICamera
   updateCamera: Function
   changeCameraValue: Function
 }
@@ -70,4 +71,13 @@ interface IToolNightbotExpansionPanelProps {
   nightbot: IToolNightbot
   updateNightbot: Function
   changeNightbotValue: Function
+}
+
+interface IToolSocialExpansionPanelProps {
+  classes: {
+    form: string
+  }
+  social: ISocial,
+  updateSocial: Function
+  changeSocialValue: Function
 }

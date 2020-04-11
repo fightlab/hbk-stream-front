@@ -40,34 +40,50 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
     super(props);
 
     this.state = {
-      hbk: 'Habrewken #000',
-      brewdog: 'Brewdog Brighton',
-      fgc: 'Brighton Fighting Game Community',
-      date: 'Wednesday XXth MONTH 20XX',
-      facebook: 'fightlabbrighton',
-      twitter: 'fight_lab',
-      web: 'hbk.gg',
-      game: 'Street Fighter V',
-      bg: 'hbk',
+      camera: {
+        hbk: 'Habrewken #000',
+        brewdog: 'Brewdog Brighton',
+        fgc: 'Brighton Fighting Game Community',
+        date: 'Wednesday XXth MONTH 20XX',
+        game: 'Street Fighter V',
+        bg: 'hbk',
+      },
+      social: {
+        web: 'hbk.gg',
+        facebook: 'fightlabbrighton',
+        twitter: 'fight_lab',
+      },
     };
 
     this.io.on(
       'camera',
       (camera) => {
-        this.setState(camera);
+        this.setState({ camera });
+      },
+    );
+
+    this.io.on(
+      'social',
+      (social) => {
+        this.setState({ social });
       },
     );
   }
 
   componentDidMount() {
     this.io.emit('camera-get');
+    this.io.emit('social-get');
   }
 
   render() {
     const { classes } = this.props;
+    const { camera, social } = this.state;
     const {
-      hbk, brewdog, fgc, date, facebook, twitter, web, game, bg,
-    } = this.state;
+      hbk, brewdog, fgc, date, game, bg,
+    } = camera;
+    const {
+      web, twitter, facebook,
+    } = social;
 
     const {
       transparent, orange, cabin, rawline, rawlineBold,

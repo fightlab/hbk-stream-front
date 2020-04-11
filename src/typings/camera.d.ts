@@ -1,3 +1,12 @@
+interface ICamera {
+  hbk: string
+  brewdog: string
+  fgc: string
+  date: string
+  game: string
+  bg: string
+}
+
 interface ICameraProps {
   classes: {
     root: string
@@ -8,13 +17,6 @@ interface ICameraProps {
 }
 
 interface ICameraState {
-  hbk: string
-  brewdog: string
-  fgc: string
-  date: string
-  facebook: string
-  twitter: string
-  web: string
-  game: string
-  bg: string
+  camera: ICamera
+  social: ISocial
 }

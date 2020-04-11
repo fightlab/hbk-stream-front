@@ -76,30 +76,6 @@ const CameraExpansionPanel = (props: IToolCameraExpansionPanelProps) => {
             </Grid>
             <Grid item xs={12} sm={4}>
               <TextField
-                label="Facebook"
-                fullWidth
-                value={camera.facebook}
-                onChange={(e) => changeCameraValue('facebook', e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <TextField
-                label="Twitter"
-                fullWidth
-                value={camera.twitter}
-                onChange={(e) => changeCameraValue('twitter', e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <TextField
-                label="Website"
-                fullWidth
-                value={camera.web}
-                onChange={(e) => changeCameraValue('web', e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <TextField
                 label="Background"
                 fullWidth
                 value={camera.bg}
