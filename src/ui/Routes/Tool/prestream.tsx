@@ -9,6 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import Alert from '@material-ui/lab/Alert';
 
 const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
   const {
@@ -17,6 +18,7 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
     prestream,
     update,
     toolKey,
+    unsaved,
   } = props;
 
   return (
@@ -103,6 +105,13 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
                 Update Prestream
               </Button>
             </Grid>
+            {
+              unsaved && (
+              <Grid item xs={12}>
+                <Alert severity="warning">Unsaved Changes!</Alert>
+              </Grid>
+              )
+            }
           </Grid>
         </form>
       </ExpansionPanelDetails>

@@ -9,6 +9,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Alert from '@material-ui/lab/Alert';
 
 const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => {
   const {
@@ -20,7 +21,23 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
     reset,
     swap,
     toolKey,
+    unsaved,
   } = props;
+
+  const players = participants.map((player) => player.displayName).sort((a, b) => {
+    const x = a.toLowerCase();
+    const y = b.toLowerCase();
+
+    if (x > y) {
+      return 1;
+    }
+
+    if (y > x) {
+      return -1;
+    }
+
+    return 0;
+  });
 
   return (
     <ExpansionPanel>
@@ -43,7 +60,8 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
             <Grid item xs={10} sm={5}>
               <Autocomplete
                 freeSolo
-                options={participants.map((player) => player.displayName)}
+                multiple={false}
+                options={players}
                 renderInput={(params) => (
                   <TextField {...params} label="Player 1" margin="normal" fullWidth />
                 )}
@@ -74,7 +92,8 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
             <Grid item xs={10} sm={5}>
               <Autocomplete
                 freeSolo
-                options={participants.map((player) => player.displayName)}
+                multiple={false}
+                options={players}
                 renderInput={(params) => (
                   <TextField {...params} label="Player 2" margin="normal" fullWidth />
                 )}
@@ -165,6 +184,13 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 Update Scoreboard
               </Button>
             </Grid>
+            {
+              unsaved && (
+              <Grid item xs={12}>
+                <Alert severity="warning">Unsaved Changes!</Alert>
+              </Grid>
+              )
+            }
           </Grid>
         </form>
       </ExpansionPanelDetails>

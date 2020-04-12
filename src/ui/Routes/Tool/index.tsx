@@ -67,19 +67,57 @@ class Tool extends React.Component<IToolProps, IToolState> {
         twitter: 'fight_lab',
         web: 'hbk.gg',
       },
+      unsaved: {
+        camera: false,
+        nightbot: false,
+        prestream: false,
+        scoreboard: false,
+        social: false,
+      },
     };
 
     this.io.on(
       'scoreboard',
       (scoreboard) => {
-        this.setState({ scoreboard });
+        const { unsaved } = this.state;
+        unsaved.scoreboard = false;
+        this.setState({ scoreboard, unsaved });
       },
     );
 
     this.io.on(
       'camera',
       (camera) => {
-        this.setState({ camera });
+        const { unsaved } = this.state;
+        unsaved.camera = false;
+        this.setState({ camera, unsaved });
+      },
+    );
+
+    this.io.on(
+      'nightbot',
+      (nightbot) => {
+        const { unsaved } = this.state;
+        unsaved.nightbot = false;
+        this.setState({ nightbot, unsaved });
+      },
+    );
+
+    this.io.on(
+      'prestream',
+      (prestream) => {
+        const { unsaved } = this.state;
+        unsaved.prestream = false;
+        this.setState({ prestream, unsaved });
+      },
+    );
+
+    this.io.on(
+      'social',
+      (social) => {
+        const { unsaved } = this.state;
+        unsaved.social = false;
+        this.setState({ social, unsaved });
       },
     );
 
@@ -87,27 +125,6 @@ class Tool extends React.Component<IToolProps, IToolState> {
       'participants',
       ({ bracket, participants }) => {
         this.setState({ bracket, participants });
-      },
-    );
-
-    this.io.on(
-      'nightbot',
-      (nightbot) => {
-        this.setState({ nightbot });
-      },
-    );
-
-    this.io.on(
-      'prestream',
-      (prestream) => {
-        this.setState({ prestream });
-      },
-    );
-
-    this.io.on(
-      'social',
-      (social) => {
-        this.setState({ social });
       },
     );
 
@@ -139,9 +156,12 @@ class Tool extends React.Component<IToolProps, IToolState> {
   }
 
   private change: (key: string, name: string, value: any) => void = (key, name, value) => {
-    const { [key]: data } = this.state;
-    data[name] = value;
-    this.setState({ [key]: data });
+    const { [key]: data, unsaved } = this.state;
+    if (value !== data[name]) {
+      data[name] = value;
+      unsaved[key] = true;
+      this.setState({ [key]: data, unsaved });
+    }
   }
 
   private changeBracketValue = (bracket) => {
@@ -163,8 +183,8 @@ class Tool extends React.Component<IToolProps, IToolState> {
     link.click();
   }
 
-  private reset = ({ names = false, scores = false }) => {
-    const { scoreboard } = this.state;
+  private reset: IToolScoreboardReset = ({ names = false, scores = false }) => {
+    const { scoreboard, unsaved } = this.state;
     if (names) {
       scoreboard.p1n = '';
       scoreboard.p2n = '';
@@ -173,10 +193,11 @@ class Tool extends React.Component<IToolProps, IToolState> {
       scoreboard.p1s = 0;
       scoreboard.p2s = 0;
     }
-    this.setState({ scoreboard });
+    unsaved.scoreboard = true;
+    this.setState({ scoreboard, unsaved });
   }
 
-  private swap = ({ names = false, scores = false }) => {
+  private swap: IToolScoreboardSwap = ({ names = false, scores = false }) => {
     const { scoreboard } = this.state;
 
     if (names) {
@@ -193,7 +214,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
   render() {
     const { classes, setDarkMode } = this.props;
     const {
-      scoreboard, camera, bracket, participants, nightbot, prestream, social,
+      scoreboard, camera, bracket, participants, nightbot, prestream, social, unsaved,
     } = this.state;
 
     return (
@@ -213,6 +234,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
               reset={this.reset}
               swap={this.swap}
               toolKey="scoreboard"
+              unsaved={unsaved.scoreboard}
             />
             <CameraExpansionPanel
               classes={classes}
@@ -220,6 +242,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
               update={this.update}
               change={this.change}
               toolKey="camera"
+              unsaved={unsaved.camera}
             />
             <PreStreamExpansionPanel
               classes={classes}
@@ -227,6 +250,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
               change={this.change}
               update={this.update}
               toolKey="prestream"
+              unsaved={unsaved.prestream}
             />
             <SocialExpansionPanel
               classes={classes}
@@ -234,6 +258,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
               change={this.change}
               update={this.update}
               toolKey="social"
+              unsaved={unsaved.social}
             />
             <NightbotExpansionPanel
               classes={classes}
@@ -241,6 +266,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
               update={this.update}
               change={this.change}
               toolKey="nightbot"
+              unsaved={unsaved.nightbot}
             />
             <SettingsExpansionPanel
               bracket={bracket}

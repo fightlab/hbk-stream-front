@@ -7,6 +7,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import Alert from '@material-ui/lab/Alert';
 
 const NightbotExpansionPanel = (props: IToolNightbotExpansionPanelProps) => {
   const {
@@ -15,6 +16,7 @@ const NightbotExpansionPanel = (props: IToolNightbotExpansionPanelProps) => {
     update,
     change,
     toolKey,
+    unsaved,
   } = props;
 
   return (
@@ -56,6 +58,13 @@ const NightbotExpansionPanel = (props: IToolNightbotExpansionPanelProps) => {
                 Update Nightbot
               </Button>
             </Grid>
+            {
+              unsaved && (
+              <Grid item xs={12}>
+                <Alert severity="warning">Unsaved Changes!</Alert>
+              </Grid>
+              )
+            }
           </Grid>
         </form>
       </ExpansionPanelDetails>

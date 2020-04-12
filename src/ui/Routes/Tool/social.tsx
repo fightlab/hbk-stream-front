@@ -7,6 +7,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Alert from '@material-ui/lab/Alert';
 
 const SocialExpansionPanel = (props: IToolSocialExpansionPanelProps) => {
   const {
@@ -15,6 +16,7 @@ const SocialExpansionPanel = (props: IToolSocialExpansionPanelProps) => {
     social,
     update,
     toolKey,
+    unsaved,
   } = props;
 
   return (
@@ -64,6 +66,13 @@ const SocialExpansionPanel = (props: IToolSocialExpansionPanelProps) => {
                 Update Social
               </Button>
             </Grid>
+            {
+              unsaved && (
+              <Grid item xs={12}>
+                <Alert severity="warning">Unsaved Changes!</Alert>
+              </Grid>
+              )
+            }
           </Grid>
         </form>
       </ExpansionPanelDetails>

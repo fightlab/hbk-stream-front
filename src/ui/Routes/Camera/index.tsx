@@ -1,7 +1,7 @@
 import * as React from 'react';
 import withStyles from 'react-jss';
 import Icon from '@mdi/react';
-import { mdiFacebookBox, mdiTwitterBox, mdiWebBox } from '@mdi/js';
+import { mdiWeb, mdiTwitter, mdiFacebook } from '@mdi/js';
 import { merge } from 'lodash';
 
 import Socket from '~/ui/Services/socket';
@@ -206,7 +206,7 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
         </TextBox>
         <Icon
           className={classes.iconFacebook}
-          path={mdiFacebookBox}
+          path={mdiFacebook}
           size="36pt"
           color={orange}
         />
@@ -235,7 +235,7 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
         </TextBox>
         <Icon
           className={classes.iconTwitter}
-          path={mdiTwitterBox}
+          path={mdiTwitter}
           size="36pt"
           color={orange}
         />
@@ -264,7 +264,7 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
         </TextBox>
         <Icon
           className={classes.iconWeb}
-          path={mdiWebBox}
+          path={mdiWeb}
           size="36pt"
           color={orange}
         />

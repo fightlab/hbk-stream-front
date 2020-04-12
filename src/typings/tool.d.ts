@@ -6,6 +6,14 @@ interface IToolChange {
   (key: string, name: string, value: any): void
 }
 
+interface IToolUnsaved {
+  scoreboard: boolean
+  camera: boolean
+  prestream: boolean
+  social: boolean
+  nightbot: boolean
+}
+
 interface IToolPlayer {
   displayName: string
   handle: string
@@ -31,7 +39,22 @@ interface IToolState {
   nightbot: IToolNightbot
   prestream: IPreStreamState
   social: ISocial
+  unsaved: IToolUnsaved
   [key: string]: any
+}
+
+interface IToolScoreboardResetParam {
+  names?: boolean, scores?: boolean
+}
+interface IToolScoreboardReset {
+  (param: IToolScoreboardResetParam): void
+}
+
+interface IToolScoreboardSwapParam {
+  names?: boolean, scores?: boolean
+}
+interface IToolScoreboardSwap {
+  (param: IToolScoreboardSwapParam): void
 }
 
 interface IToolScoreboardExpansionPanelProps {
@@ -42,9 +65,10 @@ interface IToolScoreboardExpansionPanelProps {
   scoreboard: IScoreboardState
   update: IToolUpdate
   change: IToolChange
-  reset: Function
-  swap: Function
+  reset: IToolScoreboardReset
+  swap: IToolScoreboardSwap
   toolKey: string
+  unsaved: boolean
 }
 
 interface IToolCameraExpansionPanelProps {
@@ -55,6 +79,7 @@ interface IToolCameraExpansionPanelProps {
   update: IToolUpdate
   change: IToolChange
   toolKey: string
+  unsaved: boolean
 }
 
 interface IToolPreStreamExpansionPanelProps {
@@ -65,15 +90,7 @@ interface IToolPreStreamExpansionPanelProps {
   update: IToolUpdate
   change: IToolChange
   toolKey: string
-}
-
-interface IToolSettingsExpansionPanelProps {
-  bracket: string
-  changeBracketValue: Function
-  updateParticipants: Function
-  importFilesChange: Function
-  exportFiles: Function
-  setDarkMode: Function
+  unsaved: boolean
 }
 
 interface IToolNightbotExpansionPanelProps {
@@ -84,6 +101,7 @@ interface IToolNightbotExpansionPanelProps {
   update: IToolUpdate
   change: IToolChange
   toolKey: string
+  unsaved: boolean
 }
 
 interface IToolSocialExpansionPanelProps {
@@ -94,4 +112,14 @@ interface IToolSocialExpansionPanelProps {
   update: IToolUpdate
   change: IToolChange
   toolKey: string
+  unsaved: boolean
+}
+
+interface IToolSettingsExpansionPanelProps {
+  bracket: string
+  changeBracketValue: Function
+  updateParticipants: Function
+  importFilesChange: Function
+  exportFiles: Function
+  setDarkMode: Function
 }
