@@ -10,10 +10,11 @@ import Button from '@material-ui/core/Button';
 
 const SocialExpansionPanel = (props: IToolSocialExpansionPanelProps) => {
   const {
-    changeSocialValue,
+    change,
     classes,
     social,
     update,
+    toolKey,
   } = props;
 
   return (
@@ -25,7 +26,7 @@ const SocialExpansionPanel = (props: IToolSocialExpansionPanelProps) => {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <form
-          onSubmit={(e) => update(e, 'social')}
+          onSubmit={(e) => update(e, toolKey)}
           className={classes.form}
           noValidate
         >
@@ -39,7 +40,7 @@ const SocialExpansionPanel = (props: IToolSocialExpansionPanelProps) => {
                 label="Web"
                 fullWidth
                 value={social.web}
-                onChange={(e) => changeSocialValue('web', e.target.value)}
+                onChange={(e) => change(toolKey, 'web', e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -47,7 +48,7 @@ const SocialExpansionPanel = (props: IToolSocialExpansionPanelProps) => {
                 label="Facebook"
                 fullWidth
                 value={social.facebook}
-                onChange={(e) => changeSocialValue('facebook', e.target.value)}
+                onChange={(e) => change(toolKey, 'facebook', e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -55,7 +56,7 @@ const SocialExpansionPanel = (props: IToolSocialExpansionPanelProps) => {
                 label="Twitter"
                 fullWidth
                 value={social.twitter}
-                onChange={(e) => changeSocialValue('twitter', e.target.value)}
+                onChange={(e) => change(toolKey, 'twitter', e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>

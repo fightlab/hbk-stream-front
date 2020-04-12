@@ -16,9 +16,10 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
     participants,
     scoreboard,
     update,
-    changeScoreboardValue,
+    change,
     reset,
     swap,
+    toolKey,
   } = props;
 
   return (
@@ -30,7 +31,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <form
-          onSubmit={(e) => update(e, 'scoreboard')}
+          onSubmit={(e) => update(e, toolKey)}
           className={classes.form}
           noValidate
         >
@@ -47,7 +48,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                   <TextField {...params} label="Player 1" margin="normal" fullWidth />
                 )}
                 value={scoreboard.p1n}
-                onInputChange={(_, value) => changeScoreboardValue('p1n', value)}
+                onInputChange={(_, value) => change(toolKey, 'p1n', value)}
               />
             </Grid>
             <Grid item xs={2} sm={1}>
@@ -57,7 +58,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 margin="normal"
                 fullWidth
                 value={scoreboard.p1s}
-                onChange={(e) => changeScoreboardValue('p1s', e.target.value)}
+                onChange={(e) => change(toolKey, 'p1s', e.target.value)}
               />
             </Grid>
             <Grid item xs={2} sm={1}>
@@ -67,7 +68,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 margin="normal"
                 fullWidth
                 value={scoreboard.p2s}
-                onChange={(e) => changeScoreboardValue('p2s', e.target.value)}
+                onChange={(e) => change(toolKey, 'p2s', e.target.value)}
               />
             </Grid>
             <Grid item xs={10} sm={5}>
@@ -78,7 +79,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                   <TextField {...params} label="Player 2" margin="normal" fullWidth />
                 )}
                 value={scoreboard.p2n}
-                onInputChange={(_, value) => changeScoreboardValue('p2n', value)}
+                onInputChange={(_, value) => change(toolKey, 'p2n', value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -132,7 +133,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 label="Top (White/Left)"
                 fullWidth
                 value={scoreboard.tl}
-                onChange={(e) => changeScoreboardValue('tl', e.target.value)}
+                onChange={(e) => change(toolKey, 'tl', e.target.value)}
               />
             </Grid>
             <Grid item xs={6} sm={3}>
@@ -140,7 +141,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 label="Top (Orange/Right)"
                 fullWidth
                 value={scoreboard.tr}
-                onChange={(e) => changeScoreboardValue('tr', e.target.value)}
+                onChange={(e) => change(toolKey, 'tr', e.target.value)}
               />
             </Grid>
             <Grid item xs={6} sm={3}>
@@ -148,7 +149,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 label="Bottom (Orange/Left)"
                 fullWidth
                 value={scoreboard.bl}
-                onChange={(e) => changeScoreboardValue('bl', e.target.value)}
+                onChange={(e) => change(toolKey, 'bl', e.target.value)}
               />
             </Grid>
             <Grid item xs={6} sm={3}>
@@ -156,7 +157,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 label="Bottom (White/Right)"
                 fullWidth
                 value={scoreboard.br}
-                onChange={(e) => changeScoreboardValue('br', e.target.value)}
+                onChange={(e) => change(toolKey, 'br', e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>

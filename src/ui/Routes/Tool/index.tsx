@@ -138,34 +138,10 @@ class Tool extends React.Component<IToolProps, IToolState> {
     this.io.emit('bracket-get', bracket);
   }
 
-  private changeScoreboardValue = (name, value) => {
-    const { scoreboard } = this.state;
-    scoreboard[name] = value;
-    this.setState({ scoreboard });
-  }
-
-  private changeCameraValue = (name, value) => {
-    const { camera } = this.state;
-    camera[name] = value;
-    this.setState({ camera });
-  }
-
-  private changeNightbotValue = (name, value) => {
-    const { nightbot } = this.state;
-    nightbot[name] = value;
-    this.setState({ nightbot });
-  }
-
-  private changePrestreamValue = (name, value) => {
-    const { prestream } = this.state;
-    prestream[name] = value;
-    this.setState({ prestream });
-  }
-
-  private changeSocialValue = (name, value) => {
-    const { social } = this.state;
-    social[name] = value;
-    this.setState({ social });
+  private change: (key: string, name: string, value: any) => void = (key, name, value) => {
+    const { [key]: data } = this.state;
+    data[name] = value;
+    this.setState({ [key]: data });
   }
 
   private changeBracketValue = (bracket) => {
@@ -233,27 +209,38 @@ class Tool extends React.Component<IToolProps, IToolState> {
               participants={participants}
               scoreboard={scoreboard}
               update={this.update}
-              changeScoreboardValue={this.changeScoreboardValue}
+              change={this.change}
               reset={this.reset}
               swap={this.swap}
+              toolKey="scoreboard"
             />
             <CameraExpansionPanel
               classes={classes}
               camera={camera}
               update={this.update}
-              changeCameraValue={this.changeCameraValue}
+              change={this.change}
+              toolKey="camera"
             />
             <PreStreamExpansionPanel
               classes={classes}
               prestream={prestream}
-              changePrestreamValue={this.changePrestreamValue}
+              change={this.change}
               update={this.update}
+              toolKey="prestream"
             />
             <SocialExpansionPanel
               classes={classes}
               social={social}
-              changeSocialValue={this.changeSocialValue}
+              change={this.change}
               update={this.update}
+              toolKey="social"
+            />
+            <NightbotExpansionPanel
+              classes={classes}
+              nightbot={nightbot}
+              update={this.update}
+              change={this.change}
+              toolKey="nightbot"
             />
             <SettingsExpansionPanel
               bracket={bracket}
@@ -262,12 +249,6 @@ class Tool extends React.Component<IToolProps, IToolState> {
               importFilesChange={this.importFilesChange}
               exportFiles={this.exportFiles}
               setDarkMode={setDarkMode}
-            />
-            <NightbotExpansionPanel
-              classes={classes}
-              nightbot={nightbot}
-              update={this.update}
-              changeNightbotValue={this.changeNightbotValue}
             />
           </Box>
         </Container>

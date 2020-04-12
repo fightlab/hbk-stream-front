@@ -2,6 +2,10 @@ interface IToolUpdate {
   (e: React.FormEvent<HTMLFormElement>, key: string): void
 }
 
+interface IToolChange {
+  (key: string, name: string, value: any): void
+}
+
 interface IToolPlayer {
   displayName: string
   handle: string
@@ -37,9 +41,10 @@ interface IToolScoreboardExpansionPanelProps {
   participants: Array<IToolPlayer>
   scoreboard: IScoreboardState
   update: IToolUpdate
-  changeScoreboardValue: Function
+  change: IToolChange
   reset: Function
   swap: Function
+  toolKey: string
 }
 
 interface IToolCameraExpansionPanelProps {
@@ -48,7 +53,8 @@ interface IToolCameraExpansionPanelProps {
   }
   camera: ICamera
   update: IToolUpdate
-  changeCameraValue: Function
+  change: IToolChange
+  toolKey: string
 }
 
 interface IToolPreStreamExpansionPanelProps {
@@ -57,7 +63,8 @@ interface IToolPreStreamExpansionPanelProps {
   }
   prestream: IPreStreamState
   update: IToolUpdate
-  changePrestreamValue: Function
+  change: IToolChange
+  toolKey: string
 }
 
 interface IToolSettingsExpansionPanelProps {
@@ -75,7 +82,8 @@ interface IToolNightbotExpansionPanelProps {
   }
   nightbot: IToolNightbot
   update: IToolUpdate
-  changeNightbotValue: Function
+  change: IToolChange
+  toolKey: string
 }
 
 interface IToolSocialExpansionPanelProps {
@@ -84,5 +92,6 @@ interface IToolSocialExpansionPanelProps {
   }
   social: ISocial,
   update: IToolUpdate
-  changeSocialValue: Function
+  change: IToolChange
+  toolKey: string
 }

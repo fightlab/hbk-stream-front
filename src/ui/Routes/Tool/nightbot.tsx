@@ -13,7 +13,8 @@ const NightbotExpansionPanel = (props: IToolNightbotExpansionPanelProps) => {
     classes,
     nightbot,
     update,
-    changeNightbotValue,
+    change,
+    toolKey,
   } = props;
 
   return (
@@ -25,7 +26,7 @@ const NightbotExpansionPanel = (props: IToolNightbotExpansionPanelProps) => {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <form
-          onSubmit={(e) => update(e, 'nightbot')}
+          onSubmit={(e) => update(e, toolKey)}
           className={classes.form}
           noValidate
         >
@@ -39,7 +40,7 @@ const NightbotExpansionPanel = (props: IToolNightbotExpansionPanelProps) => {
                 label="Bracket - Command: '!bracket' or '!brackets'"
                 fullWidth
                 value={nightbot.bracket}
-                onChange={(e) => changeNightbotValue('bracket', e.target.value)}
+                onChange={(e) => change(toolKey, 'bracket', e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -47,7 +48,7 @@ const NightbotExpansionPanel = (props: IToolNightbotExpansionPanelProps) => {
                 label="Social Media Info - Command: '!social' or '!follow'"
                 fullWidth
                 value={nightbot.social}
-                onChange={(e) => changeNightbotValue('social', e.target.value)}
+                onChange={(e) => change(toolKey, 'social', e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>

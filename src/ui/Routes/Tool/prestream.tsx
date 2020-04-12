@@ -12,10 +12,11 @@ import Switch from '@material-ui/core/Switch';
 
 const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
   const {
-    changePrestreamValue,
+    change,
     classes,
     prestream,
     update,
+    toolKey,
   } = props;
 
   return (
@@ -27,7 +28,7 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <form
-          onSubmit={(e) => update(e, 'prestream')}
+          onSubmit={(e) => update(e, toolKey)}
           className={classes.form}
           noValidate
         >
@@ -41,7 +42,7 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
                 label="Event Name"
                 fullWidth
                 value={prestream.event}
-                onChange={(e) => changePrestreamValue('event', e.target.value)}
+                onChange={(e) => change(toolKey, 'event', e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -49,7 +50,7 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
                 label="Venue Name"
                 fullWidth
                 value={prestream.venue}
-                onChange={(e) => changePrestreamValue('venue', e.target.value)}
+                onChange={(e) => change(toolKey, 'venue', e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -57,7 +58,7 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
                 label="Game/Tournament Name"
                 fullWidth
                 value={prestream.game}
-                onChange={(e) => changePrestreamValue('game', e.target.value)}
+                onChange={(e) => change(toolKey, 'game', e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -65,7 +66,7 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
                 label="Background"
                 fullWidth
                 value={prestream.bg}
-                onChange={(e) => changePrestreamValue('bg', e.target.value)}
+                onChange={(e) => change(toolKey, 'bg', e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -73,7 +74,7 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
                 label="Start Text"
                 fullWidth
                 value={prestream.startText}
-                onChange={(e) => changePrestreamValue('startText', e.target.value)}
+                onChange={(e) => change(toolKey, 'startText', e.target.value)}
               />
             </Grid>
             <Grid item xs={6} sm={3}>
@@ -82,7 +83,7 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
                 fullWidth
                 type="number"
                 value={prestream.countdown}
-                onChange={(e) => changePrestreamValue('countdown', e.target.value)}
+                onChange={(e) => change(toolKey, 'countdown', e.target.value)}
               />
             </Grid>
             <Grid item xs={6} sm={3}>
@@ -90,7 +91,7 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
                 control={(
                   <Switch
                     checked={prestream.showTimer}
-                    onChange={(e) => changePrestreamValue('showTimer', e.target.checked)}
+                    onChange={(e) => change(toolKey, 'showTimer', e.target.checked)}
                     color="primary"
                   />
                 )}

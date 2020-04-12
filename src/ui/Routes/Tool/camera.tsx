@@ -13,7 +13,8 @@ const CameraExpansionPanel = (props: IToolCameraExpansionPanelProps) => {
     classes,
     camera,
     update,
-    changeCameraValue,
+    change,
+    toolKey,
   } = props;
 
   return (
@@ -25,7 +26,7 @@ const CameraExpansionPanel = (props: IToolCameraExpansionPanelProps) => {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <form
-          onSubmit={(e) => update(e, 'camera')}
+          onSubmit={(e) => update(e, toolKey)}
           className={classes.form}
           noValidate
         >
@@ -39,7 +40,7 @@ const CameraExpansionPanel = (props: IToolCameraExpansionPanelProps) => {
                 label="Event Name (Top Left)"
                 fullWidth
                 value={camera.hbk}
-                onChange={(e) => changeCameraValue('hbk', e.target.value)}
+                onChange={(e) => change(toolKey, 'hbk', e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -47,7 +48,7 @@ const CameraExpansionPanel = (props: IToolCameraExpansionPanelProps) => {
                 label="Game Name (Top Right)"
                 fullWidth
                 value={camera.game}
-                onChange={(e) => changeCameraValue('game', e.target.value)}
+                onChange={(e) => change(toolKey, 'game', e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -55,7 +56,7 @@ const CameraExpansionPanel = (props: IToolCameraExpansionPanelProps) => {
                 label="Venue Name (Bottom Left)"
                 fullWidth
                 value={camera.brewdog}
-                onChange={(e) => changeCameraValue('brewdog', e.target.value)}
+                onChange={(e) => change(toolKey, 'brewdog', e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -63,7 +64,7 @@ const CameraExpansionPanel = (props: IToolCameraExpansionPanelProps) => {
                 label="Date (Bottom Left)"
                 fullWidth
                 value={camera.date}
-                onChange={(e) => changeCameraValue('date', e.target.value)}
+                onChange={(e) => change(toolKey, 'date', e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -71,7 +72,7 @@ const CameraExpansionPanel = (props: IToolCameraExpansionPanelProps) => {
                 label="FGC Name (Bottom Right)"
                 fullWidth
                 value={camera.fgc}
-                onChange={(e) => changeCameraValue('fgc', e.target.value)}
+                onChange={(e) => change(toolKey, 'fgc', e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -79,7 +80,7 @@ const CameraExpansionPanel = (props: IToolCameraExpansionPanelProps) => {
                 label="Background"
                 fullWidth
                 value={camera.bg}
-                onChange={(e) => changeCameraValue('bg', e.target.value)}
+                onChange={(e) => change(toolKey, 'bg', e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
