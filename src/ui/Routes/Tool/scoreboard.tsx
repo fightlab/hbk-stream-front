@@ -15,7 +15,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
     classes,
     participants,
     scoreboard,
-    updateScoreboard,
+    update,
     changeScoreboardValue,
     reset,
     swap,
@@ -30,7 +30,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <form
-          onSubmit={(e) => updateScoreboard(e)}
+          onSubmit={(e) => update(e, 'scoreboard')}
           className={classes.form}
           noValidate
         >

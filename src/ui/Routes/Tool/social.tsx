@@ -13,7 +13,7 @@ const SocialExpansionPanel = (props: IToolSocialExpansionPanelProps) => {
     changeSocialValue,
     classes,
     social,
-    updateSocial,
+    update,
   } = props;
 
   return (
@@ -25,7 +25,7 @@ const SocialExpansionPanel = (props: IToolSocialExpansionPanelProps) => {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <form
-          onSubmit={(e) => updateSocial(e)}
+          onSubmit={(e) => update(e, 'social')}
           className={classes.form}
           noValidate
         >

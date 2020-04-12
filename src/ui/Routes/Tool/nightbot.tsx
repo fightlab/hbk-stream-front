@@ -12,7 +12,7 @@ const NightbotExpansionPanel = (props: IToolNightbotExpansionPanelProps) => {
   const {
     classes,
     nightbot,
-    updateNightbot,
+    update,
     changeNightbotValue,
   } = props;
 
@@ -25,7 +25,7 @@ const NightbotExpansionPanel = (props: IToolNightbotExpansionPanelProps) => {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <form
-          onSubmit={(e) => updateNightbot(e)}
+          onSubmit={(e) => update(e, 'nightbot')}
           className={classes.form}
           noValidate
         >

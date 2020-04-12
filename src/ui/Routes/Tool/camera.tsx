@@ -12,7 +12,7 @@ const CameraExpansionPanel = (props: IToolCameraExpansionPanelProps) => {
   const {
     classes,
     camera,
-    updateCamera,
+    update,
     changeCameraValue,
   } = props;
 
@@ -25,7 +25,7 @@ const CameraExpansionPanel = (props: IToolCameraExpansionPanelProps) => {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <form
-          onSubmit={(e) => updateCamera(e)}
+          onSubmit={(e) => update(e, 'camera')}
           className={classes.form}
           noValidate
         >

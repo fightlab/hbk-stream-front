@@ -15,7 +15,7 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
     changePrestreamValue,
     classes,
     prestream,
-    updatePrestream,
+    update,
   } = props;
 
   return (
@@ -27,7 +27,7 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <form
-          onSubmit={(e) => updatePrestream(e)}
+          onSubmit={(e) => update(e, 'prestream')}
           className={classes.form}
           noValidate
         >
