@@ -10,6 +10,8 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Alert from '@material-ui/lab/Alert';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => {
   const {
@@ -101,6 +103,30 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 onInputChange={(_, value) => change(toolKey, 'p2n', value)}
               />
             </Grid>
+            <Grid item xs={6} sm={6}>
+              <FormControlLabel
+                control={(
+                  <Switch
+                    checked={scoreboard.p1l}
+                    onChange={(e) => change(toolKey, 'p1l', e.target.checked)}
+                    color="primary"
+                  />
+                )}
+                label={`Player 1 "${scoreboard.lTag}" Tag`}
+              />
+            </Grid>
+            <Grid item xs={6} sm={6}>
+              <FormControlLabel
+                control={(
+                  <Switch
+                    checked={scoreboard.p2l}
+                    onChange={(e) => change(toolKey, 'p2l', e.target.checked)}
+                    color="primary"
+                  />
+                )}
+                label={`Player 2 "${scoreboard.lTag}" Tag`}
+              />
+            </Grid>
             <Grid item xs={12} sm={6}>
               <Typography variant="overline" display="block" gutterBottom>
                 Reset - Be sure to hit &quot;Update Scoreboard&quot;
@@ -177,6 +203,14 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 fullWidth
                 value={scoreboard.br}
                 onChange={(e) => change(toolKey, 'br', e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <TextField
+                label="[L] Tag"
+                fullWidth
+                value={scoreboard.lTag}
+                onChange={(e) => change(toolKey, 'lTag', e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>

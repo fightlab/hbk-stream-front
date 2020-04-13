@@ -31,14 +31,17 @@ class Tool extends React.Component<IToolProps, IToolState> {
     this.state = {
       bracket: '',
       scoreboard: {
-        p1n: 'Player 1',
-        p2n: 'Player 2',
+        p1n: '',
+        p2n: '',
         p1s: 0,
         p2s: 0,
+        p1l: false,
+        p2l: false,
         tl: 'HBK',
         tr: '#000',
         bl: 'Brewdog',
         br: 'Brighton',
+        lTag: '[L]',
       },
       camera: {
         hbk: 'Habrewken #000',
@@ -188,6 +191,8 @@ class Tool extends React.Component<IToolProps, IToolState> {
     if (names) {
       scoreboard.p1n = '';
       scoreboard.p2n = '';
+      scoreboard.p1l = false;
+      scoreboard.p2l = false;
     }
     if (scores) {
       scoreboard.p1s = 0;
@@ -202,6 +207,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
 
     if (names) {
       [scoreboard.p1n, scoreboard.p2n] = [scoreboard.p2n, scoreboard.p1n];
+      [scoreboard.p1l, scoreboard.p2l] = [scoreboard.p2l, scoreboard.p1l];
     }
 
     if (scores) {

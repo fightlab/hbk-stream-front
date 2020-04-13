@@ -18,14 +18,17 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
     super(props);
 
     this.state = {
-      p1n: 'Player 1',
-      p2n: 'Player 2',
+      p1n: '',
+      p2n: '',
       p1s: 0,
       p2s: 0,
+      p1l: false,
+      p2l: false,
       tl: 'HBK',
       tr: '#000',
       bl: 'Brewdog',
       br: 'Brighton',
+      lTag: '[L]',
     };
 
     this.io.on(
@@ -43,7 +46,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
   render() {
     const { classes } = this.props;
     const {
-      p1n, p2n, p1s, p2s, tl, tr, bl, br,
+      p1n, p2n, p1s, p2s, tl, tr, bl, br, p1l, p2l, lTag,
     } = this.state;
 
     const smallText: IThemeFont = merge({}, theme.rawlineBold, {
@@ -76,7 +79,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           textAlign="right"
           border={theme.borderBottom}
         >
-          <Text>{p1n}</Text>
+          <Text>{`${p1n}${p1l ? ` ${lTag}` : ''}`}</Text>
         </TextBox>
         <TextBox
           // player 1 score
@@ -92,7 +95,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           textAlign="left"
           border={theme.borderBottom}
         >
-          <Text>{p2n}</Text>
+          <Text>{`${p2n}${p2l ? ` ${lTag}` : ''}`}</Text>
         </TextBox>
         <TextBox
           // player 2 score
