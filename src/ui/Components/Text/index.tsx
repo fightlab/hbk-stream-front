@@ -1,16 +1,16 @@
-import * as React from 'react';
-import withStyles from 'react-jss';
-import { merge } from 'lodash';
-import theme from '~/theme';
+import * as React from "react";
+import withStyles from "react-jss";
+import { merge } from "lodash";
+import theme, { IThemeFont } from "~/theme";
 
 interface ITextProps {
-  children?: string|number
-  color?: string
-  font?: IThemeFont
-  lowerCase?: boolean
+  children?: string | number;
+  color?: string;
+  font?: IThemeFont;
+  lowerCase?: boolean;
   classes: {
-    root: string
-  }
+    root: string;
+  };
 }
 
 const styles = {
@@ -26,28 +26,24 @@ const styles = {
 };
 
 const defaultFont: IThemeFont = merge({}, theme.rawlineBold, {
-  fontSize: '36pt',
-  fontVariant: 'small-caps',
+  fontSize: "36pt",
+  fontVariant: "small-caps",
 });
 
 class Text extends React.PureComponent<ITextProps> {
   static defaultProps: ITextProps = {
-    children: '',
-    classes: { root: '' },
+    children: "",
+    classes: { root: "" },
     color: theme.white,
     font: defaultFont,
     lowerCase: false,
-  }
+  };
 
   render() {
     const { children, classes, lowerCase } = this.props;
     return (
       <span className={classes.root}>
-        {
-          lowerCase
-            ? children.toString().toLowerCase()
-            : children
-        }
+        {lowerCase ? children.toString().toLowerCase() : children}
       </span>
     );
   }

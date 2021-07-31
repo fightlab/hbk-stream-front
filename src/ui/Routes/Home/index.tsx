@@ -1,20 +1,20 @@
 /* eslint-disable react/prop-types */
-import * as React from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import List from '@material-ui/core/List';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import AspectRatio from '@material-ui/icons/AspectRatio';
-import SettingsBrightnessIcon from '@material-ui/icons/SettingsBrightness';
-import PictureInPictureIcon from '@material-ui/icons/PictureInPicture';
-import QueuePlayNext from '@material-ui/icons/QueuePlayNext';
-import { toggleDarkMode } from '../../Services/helper';
+import * as React from "react";
+import { Link, withRouter } from "react-router-dom";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import List from "@material-ui/core/List";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import AspectRatio from "@material-ui/icons/AspectRatio";
+import SettingsBrightnessIcon from "@material-ui/icons/SettingsBrightness";
+import PictureInPictureIcon from "@material-ui/icons/PictureInPicture";
+import QueuePlayNext from "@material-ui/icons/QueuePlayNext";
+import { toggleDarkMode } from "../../Services/helper";
 
 const Home = (props) => (
   <>

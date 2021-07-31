@@ -1,19 +1,41 @@
-import * as React from 'react';
-import Typography from '@material-ui/core/Typography';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Alert from '@material-ui/lab/Alert';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
+import * as React from "react";
+import Typography from "@material-ui/core/Typography";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import Alert from "@material-ui/lab/Alert";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
+import { IScoreboardState } from "../Scoreboard";
+import {
+  IToolChange,
+  IToolPlayer,
+  IToolScoreboardReset,
+  IToolScoreboardSwap,
+  IToolUpdate,
+} from ".";
 
-const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => {
+interface IToolScoreboardAccordionProps {
+  classes: {
+    form: string;
+  };
+  participants: Array<IToolPlayer>;
+  scoreboard: IScoreboardState;
+  update: IToolUpdate;
+  change: IToolChange;
+  reset: IToolScoreboardReset;
+  swap: IToolScoreboardSwap;
+  toolKey: string;
+  unsaved: boolean;
+}
+
+const ScoreboardAccordion = (props: IToolScoreboardAccordionProps) => {
   const {
     classes,
     participants,
@@ -26,49 +48,50 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
     unsaved,
   } = props;
 
-  const players = participants.map((player) => player.displayName).sort((a, b) => {
-    const x = a.toLowerCase();
-    const y = b.toLowerCase();
+  const players = participants
+    .map((player) => player.displayName)
+    .sort((a, b) => {
+      const x = a.toLowerCase();
+      const y = b.toLowerCase();
 
-    if (x > y) {
-      return 1;
-    }
+      if (x > y) {
+        return 1;
+      }
 
-    if (y > x) {
-      return -1;
-    }
+      if (y > x) {
+        return -1;
+      }
 
-    return 0;
-  });
+      return 0;
+    });
 
   return (
-    <ExpansionPanel>
-      <ExpansionPanelSummary
-        expandIcon={<ExpandMoreIcon />}
-      >
+    <Accordion>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography>Scoreboard</Typography>
-      </ExpansionPanelSummary>
-      <ExpansionPanelDetails>
+      </AccordionSummary>
+      <AccordionDetails>
         <form
           onSubmit={(e) => update(e, toolKey)}
           className={classes.form}
           noValidate
         >
-          <Grid
-            container
-            alignItems="flex-start"
-            spacing={2}
-          >
+          <Grid container alignItems="flex-start" spacing={2}>
             <Grid item xs={10} sm={5}>
               <Autocomplete
                 freeSolo
                 multiple={false}
                 options={players}
                 renderInput={(params) => (
-                  <TextField {...params} label="Player 1" margin="normal" fullWidth />
+                  <TextField
+                    {...params}
+                    label="Player 1"
+                    margin="normal"
+                    fullWidth
+                  />
                 )}
                 value={scoreboard.p1n}
-                onInputChange={(_, value) => change(toolKey, 'p1n', value)}
+                onInputChange={(_, value) => change(toolKey, "p1n", value)}
               />
             </Grid>
             <Grid item xs={2} sm={1}>
@@ -78,7 +101,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 margin="normal"
                 fullWidth
                 value={scoreboard.p1s}
-                onChange={(e) => change(toolKey, 'p1s', e.target.value)}
+                onChange={(e) => change(toolKey, "p1s", e.target.value)}
               />
             </Grid>
             <Grid item xs={2} sm={1}>
@@ -88,7 +111,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 margin="normal"
                 fullWidth
                 value={scoreboard.p2s}
-                onChange={(e) => change(toolKey, 'p2s', e.target.value)}
+                onChange={(e) => change(toolKey, "p2s", e.target.value)}
               />
             </Grid>
             <Grid item xs={10} sm={5}>
@@ -97,33 +120,38 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 multiple={false}
                 options={players}
                 renderInput={(params) => (
-                  <TextField {...params} label="Player 2" margin="normal" fullWidth />
+                  <TextField
+                    {...params}
+                    label="Player 2"
+                    margin="normal"
+                    fullWidth
+                  />
                 )}
                 value={scoreboard.p2n}
-                onInputChange={(_, value) => change(toolKey, 'p2n', value)}
+                onInputChange={(_, value) => change(toolKey, "p2n", value)}
               />
             </Grid>
             <Grid item xs={6} sm={6}>
               <FormControlLabel
-                control={(
+                control={
                   <Switch
                     checked={scoreboard.p1l}
-                    onChange={(e) => change(toolKey, 'p1l', e.target.checked)}
+                    onChange={(e) => change(toolKey, "p1l", e.target.checked)}
                     color="primary"
                   />
-                )}
+                }
                 label={`Player 1 "${scoreboard.lTag}" Tag`}
               />
             </Grid>
             <Grid item xs={6} sm={6}>
               <FormControlLabel
-                control={(
+                control={
                   <Switch
                     checked={scoreboard.p2l}
-                    onChange={(e) => change(toolKey, 'p2l', e.target.checked)}
+                    onChange={(e) => change(toolKey, "p2l", e.target.checked)}
                     color="primary"
                   />
-                )}
+                }
                 label={`Player 2 "${scoreboard.lTag}" Tag`}
               />
             </Grid>
@@ -131,24 +159,12 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
               <Typography variant="overline" display="block" gutterBottom>
                 Reset - Be sure to hit &quot;Update Scoreboard&quot;
               </Typography>
-              <ButtonGroup
-                color="secondary"
-              >
-                <Button
-                  onClick={() => reset({ names: true, scores: true })}
-                >
+              <ButtonGroup color="secondary">
+                <Button onClick={() => reset({ names: true, scores: true })}>
                   Both
                 </Button>
-                <Button
-                  onClick={() => reset({ names: true })}
-                >
-                  Names
-                </Button>
-                <Button
-                  onClick={() => reset({ scores: true })}
-                >
-                  Scores
-                </Button>
+                <Button onClick={() => reset({ names: true })}>Names</Button>
+                <Button onClick={() => reset({ scores: true })}>Scores</Button>
               </ButtonGroup>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -156,21 +172,11 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 Swap
               </Typography>
               <ButtonGroup>
-                <Button
-                  onClick={() => swap({ names: true, scores: true })}
-                >
+                <Button onClick={() => swap({ names: true, scores: true })}>
                   Both
                 </Button>
-                <Button
-                  onClick={() => swap({ names: true })}
-                >
-                  Names
-                </Button>
-                <Button
-                  onClick={() => swap({ scores: true })}
-                >
-                  Scores
-                </Button>
+                <Button onClick={() => swap({ names: true })}>Names</Button>
+                <Button onClick={() => swap({ scores: true })}>Scores</Button>
               </ButtonGroup>
             </Grid>
             <Grid item xs={6} sm={3}>
@@ -178,7 +184,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 label="Top (White/Left)"
                 fullWidth
                 value={scoreboard.tl}
-                onChange={(e) => change(toolKey, 'tl', e.target.value)}
+                onChange={(e) => change(toolKey, "tl", e.target.value)}
               />
             </Grid>
             <Grid item xs={6} sm={3}>
@@ -186,7 +192,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 label="Top (Orange/Right)"
                 fullWidth
                 value={scoreboard.tr}
-                onChange={(e) => change(toolKey, 'tr', e.target.value)}
+                onChange={(e) => change(toolKey, "tr", e.target.value)}
               />
             </Grid>
             <Grid item xs={6} sm={3}>
@@ -194,7 +200,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 label="Bottom (Orange/Left)"
                 fullWidth
                 value={scoreboard.bl}
-                onChange={(e) => change(toolKey, 'bl', e.target.value)}
+                onChange={(e) => change(toolKey, "bl", e.target.value)}
               />
             </Grid>
             <Grid item xs={6} sm={3}>
@@ -202,7 +208,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 label="Bottom (White/Right)"
                 fullWidth
                 value={scoreboard.br}
-                onChange={(e) => change(toolKey, 'br', e.target.value)}
+                onChange={(e) => change(toolKey, "br", e.target.value)}
               />
             </Grid>
             <Grid item xs={6} sm={3}>
@@ -210,7 +216,7 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 label="[L] Tag"
                 fullWidth
                 value={scoreboard.lTag}
-                onChange={(e) => change(toolKey, 'lTag', e.target.value)}
+                onChange={(e) => change(toolKey, "lTag", e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -218,19 +224,16 @@ const ScoreboardExpansionPanel = (props: IToolScoreboardExpansionPanelProps) => 
                 Update Scoreboard
               </Button>
             </Grid>
-            {
-              unsaved && (
+            {unsaved && (
               <Grid item xs={12}>
                 <Alert severity="warning">Unsaved Changes!</Alert>
               </Grid>
-              )
-            }
+            )}
           </Grid>
         </form>
-      </ExpansionPanelDetails>
-    </ExpansionPanel>
+      </AccordionDetails>
+    </Accordion>
   );
 };
 
-
-export default ScoreboardExpansionPanel;
+export default ScoreboardAccordion;

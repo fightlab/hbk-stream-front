@@ -1,50 +1,50 @@
-import * as React from 'react';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import Alert from '@material-ui/lab/Alert';
+import * as React from "react";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
+import Alert from "@material-ui/lab/Alert";
+import { IPreStreamState } from "../PreStream";
+import { IToolChange, IToolUpdate } from ".";
 
-const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
-  const {
-    change,
-    classes,
-    prestream,
-    update,
-    toolKey,
-    unsaved,
-  } = props;
+interface IToolPreStreamAccordionProps {
+  classes: {
+    form: string;
+  };
+  prestream: IPreStreamState;
+  update: IToolUpdate;
+  change: IToolChange;
+  toolKey: string;
+  unsaved: boolean;
+}
+
+const PreStreamAccordion = (props: IToolPreStreamAccordionProps) => {
+  const { change, classes, prestream, update, toolKey, unsaved } = props;
 
   return (
-    <ExpansionPanel>
-      <ExpansionPanelSummary
-        expandIcon={<ExpandMoreIcon />}
-      >
+    <Accordion>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography>PreStream</Typography>
-      </ExpansionPanelSummary>
-      <ExpansionPanelDetails>
+      </AccordionSummary>
+      <AccordionDetails>
         <form
           onSubmit={(e) => update(e, toolKey)}
           className={classes.form}
           noValidate
         >
-          <Grid
-            container
-            alignItems="flex-start"
-            spacing={2}
-          >
+          <Grid container alignItems="flex-start" spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
                 label="Event Name"
                 fullWidth
                 value={prestream.event}
-                onChange={(e) => change(toolKey, 'event', e.target.value)}
+                onChange={(e) => change(toolKey, "event", e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -52,7 +52,7 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
                 label="Venue Name"
                 fullWidth
                 value={prestream.venue}
-                onChange={(e) => change(toolKey, 'venue', e.target.value)}
+                onChange={(e) => change(toolKey, "venue", e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -60,7 +60,7 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
                 label="Game/Tournament Name"
                 fullWidth
                 value={prestream.game}
-                onChange={(e) => change(toolKey, 'game', e.target.value)}
+                onChange={(e) => change(toolKey, "game", e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -68,7 +68,7 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
                 label="Background"
                 fullWidth
                 value={prestream.bg}
-                onChange={(e) => change(toolKey, 'bg', e.target.value)}
+                onChange={(e) => change(toolKey, "bg", e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -76,7 +76,7 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
                 label="Start Text"
                 fullWidth
                 value={prestream.startText}
-                onChange={(e) => change(toolKey, 'startText', e.target.value)}
+                onChange={(e) => change(toolKey, "startText", e.target.value)}
               />
             </Grid>
             <Grid item xs={6} sm={3}>
@@ -85,18 +85,20 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
                 fullWidth
                 type="number"
                 value={prestream.countdown}
-                onChange={(e) => change(toolKey, 'countdown', e.target.value)}
+                onChange={(e) => change(toolKey, "countdown", e.target.value)}
               />
             </Grid>
             <Grid item xs={6} sm={3}>
               <FormControlLabel
-                control={(
+                control={
                   <Switch
                     checked={prestream.showTimer}
-                    onChange={(e) => change(toolKey, 'showTimer', e.target.checked)}
+                    onChange={(e) =>
+                      change(toolKey, "showTimer", e.target.checked)
+                    }
                     color="primary"
                   />
-                )}
+                }
                 label="Show Timer"
               />
             </Grid>
@@ -105,18 +107,16 @@ const PreStreamExpansionPanel = (props: IToolPreStreamExpansionPanelProps) => {
                 Update Prestream
               </Button>
             </Grid>
-            {
-              unsaved && (
+            {unsaved && (
               <Grid item xs={12}>
                 <Alert severity="warning">Unsaved Changes!</Alert>
               </Grid>
-              )
-            }
+            )}
           </Grid>
         </form>
-      </ExpansionPanelDetails>
-    </ExpansionPanel>
+      </AccordionDetails>
+    </Accordion>
   );
 };
 
-export default PreStreamExpansionPanel;
+export default PreStreamAccordion;

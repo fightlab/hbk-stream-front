@@ -1,21 +1,41 @@
-import * as React from 'react';
-import withStyles from 'react-jss';
-import { merge } from 'lodash';
+import * as React from "react";
+import withStyles, { WithStylesProps, Styles } from "react-jss";
+import { merge } from "lodash";
 
-import Countdown from 'react-countdown-now';
-import theme from '~/theme';
-import Socket from '~/ui/Services/socket';
-import GlassImage from '~/ui/Components/GlassImage';
-import TextBox from '~/ui/Components/TextBox';
-import Text from '~/ui/Components/Text';
+import Countdown from "react-countdown";
+import theme from "~/theme";
+import Socket from "~/ui/Services/socket";
+import GlassImage from "~/ui/Components/GlassImage";
+import TextBox from "~/ui/Components/TextBox";
+import Text from "~/ui/Components/Text";
 
-const styles = {
+const styles: Styles = {
   root: theme.container,
 };
 
-const formatTime = ({ hours = 0, minutes = 0, seconds = 0 }): string => `in ${hours ? `${hours} hour${hours === 1 ? '' : 's'}` : ''} ${minutes ? `${minutes} minute${minutes === 1 ? '' : 's'}` : ''} ${seconds ? `${seconds} second${seconds === 1 ? '' : 's'}` : ''}`;
+interface IPreStreamProps extends WithStylesProps<typeof styles> {}
 
-const TimerComplete: any = (text = 'now', color = theme.white, font = theme.rawline, fontSize = '70px') => (
+export interface IPreStreamState {
+  event: string;
+  game: string;
+  bg: string;
+  countdown: number;
+  venue: string;
+  showTimer: boolean;
+  startText: string;
+}
+
+const formatTime = ({ hours = 0, minutes = 0, seconds = 0 }): string =>
+  `in ${hours ? `${hours} hour${hours === 1 ? "" : "s"}` : ""} ${
+    minutes ? `${minutes} minute${minutes === 1 ? "" : "s"}` : ""
+  } ${seconds ? `${seconds} second${seconds === 1 ? "" : "s"}` : ""}`;
+
+const TimerComplete: any = (
+  text = "now",
+  color = theme.white,
+  font = theme.rawline,
+  fontSize = "70px"
+) => (
   <TextBox
     bottom={55}
     left={0}
@@ -26,91 +46,73 @@ const TimerComplete: any = (text = 'now', color = theme.white, font = theme.rawl
   >
     <Text
       color={color}
-      font={
-    merge(
-      {},
-      font,
-      {
+      font={merge({}, font, {
         fontSize,
-      },
-    )
-  }
+      })}
     >
       {text}
     </Text>
   </TextBox>
 );
 
-const countdownRenderer = (color = theme.white, font = theme.rawline, fontSize = '70px') => ({
-  hours, minutes, seconds, completed,
-}): JSX.Element => {
-  if (completed) {
-    return TimerComplete();
-  }
-  return (
-    <TextBox
-      bottom={55}
-      left={0}
-      textAlign="center"
-      width="100%"
-      padding={0}
-      backgroundColor={theme.transparent}
-    >
-      <Text
-        color={color}
-        font={
-          merge(
-            {},
-            font,
-            {
-              fontSize,
-            },
-          )
-        }
+const countdownRenderer =
+  (color = theme.white, font = theme.rawline, fontSize = "70px") =>
+  ({ hours, minutes, seconds, completed }): JSX.Element => {
+    if (completed) {
+      return TimerComplete();
+    }
+    return (
+      <TextBox
+        bottom={55}
+        left={0}
+        textAlign="center"
+        width="100%"
+        padding={0}
+        backgroundColor={theme.transparent}
       >
-        {`${formatTime({ hours, minutes, seconds })}`}
-      </Text>
-    </TextBox>
-  );
-};
+        <Text
+          color={color}
+          font={merge({}, font, {
+            fontSize,
+          })}
+        >
+          {`${formatTime({ hours, minutes, seconds })}`}
+        </Text>
+      </TextBox>
+    );
+  };
 
 class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
-  private io = new Socket()
+  private io = new Socket();
 
   constructor(props) {
     super(props);
 
     this.state = {
-      event: 'Habrewken #000',
-      game: 'Game Fighter Name',
-      bg: 'hbk',
+      event: "Habrewken #000",
+      game: "Game Fighter Name",
+      bg: "hbk",
       countdown: 300,
-      venue: 'BrewDog Brighton',
+      venue: "BrewDog Brighton",
       showTimer: false,
-      startText: 'Starts',
+      startText: "Starts",
     };
 
-    this.io.on(
-      'prestream',
-      (prestream) => {
-        this.setState(prestream);
-      },
-    );
+    this.io.on("prestream", (prestream) => {
+      this.setState(prestream);
+    });
   }
 
   componentDidMount() {
-    this.io.emit('prestream-get');
+    this.io.emit("prestream-get");
   }
 
   render() {
     const { classes } = this.props;
-    const {
-      event, game, bg, countdown, venue, showTimer, startText,
-    } = this.state;
+    const { event, game, bg, countdown, venue, showTimer, startText } =
+      this.state;
 
-    const {
-      transparent, orange, rawline, rawlineBold,
-    } = theme;
+    const { transparent, orange, rawline, rawlineBold } = theme;
 
     return (
       <div className={classes.root}>
@@ -127,15 +129,9 @@ class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
           backgroundColor={transparent}
         >
           <Text
-            font={
-              merge(
-                {},
-                rawlineBold,
-                {
-                  fontSize: '100px',
-                },
-              )
-            }
+            font={merge({}, rawlineBold, {
+              fontSize: "100px",
+            })}
           >
             {event}
           </Text>
@@ -151,15 +147,9 @@ class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
         >
           <Text
             color={orange}
-            font={
-              merge(
-                {},
-                rawline,
-                {
-                  fontSize: '70px',
-                },
-              )
-            }
+            font={merge({}, rawline, {
+              fontSize: "70px",
+            })}
           >
             {venue}
           </Text>
@@ -174,15 +164,9 @@ class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
           backgroundColor={transparent}
         >
           <Text
-            font={
-              merge(
-                {},
-                rawlineBold,
-                {
-                  fontSize: '64px',
-                },
-              )
-            }
+            font={merge({}, rawlineBold, {
+              fontSize: "64px",
+            })}
           >
             {game}
           </Text>
@@ -196,28 +180,19 @@ class PreStream extends React.Component<IPreStreamProps, IPreStreamState> {
           backgroundColor={transparent}
         >
           <Text
-            font={
-              merge(
-                {},
-                rawline,
-                {
-                  fontSize: '70px',
-                },
-              )
-            }
+            font={merge({}, rawline, {
+              fontSize: "70px",
+            })}
           >
             {startText}
           </Text>
         </TextBox>
-        {
-          showTimer
-          && (
+        {showTimer && (
           <Countdown
             date={Date.now() + countdown * 1000}
             renderer={countdownRenderer()}
           />
-          )
-        }
+        )}
       </div>
     );
   }

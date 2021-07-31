@@ -1,48 +1,48 @@
-import * as React from 'react';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Alert from '@material-ui/lab/Alert';
+import * as React from "react";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Alert from "@material-ui/lab/Alert";
+import { ISocial } from "../Camera";
+import { IToolChange, IToolUpdate } from ".";
 
-const SocialExpansionPanel = (props: IToolSocialExpansionPanelProps) => {
-  const {
-    change,
-    classes,
-    social,
-    update,
-    toolKey,
-    unsaved,
-  } = props;
+interface IToolSocialAccordionProps {
+  classes: {
+    form: string;
+  };
+  social: ISocial;
+  update: IToolUpdate;
+  change: IToolChange;
+  toolKey: string;
+  unsaved: boolean;
+}
+
+const SocialAccordion = (props: IToolSocialAccordionProps) => {
+  const { change, classes, social, update, toolKey, unsaved } = props;
 
   return (
-    <ExpansionPanel>
-      <ExpansionPanelSummary
-        expandIcon={<ExpandMoreIcon />}
-      >
+    <Accordion>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography>Social</Typography>
-      </ExpansionPanelSummary>
-      <ExpansionPanelDetails>
+      </AccordionSummary>
+      <AccordionDetails>
         <form
           onSubmit={(e) => update(e, toolKey)}
           className={classes.form}
           noValidate
         >
-          <Grid
-            container
-            alignItems="flex-start"
-            spacing={2}
-          >
+          <Grid container alignItems="flex-start" spacing={2}>
             <Grid item xs={12} sm={4}>
               <TextField
                 label="Web"
                 fullWidth
                 value={social.web}
-                onChange={(e) => change(toolKey, 'web', e.target.value)}
+                onChange={(e) => change(toolKey, "web", e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -50,7 +50,7 @@ const SocialExpansionPanel = (props: IToolSocialExpansionPanelProps) => {
                 label="Facebook"
                 fullWidth
                 value={social.facebook}
-                onChange={(e) => change(toolKey, 'facebook', e.target.value)}
+                onChange={(e) => change(toolKey, "facebook", e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -58,7 +58,7 @@ const SocialExpansionPanel = (props: IToolSocialExpansionPanelProps) => {
                 label="Twitter"
                 fullWidth
                 value={social.twitter}
-                onChange={(e) => change(toolKey, 'twitter', e.target.value)}
+                onChange={(e) => change(toolKey, "twitter", e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -66,18 +66,16 @@ const SocialExpansionPanel = (props: IToolSocialExpansionPanelProps) => {
                 Update Social
               </Button>
             </Grid>
-            {
-              unsaved && (
+            {unsaved && (
               <Grid item xs={12}>
                 <Alert severity="warning">Unsaved Changes!</Alert>
               </Grid>
-              )
-            }
+            )}
           </Grid>
         </form>
-      </ExpansionPanelDetails>
-    </ExpansionPanel>
+      </AccordionDetails>
+    </Accordion>
   );
 };
 
-export default SocialExpansionPanel;
+export default SocialAccordion;

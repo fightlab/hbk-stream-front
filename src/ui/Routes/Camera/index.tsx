@@ -1,37 +1,59 @@
-import * as React from 'react';
-import withStyles from 'react-jss';
-import Icon from '@mdi/react';
-import { mdiWeb, mdiTwitter, mdiFacebook } from '@mdi/js';
-import { merge } from 'lodash';
+import * as React from "react";
+import withStyles, { WithStylesProps, Styles } from "react-jss";
+import Icon from "@mdi/react";
+import { mdiWeb, mdiTwitter, mdiFacebook } from "@mdi/js";
+import { merge } from "lodash";
 
-import Socket from '~/ui/Services/socket';
-import theme from '~/theme';
-import Text from '~/ui/Components/Text';
-import TextBox from '~/ui/Components/TextBox';
-import GlassImage from '~/ui/Components/GlassImage';
-import MaskImage from './mask.png';
+import Socket from "~/ui/Services/socket";
+import theme from "~/theme";
+import Text from "~/ui/Components/Text";
+import TextBox from "~/ui/Components/TextBox";
+import GlassImage from "~/ui/Components/GlassImage";
+import MaskImage from "./mask.png";
 
-const styles = {
+const styles: Styles = {
   root: theme.container,
   iconFacebook: {
-    position: 'absolute',
-    bottom: '105px',
-    right: '5px',
-    zIndex: 1,
+    position: "absolute",
+    bottom: "105px",
+    right: "5px",
+    zIndex: "1",
   },
   iconTwitter: {
-    position: 'absolute',
-    bottom: '55px',
-    right: '5px',
-    zIndex: 1,
+    position: "absolute",
+    bottom: "55px",
+    right: "5px",
+    zIndex: "1",
   },
   iconWeb: {
-    position: 'absolute',
-    bottom: '5px',
-    right: '5px',
-    zIndex: 1,
+    position: "absolute",
+    bottom: "5px",
+    right: "5px",
+    zIndex: "1",
   },
 };
+
+export interface ISocial {
+  web: string;
+  facebook: string;
+  twitter: string;
+}
+
+export interface ICamera {
+  hbk: string;
+  brewdog: string;
+  fgc: string;
+  date: string;
+  game: string;
+  bg: string;
+}
+
+interface ICameraProps extends WithStylesProps<typeof styles> {}
+
+interface ICameraState {
+  camera: ICamera;
+  social: ISocial;
+}
 
 class Camera extends React.Component<ICameraProps, ICameraState> {
   private io = new Socket();
@@ -41,58 +63,46 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
 
     this.state = {
       camera: {
-        hbk: 'Habrewken #000',
-        brewdog: 'Brewdog Brighton',
-        fgc: 'Brighton Fighting Game Community',
-        date: 'Wednesday XXth MONTH 20XX',
-        game: 'Street Fighter V',
-        bg: 'hbk',
+        hbk: "Habrewken #000",
+        brewdog: "Brewdog Brighton",
+        fgc: "Brighton Fighting Game Community",
+        date: "Wednesday XXth MONTH 20XX",
+        game: "Street Fighter V",
+        bg: "hbk",
       },
       social: {
-        web: 'hbk.gg',
-        facebook: 'fightlabbrighton',
-        twitter: 'fight_lab',
+        web: "hbk.gg",
+        facebook: "fightlabbrighton",
+        twitter: "fight_lab",
       },
     };
 
-    this.io.on(
-      'camera',
-      (camera) => {
-        this.setState({ camera });
-      },
-    );
+    this.io.on("camera", (camera) => {
+      this.setState({ camera });
+    });
 
-    this.io.on(
-      'social',
-      (social) => {
-        this.setState({ social });
-      },
-    );
+    this.io.on("social", (social) => {
+      this.setState({ social });
+    });
   }
 
   componentDidMount() {
-    this.io.emit('camera-get');
-    this.io.emit('social-get');
+    this.io.emit("camera-get");
+    this.io.emit("social-get");
   }
 
   render() {
     const { classes } = this.props;
     const { camera, social } = this.state;
-    const {
-      hbk, brewdog, fgc, date, game, bg,
-    } = camera;
-    const {
-      web, twitter, facebook,
-    } = social;
+    const { hbk, brewdog, fgc, date, game, bg } = camera;
+    const { web, twitter, facebook } = social;
 
-    const {
-      transparent, orange, cabin, rawline, rawlineBold,
-    } = theme;
+    const { transparent, orange, cabin, rawline, rawlineBold } = theme;
 
     return (
       <div className={classes.root}>
         <GlassImage
-          src={`https://res.cloudinary.com/mkn-sh/image/upload/c_fill,e_blur:2000,g_center,h_1080,w_1920/v1539443572/fgc/${bg}.jpg`}
+          src={`https://res.cloudinary.com/mkn-sh/image/upload/c_fill,e_blur:2500,g_center,h_1080,w_1920/v1539443572/fgc/${bg}.jpg`}
           maskImage={MaskImage}
         />
         <TextBox
@@ -103,15 +113,9 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
           backgroundColor={transparent}
         >
           <Text
-            font={
-              merge(
-                {},
-                rawlineBold,
-                {
-                  fontSize: '72pt',
-                },
-              )
-            }
+            font={merge({}, rawlineBold, {
+              fontSize: "72pt",
+            })}
           >
             {hbk}
           </Text>
@@ -125,81 +129,61 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
         >
           <Text
             color={orange}
-            font={
-              merge(
-                {},
-                rawlineBold,
-                {
-                  fontSize: '72pt',
-                },
-              )
-            }
+            font={merge({}, rawlineBold, {
+              fontSize: "72pt",
+            })}
           >
             {game}
           </Text>
         </TextBox>
         <TextBox
           // venue text
-          bottom={30 + 50 * 2}
-          left={5}
+          bottom={`${30 + 50 * 2}px`}
+          left={"5px"}
           textAlign="left"
           backgroundColor={transparent}
         >
           <Text
-            font={
-              merge(
-                {},
-                rawlineBold,
-                {
-                  fontSize: '56pt',
-                },
-              )
-            }
+            font={merge({}, rawlineBold, {
+              fontSize: "56pt",
+            })}
           >
             {brewdog}
           </Text>
         </TextBox>
         <TextBox
           // date text
-          bottom={50 * 1}
-          left={5}
+          bottom={`${50 * 1}px`}
+          left={"5px"}
           textAlign="left"
           backgroundColor={transparent}
         >
           <Text
             color={orange}
-            font={
-              merge(
-                {},
-                cabin,
-                {
-                  fontSize: '42pt',
-                },
-              )
-            }
+            font={merge({}, cabin, {
+              fontSize: "42pt",
+            })}
           >
             {date}
           </Text>
         </TextBox>
         <TextBox
           // facebook text
-          bottom={5 + 50 * 2}
-          right={50 * 1}
+          bottom={`${5 + 50 * 2}px`}
+          right={`${50 * 1}px`}
           textAlign="right"
           backgroundColor={transparent}
         >
           <Text
             lowerCase
-            font={
-              merge(
-                {},
-                {
-                  fontVariant: 'small-caps',
-                  fontSize: '36pt',
-                },
-                cabin,
-              )
-            }
+            font={merge(
+              {},
+              {
+                fontVariant: "small-caps",
+                fontSize: "36pt",
+              },
+              cabin
+            )}
           >
             {facebook}
           </Text>
@@ -212,23 +196,21 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
         />
         <TextBox
           // twitter text
-          bottom={5 + 50 * 1}
-          right={50 * 1}
+          bottom={`${5 + 50 * 1}px`}
+          right={`${50 * 1}px`}
           textAlign="right"
           backgroundColor={transparent}
         >
           <Text
             lowerCase
-            font={
-              merge(
-                {},
-                {
-                  fontVariant: 'small-caps',
-                  fontSize: '36pt',
-                },
-                cabin,
-              )
-            }
+            font={merge(
+              {},
+              {
+                fontVariant: "small-caps",
+                fontSize: "36pt",
+              },
+              cabin
+            )}
           >
             {twitter}
           </Text>
@@ -241,23 +223,21 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
         />
         <TextBox
           // web text
-          bottom={5 + 50 * 0}
-          right={50 * 1}
+          bottom={`${5 + 50 * 0}px`}
+          right={`${50 * 1}px`}
           textAlign="right"
           backgroundColor={transparent}
         >
           <Text
             lowerCase
-            font={
-              merge(
-                {},
-                {
-                  fontVariant: 'small-caps',
-                  fontSize: '36pt',
-                },
-                cabin,
-              )
-            }
+            font={merge(
+              {},
+              {
+                fontVariant: "small-caps",
+                fontSize: "36pt",
+              },
+              cabin
+            )}
           >
             {web}
           </Text>
@@ -270,22 +250,16 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
         />
         <TextBox
           // fgc text
-          bottom={5 + 50 * 3}
-          right={5}
+          bottom={`${5 + 50 * 3}px`}
+          right={`5px`}
           textAlign="right"
           backgroundColor={transparent}
         >
           <Text
             color={orange}
-            font={
-              merge(
-                {},
-                rawline,
-                {
-                  fontSize: '42pt',
-                },
-              )
-            }
+            font={merge({}, rawline, {
+              fontSize: "42pt",
+            })}
           >
             {fgc}
           </Text>

@@ -1,15 +1,31 @@
-import * as React from 'react';
-import withStyles from 'react-jss';
-import { merge } from 'lodash';
+import * as React from "react";
+import withStyles, { Styles, WithStylesProps } from "react-jss";
+import { merge } from "lodash";
 
-import Socket from '~/ui/Services/socket';
-import TextBox from '~/ui/Components/TextBox';
-import Text from '~/ui/Components/Text';
-import theme from '~/theme';
+import Socket from "~/ui/Services/socket";
+import TextBox from "~/ui/Components/TextBox";
+import Text from "~/ui/Components/Text";
+import theme, { IThemeFont } from "~/theme";
 
-const styles = {
+const styles: Styles = {
   root: theme.container,
 };
+
+interface IScoreboardProps extends WithStylesProps<typeof styles> {}
+
+export interface IScoreboardState {
+  p1n: string;
+  p2n: string;
+  p1s: number;
+  p2s: number;
+  p1l: boolean;
+  p2l: boolean;
+  tl: string;
+  tr: string;
+  bl: string;
+  br: string;
+  lTag: string;
+}
 
 class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
   private io = new Socket();
@@ -18,39 +34,34 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
     super(props);
 
     this.state = {
-      p1n: '',
-      p2n: '',
+      p1n: "",
+      p2n: "",
       p1s: 0,
       p2s: 0,
       p1l: false,
       p2l: false,
-      tl: 'HBK',
-      tr: '#000',
-      bl: 'Brewdog',
-      br: 'Brighton',
-      lTag: '[L]',
+      tl: "HBK",
+      tr: "#000",
+      bl: "Brewdog",
+      br: "Brighton",
+      lTag: "[L]",
     };
 
-    this.io.on(
-      'scoreboard',
-      (scoreboard) => {
-        this.setState(scoreboard);
-      },
-    );
+    this.io.on("scoreboard", (scoreboard) => {
+      this.setState(scoreboard);
+    });
   }
 
   componentDidMount() {
-    this.io.emit('scoreboard-get');
+    this.io.emit("scoreboard-get");
   }
 
   render() {
     const { classes } = this.props;
-    const {
-      p1n, p2n, p1s, p2s, tl, tr, bl, br, p1l, p2l, lTag,
-    } = this.state;
+    const { p1n, p2n, p1s, p2s, tl, tr, bl, br, p1l, p2l, lTag } = this.state;
 
     const smallText: IThemeFont = merge({}, theme.rawlineBold, {
-      fontSize: '30pt',
+      fontSize: "30pt",
     });
 
     return (
@@ -61,15 +72,8 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           right={0}
           border={theme.borderBottom}
         >
-          <Text
-            font={smallText}
-          >
-            {tl}
-          </Text>
-          <Text
-            font={smallText}
-            color={theme.orange}
-          >
+          <Text font={smallText}>{tl}</Text>
+          <Text font={smallText} color={theme.orange}>
             {tr}
           </Text>
         </TextBox>
@@ -79,7 +83,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           textAlign="right"
           border={theme.borderBottom}
         >
-          <Text>{`${p1n}${p1l ? ` ${lTag}` : ''}`}</Text>
+          <Text>{`${p1n}${p1l ? ` ${lTag}` : ""}`}</Text>
         </TextBox>
         <TextBox
           // player 1 score
@@ -95,7 +99,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           textAlign="left"
           border={theme.borderBottom}
         >
-          <Text>{`${p2n}${p2l ? ` ${lTag}` : ''}`}</Text>
+          <Text>{`${p2n}${p2l ? ` ${lTag}` : ""}`}</Text>
         </TextBox>
         <TextBox
           // player 2 score
@@ -112,14 +116,8 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           bottom={0}
           border={theme.borderTop}
         >
-          <Text>
-            {bl}
-          </Text>
-          <Text
-            color={theme.orange}
-          >
-            {br}
-          </Text>
+          <Text>{bl}</Text>
+          <Text color={theme.orange}>{br}</Text>
         </TextBox>
       </div>
     );

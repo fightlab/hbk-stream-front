@@ -1,16 +1,17 @@
-import * as SocketIO from 'socket.io-client';
+import { io, Socket as SocketIoSocket } from "socket.io-client";
 
 class Socket {
-  connection: SocketIOClient.Socket;
+  connection: SocketIoSocket;
 
-  public emit = (name: string, data: object|string = {}): void => {
+  public emit = (name: string, data: object | string = {}): void => {
     this.connection.emit(name, data);
-  }
+  };
 
-  public on = (name: string, cb: Function) => this.connection.on(name, cb);
+  public on = (name: string, cb: (...args: any[]) => void) =>
+    this.connection.on(name, cb);
 
   constructor() {
-    this.connection = SocketIO.connect(process.env.STREAM_SERVER);
+    this.connection = io(process.env.STREAM_SERVER);
   }
 }
 

@@ -1,25 +1,25 @@
-import * as React from 'react';
-import withStyles from 'react-jss';
-import theme from '~/theme';
+import * as React from "react";
+import withStyles from "react-jss";
+import theme, { IThemeBorder } from "~/theme";
 
 interface ITextBoxProps {
-  children?: any
-  position?: string
-  marginLeft?: string|number
-  marginRight?: string|number
-  left?: string|number
-  right?: string|number
-  bottom?: string|number
-  top?: string|number
-  width?: string|number
-  zIndex?: number
-  textAlign?: string
-  backgroundColor?: string
-  padding?: string|number
-  border?: IThemeBorder
+  children?: any;
+  position?: string;
+  marginLeft?: string | number;
+  marginRight?: string | number;
+  left?: string | number;
+  right?: string | number;
+  bottom?: string | number;
+  top?: string | number;
+  width?: string | number;
+  zIndex?: number;
+  textAlign?: string;
+  backgroundColor?: string;
+  padding?: string | number;
+  border?: IThemeBorder;
   classes: {
-    root: string
-  }
+    root: string;
+  };
 }
 
 const styles = {
@@ -42,24 +42,22 @@ const styles = {
 
 class TextBox extends React.PureComponent<ITextBoxProps> {
   static defaultProps: ITextBoxProps = {
-    classes: { root: '' },
-    position: 'absolute',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    width: 'fit-content',
-    backgroundColor: '#424242',
-    padding: '0px 10px 0px 10px',
-    children: '',
-    textAlign: 'center',
+    classes: { root: "" },
+    position: "absolute",
+    marginLeft: "auto",
+    marginRight: "auto",
+    width: "fit-content",
+    backgroundColor: "#424242",
+    padding: "0px 10px 0px 10px",
+    children: "",
+    textAlign: "center",
     border: theme.border,
     zIndex: 1,
-  }
+  };
 
   render() {
     const { children, classes } = this.props;
-    return (
-      <span className={classes.root}>{children}</span>
-    );
+    return <span className={classes.root}>{children}</span>;
   }
 }
 

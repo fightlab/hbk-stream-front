@@ -1,17 +1,17 @@
-import * as React from 'react';
-import withStyles from 'react-jss';
+import * as React from "react";
+import withStyles from "react-jss";
 
 interface IImageProps {
-  src: any
-  alt?: string
-  position?: string
-  top?: number|string
-  left?: number|string
-  zIndex?: number
+  src: any;
+  alt?: string;
+  position?: string;
+  top?: number | string;
+  left?: number | string;
+  zIndex?: number;
   classes: {
-    root: string
-  }
-  maskImage?: string
+    root: string;
+  };
+  maskImage?: string;
 }
 
 const styles = {
@@ -25,23 +25,21 @@ const styles = {
 };
 
 class Image extends React.PureComponent<IImageProps> {
- static defaultProps: IImageProps = {
-   src: '',
-   alt: '',
-   position: 'absolute',
-   top: 0,
-   left: 0,
-   zIndex: -1,
-   classes: { root: '' },
-   maskImage: null,
- }
+  static defaultProps: IImageProps = {
+    src: "",
+    alt: "",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    zIndex: -1,
+    classes: { root: "" },
+    maskImage: null,
+  };
 
- render() {
-   const { classes, src, alt } = this.props;
-   return (
-     <img className={classes.root} src={src} alt={alt} />
-   );
- }
+  render() {
+    const { classes, src, alt } = this.props;
+    return <img className={classes.root} src={src} alt={alt} />;
+  }
 }
 
 export default withStyles(styles)(Image);

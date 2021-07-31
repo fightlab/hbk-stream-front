@@ -1,17 +1,26 @@
-import * as React from 'react';
-import Typography from '@material-ui/core/Typography';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Files from 'react-files';
-import { toggleDarkMode } from '~/ui/Services/helper';
+import * as React from "react";
+import Typography from "@material-ui/core/Typography";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import Files from "react-files";
+import { toggleDarkMode } from "~/ui/Services/helper";
 
-const SettingsExpansionPanel = (props: IToolSettingsExpansionPanelProps) => {
+interface IToolSettingsAccordionProps {
+  bracket: string;
+  changeBracketValue: Function;
+  updateParticipants: Function;
+  importFilesChange: Function;
+  exportFiles: Function;
+  setDarkMode: Function;
+}
+
+const SettingsAccordion = (props: IToolSettingsAccordionProps) => {
   const {
     bracket,
     changeBracketValue,
@@ -22,18 +31,12 @@ const SettingsExpansionPanel = (props: IToolSettingsExpansionPanelProps) => {
   } = props;
 
   return (
-    <ExpansionPanel>
-      <ExpansionPanelSummary
-        expandIcon={<ExpandMoreIcon />}
-      >
+    <Accordion>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography>Settings</Typography>
-      </ExpansionPanelSummary>
-      <ExpansionPanelDetails>
-        <Grid
-          container
-          alignItems="flex-start"
-          spacing={2}
-        >
+      </AccordionSummary>
+      <AccordionDetails>
+        <Grid container alignItems="flex-start" spacing={2}>
           <Grid item xs={12}>
             <Typography variant="overline" display="block" gutterBottom>
               Get Players from Challonge/Smash.gg Tournament
@@ -66,17 +69,13 @@ const SettingsExpansionPanel = (props: IToolSettingsExpansionPanelProps) => {
                 <Files
                   onChange={(file) => importFilesChange(file)}
                   multiple={false}
-                  accepts={['application/json', '.json']}
+                  accepts={["application/json", ".json"]}
                   clickable
                 >
                   Import
                 </Files>
               </Button>
-              <Button
-                onClick={() => exportFiles()}
-              >
-                Export
-              </Button>
+              <Button onClick={() => exportFiles()}>Export</Button>
             </ButtonGroup>
           </Grid>
           <Grid item xs={12} sm={4}>
@@ -93,9 +92,9 @@ const SettingsExpansionPanel = (props: IToolSettingsExpansionPanelProps) => {
             </Button>
           </Grid>
         </Grid>
-      </ExpansionPanelDetails>
-    </ExpansionPanel>
+      </AccordionDetails>
+    </Accordion>
   );
 };
 
-export default SettingsExpansionPanel;
+export default SettingsAccordion;

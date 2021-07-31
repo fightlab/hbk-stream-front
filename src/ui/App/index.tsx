@@ -1,32 +1,29 @@
-import * as React from 'react';
-import {
-  Switch,
-  Route,
-  withRouter,
-} from 'react-router-dom';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { deepOrange } from '@material-ui/core/colors';
+import * as React from "react";
+import { Switch, Route, withRouter } from "react-router-dom";
+import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+import { deepOrange } from "@material-ui/core/colors";
 
-import { hasDarkMode } from '../Services/helper';
+import { hasDarkMode } from "../Services/helper";
 
-import Home from '~/ui/Routes/Home';
-import Camera from '~/ui/Routes/Camera';
-import Scoreboard from '~/ui/Routes/Scoreboard';
-import Tool from '~/ui/Routes/Tool';
-import Playground from '~/ui/Routes/Playground';
-import PreStream from '~/ui/Routes/PreStream';
+import Home from "~/ui/Routes/Home";
+import Camera from "~/ui/Routes/Camera";
+import Scoreboard from "~/ui/Routes/Scoreboard";
+import Tool from "~/ui/Routes/Tool";
+import Playground from "~/ui/Routes/Playground";
+import PreStream from "~/ui/Routes/PreStream";
 
 const App = () => {
   const [darkMode, setDarkMode] = React.useState(hasDarkMode());
 
   const theme = React.useMemo(
-    () => createMuiTheme({
-      palette: {
-        type: darkMode ? 'dark' : 'light',
-        primary: deepOrange,
-      },
-    }),
-    [darkMode],
+    () =>
+      createTheme({
+        palette: {
+          type: darkMode ? "dark" : "light",
+          primary: deepOrange,
+        },
+      }),
+    [darkMode]
   );
 
   return (
