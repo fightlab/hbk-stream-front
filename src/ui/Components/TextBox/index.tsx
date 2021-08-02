@@ -47,7 +47,7 @@ class TextBox extends React.PureComponent<ITextBoxProps> {
     marginLeft: "auto",
     marginRight: "auto",
     width: "fit-content",
-    backgroundColor: "#424242",
+    backgroundColor: "rgba(66, 66, 66, 0.6)",
     padding: "0px 10px 0px 10px",
     children: "",
     textAlign: "center",
