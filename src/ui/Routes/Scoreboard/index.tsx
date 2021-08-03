@@ -71,6 +71,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           left={0}
           right={0}
           border={theme.borderBottom}
+          boxShadow={theme.boxShadow}
         >
           <Text font={smallText}>{tl}</Text>
           <Text font={smallText} color={theme.orange}>
@@ -82,6 +83,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           right={1216}
           textAlign="right"
           border={theme.borderBottom}
+          boxShadow={theme.boxShadow}
         >
           <Text>{`${p1n}${p1l ? ` ${lTag}` : ""}`}</Text>
         </TextBox>
@@ -90,14 +92,16 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           left={714}
           width={50}
           border={theme.borderBottom}
+          boxShadow={theme.boxShadow}
         >
-          <Text>{p1s}</Text>
+          <Text color={p1s > p2s ? theme.orange : theme.white}>{p1s}</Text>
         </TextBox>
         <TextBox
           // player 2 name
           left={1216}
           textAlign="left"
           border={theme.borderBottom}
+          boxShadow={theme.boxShadow}
         >
           <Text>{`${p2n}${p2l ? ` ${lTag}` : ""}`}</Text>
         </TextBox>
@@ -106,8 +110,9 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           right={714}
           width={50}
           border={theme.borderBottom}
+          boxShadow={theme.boxShadow}
         >
-          <Text>{p2s}</Text>
+          <Text color={p2s > p1s ? theme.orange : theme.white}>{p2s}</Text>
         </TextBox>
         <TextBox
           // bottom text
@@ -115,6 +120,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           right={0}
           bottom={0}
           border={theme.borderTop}
+          boxShadow={theme.boxShadow}
         >
           <Text>{bl}</Text>
           <Text color={theme.orange}>{br}</Text>

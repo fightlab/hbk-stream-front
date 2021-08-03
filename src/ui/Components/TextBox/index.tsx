@@ -12,11 +12,12 @@ interface ITextBoxProps {
   bottom?: string | number;
   top?: string | number;
   width?: string | number;
-  zIndex?: number;
+  zIndex?: string | number;
   textAlign?: string;
   backgroundColor?: string;
   padding?: string | number;
   border?: IThemeBorder;
+  boxShadow?: string;
   classes: {
     root: string;
   };
@@ -37,6 +38,7 @@ const styles = {
     backgroundColor: props.backgroundColor,
     padding: props.padding,
     borderRadius: props.border.borderRadius,
+    boxShadow: props.boxShadow,
   }),
 };
 
@@ -52,7 +54,7 @@ class TextBox extends React.PureComponent<ITextBoxProps> {
     children: "",
     textAlign: "center",
     border: theme.border,
-    zIndex: 1,
+    zIndex: "1",
   };
 
   render() {

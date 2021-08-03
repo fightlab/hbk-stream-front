@@ -7,22 +7,6 @@ import Text from "~/ui/Components/Text";
 
 const styles: Styles = {
   root: theme.container,
-  video: {
-    position: "absolute",
-    top: "0px",
-    left: "0px",
-    zIndex: "0",
-  },
-  frosted: {
-    position: "absolute",
-    top: "0",
-    left: "0",
-    height: "1080px",
-    width: "1920px",
-    zIndex: "1",
-    backdropFilter: "blur(15px)",
-    backgroundColor: "rgba(255, 255, 255, 0.5)",
-  },
 };
 
 interface IPlaygroundProps extends WithStylesProps<typeof styles> {}
@@ -39,6 +23,7 @@ const Playground: React.FunctionComponent<IPlaygroundProps> = (
         textAlign="right"
         border={theme.borderBottom}
         backgroundColor="rgba(66, 66, 66, 0.5)"
+        boxShadow={theme.boxShadow}
       >
         <Text>HBK | Coldlink Sensei</Text>
       </TextBox>
@@ -48,8 +33,9 @@ const Playground: React.FunctionComponent<IPlaygroundProps> = (
         width={50}
         border={theme.borderBottom}
         backgroundColor="rgba(66, 66, 66, 0.5)"
+        boxShadow={theme.boxShadow}
       >
-        <Text>0</Text>
+        <Text color={theme.orange}>0</Text>
       </TextBox>
       <TextBox
         // player 2 name
@@ -57,6 +43,7 @@ const Playground: React.FunctionComponent<IPlaygroundProps> = (
         textAlign="left"
         border={theme.borderBottom}
         backgroundColor="rgba(66, 66, 66, 0.5)"
+        boxShadow={theme.boxShadow}
       >
         <Text>A stupidly long name</Text>
       </TextBox>
@@ -66,8 +53,9 @@ const Playground: React.FunctionComponent<IPlaygroundProps> = (
         width={50}
         border={theme.borderBottom}
         backgroundColor="rgba(66, 66, 66, 0.5)"
+        boxShadow={theme.boxShadow}
       >
-        <Text>1</Text>
+        <Text color={theme.orange}>1</Text>
       </TextBox>
     </div>
   );
