@@ -12,6 +12,7 @@ interface ITextBoxProps {
   bottom?: string | number;
   top?: string | number;
   width?: string | number;
+  minWidth?: string;
   zIndex?: string | number;
   textAlign?: string;
   backgroundColor?: string;
@@ -33,6 +34,7 @@ const styles = {
     bottom: props.bottom,
     top: props.top,
     width: props.width,
+    minWidth: props.minWidth,
     zIndex: props.zIndex,
     textAlign: props.textAlign,
     backgroundColor: props.backgroundColor,
@@ -49,6 +51,7 @@ class TextBox extends React.PureComponent<ITextBoxProps> {
     marginLeft: "auto",
     marginRight: "auto",
     width: "fit-content",
+    minWidth: "30px",
     backgroundColor: "rgba(66, 66, 66, 0.6)",
     padding: "0px 10px 0px 10px",
     children: "",

@@ -25,7 +25,7 @@ const Playground: React.FunctionComponent<IPlaygroundProps> = (
         backgroundColor="rgba(66, 66, 66, 0.5)"
         boxShadow={theme.boxShadow}
       >
-        <Text>HBK | Coldlink Sensei</Text>
+        <Text position="relative" top="-4px">HBK | Coldlink Sensei</Text>
       </TextBox>
       <TextBox
         // player 1 score
@@ -35,7 +35,7 @@ const Playground: React.FunctionComponent<IPlaygroundProps> = (
         backgroundColor="rgba(66, 66, 66, 0.5)"
         boxShadow={theme.boxShadow}
       >
-        <Text color={theme.orange}>0</Text>
+        <Text position="relative" top="-4px" color={theme.orange}>0</Text>
       </TextBox>
       <TextBox
         // player 2 name
@@ -45,7 +45,7 @@ const Playground: React.FunctionComponent<IPlaygroundProps> = (
         backgroundColor="rgba(66, 66, 66, 0.5)"
         boxShadow={theme.boxShadow}
       >
-        <Text>A stupidly long name</Text>
+        <Text position="relative" top="-4px">A stupidly long name</Text>
       </TextBox>
       <TextBox
         // player 2 score
@@ -55,7 +55,7 @@ const Playground: React.FunctionComponent<IPlaygroundProps> = (
         backgroundColor="rgba(66, 66, 66, 0.5)"
         boxShadow={theme.boxShadow}
       >
-        <Text color={theme.orange}>1</Text>
+        <Text position="relative" top="-4px" color={theme.orange}>1</Text>
       </TextBox>
     </div>
   );

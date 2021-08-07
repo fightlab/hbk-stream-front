@@ -3,11 +3,14 @@ import withStyles from "react-jss";
 import { merge } from "lodash";
 import theme, { IThemeFont } from "~/theme";
 
-interface ITextProps {
+export interface ITextProps {
   children?: string | number;
   color?: string;
   font?: IThemeFont;
   lowerCase?: boolean;
+  position?: string;
+  top?: string;
+  bottom?: string;
   classes: {
     root: string;
   };
@@ -16,6 +19,9 @@ interface ITextProps {
 const styles = {
   root: (props: ITextProps) => ({
     color: props.color,
+    position: props.position,
+    top: props.top,
+    bottom: props.bottom,
     fontFamily: props.font.fontFamily,
     fontWeight: props.font.fontWeight,
     fontStyle: props.font.fontStyle,
@@ -26,7 +32,7 @@ const styles = {
 };
 
 const defaultFont: IThemeFont = merge({}, theme.rawlineBold, {
-  fontSize: "36pt",
+  fontSize: "28pt",
   fontVariant: "small-caps",
 });
 

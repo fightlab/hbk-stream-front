@@ -4,7 +4,7 @@ import { merge } from "lodash";
 
 import Socket from "~/ui/Services/socket";
 import TextBox from "~/ui/Components/TextBox";
-import Text from "~/ui/Components/Text";
+import Text, { ITextProps } from "~/ui/Components/Text";
 import theme, { IThemeFont } from "~/theme";
 
 const styles: Styles = {
@@ -26,6 +26,21 @@ export interface IScoreboardState {
   br: string;
   lTag: string;
 }
+
+interface MainTextProps {
+  color?: string;
+  children?: string | number;
+}
+const defaultPropsMainText: MainTextProps = {
+  children: "",
+  color: undefined
+}
+const MainText: React.FunctionComponent<MainTextProps> = (props: MainTextProps) => {
+  const { children, color } = props;
+  
+  return <Text position="relative" top="-3px" color={color}>{children}</Text>
+};
+MainText.defaultProps = defaultPropsMainText;
 
 class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
   private io = new Socket();
@@ -61,7 +76,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
     const { p1n, p2n, p1s, p2s, tl, tr, bl, br, p1l, p2l, lTag } = this.state;
 
     const smallText: IThemeFont = merge({}, theme.rawlineBold, {
-      fontSize: "30pt",
+      fontSize: "24pt",
     });
 
     return (
@@ -73,8 +88,8 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           border={theme.borderBottom}
           boxShadow={theme.boxShadow}
         >
-          <Text font={smallText}>{tl}</Text>
-          <Text font={smallText} color={theme.orange}>
+          <Text font={smallText} position="relative" top="-2px">{tl}</Text>
+          <Text font={smallText} position="relative" top="-2px" color={theme.orange}>
             {tr}
           </Text>
         </TextBox>
@@ -85,16 +100,15 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           border={theme.borderBottom}
           boxShadow={theme.boxShadow}
         >
-          <Text>{`${p1n}${p1l ? ` ${lTag}` : ""}`}</Text>
+          <MainText>{`${p1n}${p1l ? ` ${lTag}` : ""}`}</MainText>
         </TextBox>
         <TextBox
           // player 1 score
           left={714}
-          width={50}
           border={theme.borderBottom}
           boxShadow={theme.boxShadow}
         >
-          <Text color={p1s > p2s ? theme.orange : theme.white}>{p1s}</Text>
+          <MainText color={p1s > p2s ? theme.orange : theme.white}>{p1s}</MainText>
         </TextBox>
         <TextBox
           // player 2 name
@@ -103,16 +117,15 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           border={theme.borderBottom}
           boxShadow={theme.boxShadow}
         >
-          <Text>{`${p2n}${p2l ? ` ${lTag}` : ""}`}</Text>
+          <MainText>{`${p2n}${p2l ? ` ${lTag}` : ""}`}</MainText>
         </TextBox>
         <TextBox
           // player 2 score
           right={714}
-          width={50}
           border={theme.borderBottom}
           boxShadow={theme.boxShadow}
         >
-          <Text color={p2s > p1s ? theme.orange : theme.white}>{p2s}</Text>
+          <MainText color={p2s > p1s ? theme.orange : theme.white}>{p2s}</MainText>
         </TextBox>
         <TextBox
           // bottom text
@@ -122,8 +135,8 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           border={theme.borderTop}
           boxShadow={theme.boxShadow}
         >
-          <Text>{bl}</Text>
-          <Text color={theme.orange}>{br}</Text>
+          <MainText>{bl}</MainText>
+          <MainText color={theme.orange}>{br}</MainText>
         </TextBox>
       </div>
     );

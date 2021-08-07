@@ -139,7 +139,7 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
         <TextBox
           // venue text
           bottom={`${30 + 50 * 2}px`}
-          left={"5px"}
+          left="5px"
           textAlign="left"
           backgroundColor={transparent}
         >
@@ -154,7 +154,7 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
         <TextBox
           // date text
           bottom={`${50 * 1}px`}
-          left={"5px"}
+          left="5px"
           textAlign="left"
           backgroundColor={transparent}
         >
@@ -251,7 +251,7 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
         <TextBox
           // fgc text
           bottom={`${5 + 50 * 3}px`}
-          right={`5px`}
+          right="5px"
           textAlign="right"
           backgroundColor={transparent}
         >
