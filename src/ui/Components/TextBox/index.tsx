@@ -13,6 +13,7 @@ interface ITextBoxProps {
   top?: string | number;
   width?: string | number;
   minWidth?: string;
+  maxWidth?: string;
   zIndex?: string | number;
   textAlign?: string;
   backgroundColor?: string;
@@ -22,6 +23,7 @@ interface ITextBoxProps {
   classes: {
     root: string;
   };
+  truncate?: boolean;
 }
 
 const styles = {
@@ -35,12 +37,16 @@ const styles = {
     top: props.top,
     width: props.width,
     minWidth: props.minWidth,
+    maxWidth: props.maxWidth,
     zIndex: props.zIndex,
     textAlign: props.textAlign,
     backgroundColor: props.backgroundColor,
     padding: props.padding,
     borderRadius: props.border.borderRadius,
     boxShadow: props.boxShadow,
+    textOverflow: props.truncate && "clip",
+    whiteSpace: props.truncate && "nowrap",
+    overflow: props.truncate && "hidden",
   }),
 };
 
@@ -52,12 +58,13 @@ class TextBox extends React.PureComponent<ITextBoxProps> {
     marginRight: "auto",
     width: "fit-content",
     minWidth: "30px",
-    backgroundColor: "rgba(66, 66, 66, 0.6)",
+    backgroundColor: theme.greyTranslucent,
     padding: "0px 10px 0px 10px",
     children: "",
     textAlign: "center",
     border: theme.border,
     zIndex: "1",
+    truncate: false,
   };
 
   render() {

@@ -14,6 +14,7 @@ import AspectRatio from "@material-ui/icons/AspectRatio";
 import SettingsBrightnessIcon from "@material-ui/icons/SettingsBrightness";
 import PictureInPictureIcon from "@material-ui/icons/PictureInPicture";
 import QueuePlayNext from "@material-ui/icons/QueuePlayNext";
+import AccountTreeOutlinedIcon from '@material-ui/icons/AccountTreeOutlined';
 import { toggleDarkMode } from "../../Services/helper";
 
 const Home = (props) => (
@@ -42,6 +43,12 @@ const Home = (props) => (
               <PictureInPictureIcon />
             </ListItemIcon>
             <ListItemText primary="Camera" />
+          </ListItem>
+          <ListItem button component={Link} to="/det8">
+            <ListItemIcon>
+              <AccountTreeOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="DE Top 8 Bracket" />
           </ListItem>
           <ListItem button component={Link} to="/prestream">
             <ListItemIcon>

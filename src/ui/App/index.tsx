@@ -11,6 +11,9 @@ import Scoreboard from "~/ui/Routes/Scoreboard";
 import Tool from "~/ui/Routes/Tool";
 import Playground from "~/ui/Routes/Playground";
 import PreStream from "~/ui/Routes/PreStream";
+import DET8 from "~/ui/Routes/DET8";
+
+import CameraMaskImage from "~/ui/Routes/Camera/mask.png";
 
 const App = () => {
   const [darkMode, setDarkMode] = React.useState(hasDarkMode());
@@ -36,7 +39,7 @@ const App = () => {
           <Tool setDarkMode={setDarkMode} />
         </Route>
         <Route exact path="/camera">
-          <Camera />
+          <Camera maskImage={CameraMaskImage} />
         </Route>
         <Route exact path="/scoreboard">
           <Scoreboard />
@@ -46,6 +49,9 @@ const App = () => {
         </Route>
         <Route exact path="/prestream">
           <PreStream />
+        </Route>
+        <Route exact path="/det8">
+          <DET8 />
         </Route>
       </Switch>
     </ThemeProvider>

@@ -9,7 +9,6 @@ import theme from "~/theme";
 import Text from "~/ui/Components/Text";
 import TextBox from "~/ui/Components/TextBox";
 import GlassImage from "~/ui/Components/GlassImage";
-import MaskImage from "./mask.png";
 
 const styles: Styles = {
   root: theme.container,
@@ -48,7 +47,10 @@ export interface ICamera {
   bg: string;
 }
 
-interface ICameraProps extends WithStylesProps<typeof styles> {}
+interface ICameraProps extends WithStylesProps<typeof styles> {
+  children?: React.ReactNode;
+  maskImage?: string;
+}
 
 interface ICameraState {
   camera: ICamera;
@@ -92,7 +94,7 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, children, maskImage } = this.props;
     const { camera, social } = this.state;
     const { hbk, brewdog, fgc, date, game, bg } = camera;
     const { web, twitter, facebook } = social;
@@ -103,7 +105,8 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
       <div className={classes.root}>
         <GlassImage
           src={`https://res.cloudinary.com/mkn-sh/image/upload/c_fill,e_blur:2500,g_center,h_1080,w_1920/v1539443572/fgc/${bg}.jpg`}
-          maskImage={MaskImage}
+          // src="https://res.cloudinary.com/mkn-sh/image/upload/c_mfit,w_1920/v1628972214/fgc/de_bracket_usfiv.png"
+          // maskImage={maskImage}
         />
         <TextBox
           // hbk text
@@ -264,6 +267,7 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
             {fgc}
           </Text>
         </TextBox>
+        {children}
       </div>
     );
   }

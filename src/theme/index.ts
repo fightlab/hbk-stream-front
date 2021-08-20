@@ -6,6 +6,7 @@ interface ITheme extends Styles {
   transparent: string;
   orange: string;
   grey: string;
+  greyTranslucent: string;
   darkGrey: string;
   rawline: IThemeFont;
   raleway: IThemeFont;
@@ -18,6 +19,7 @@ interface ITheme extends Styles {
   borderLeft: IThemeBorder;
   cabin: IThemeFont;
   boxShadow: string;
+  lightGrey: string;
 }
 
 interface IThemeContainer extends Styles {
@@ -52,6 +54,8 @@ const theme: ITheme = {
   orange: "#FF5722",
   grey: "#424242",
   darkGrey: "#303030",
+  lightGrey: "#5F5F5F",
+  greyTranslucent: "rgba(66,66,66,0.6)",
   transparent: "rgba(0,0,0,0)",
   rawline: {
     fontFamily: "'rawline', sans-serif",

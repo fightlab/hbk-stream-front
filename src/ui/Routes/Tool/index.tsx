@@ -13,15 +13,17 @@ import NightbotAccordion from "./nightbot";
 import PreStreamAccordion from "./prestream";
 import SocialAccordion from "./social";
 
+import { ICamera, ISocial } from "~/ui/Routes/Camera";
+import { IScoreboardState } from "../Scoreboard";
+import { IMatch } from "../DET8";
+import { IPreStreamState } from "../PreStream";
+
 const styles = {
   form: {
     width: "100%",
   },
 };
 
-import { ICamera, ISocial } from "~ui/Routes/Camera";
-import { IScoreboardState } from "../Scoreboard";
-import { IPreStreamState } from "../PreStream";
 
 export interface IToolUpdate {
   (e: React.FormEvent<HTMLFormElement>, key: string): void;
@@ -65,6 +67,7 @@ interface IToolState {
   prestream: IPreStreamState;
   social: ISocial;
   unsaved: IToolUnsaved;
+  matches: Array<IMatch>;
   [key: string]: any;
 }
 
@@ -142,6 +145,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
         scoreboard: false,
         social: false,
       },
+      matches: [],
     };
 
     this.io.on("scoreboard", (scoreboard) => {
@@ -178,6 +182,10 @@ class Tool extends React.Component<IToolProps, IToolState> {
       this.setState({ bracket, participants });
     });
 
+    this.io.on("matches", ({ bracket, matches }) => {
+      this.setState({ bracket, matches });
+    });
+
     this.importFileReader.onload = (event) => {
       const json = event.target.result;
       const parsed = JSON.parse(json.toString());
@@ -189,6 +197,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
     this.io.emit("scoreboard-get");
     this.io.emit("camera-get");
     this.io.emit("participants-get");
+    this.io.emit("matches-get");
     this.io.emit("nightbot-get");
     this.io.emit("prestream-get");
     this.io.emit("social-get");
@@ -203,6 +212,11 @@ class Tool extends React.Component<IToolProps, IToolState> {
   private updateParticipants = () => {
     const { bracket } = this.state;
     this.io.emit("bracket-get", bracket);
+  };
+
+  private updateMatches = () => {
+    const { bracket } = this.state;
+    this.io.emit("bracket-get-matches", bracket);
   };
 
   private change: (key: string, name: string, value: any) => void = (
@@ -341,6 +355,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
               importFilesChange={this.importFilesChange}
               exportFiles={this.exportFiles}
               setDarkMode={setDarkMode}
+              updateMatches={this.updateMatches}
             />
           </Box>
         </Container>

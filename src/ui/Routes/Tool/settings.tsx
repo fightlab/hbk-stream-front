@@ -18,6 +18,7 @@ interface IToolSettingsAccordionProps {
   importFilesChange: Function;
   exportFiles: Function;
   setDarkMode: Function;
+  updateMatches: Function;
 }
 
 const SettingsAccordion = (props: IToolSettingsAccordionProps) => {
@@ -28,6 +29,7 @@ const SettingsAccordion = (props: IToolSettingsAccordionProps) => {
     importFilesChange,
     exportFiles,
     setDarkMode,
+    updateMatches,
   } = props;
 
   return (
@@ -39,10 +41,10 @@ const SettingsAccordion = (props: IToolSettingsAccordionProps) => {
         <Grid container alignItems="flex-start" spacing={2}>
           <Grid item xs={12}>
             <Typography variant="overline" display="block" gutterBottom>
-              Get Players from Challonge/Smash.gg Tournament
+              Get Players from Challonge/Smash.gg Tournament, and/or matches from Challonge
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={8}>
+          <Grid item xs={12} sm={6}>
             <TextField
               label="Tournament URL"
               fullWidth
@@ -50,14 +52,26 @@ const SettingsAccordion = (props: IToolSettingsAccordionProps) => {
               onChange={(e) => changeBracketValue(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={3}>
             <Button
               type="submit"
               variant="contained"
               color="primary"
               onClick={() => updateParticipants()}
+              fullWidth
             >
               Get Participants
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={3}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={() => updateMatches()}
+              fullWidth
+            >
+              Get Top 8 Matches
             </Button>
           </Grid>
           <Grid item xs={12} sm={4}>
