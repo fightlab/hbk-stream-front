@@ -33,12 +33,18 @@ interface MainTextProps {
 }
 const defaultPropsMainText: MainTextProps = {
   children: "",
-  color: undefined
-}
-const MainText: React.FunctionComponent<MainTextProps> = (props: MainTextProps) => {
+  color: undefined,
+};
+const MainText: React.FunctionComponent<MainTextProps> = (
+  props: MainTextProps
+) => {
   const { children, color } = props;
-  
-  return <Text position="relative" top="-3px" color={color}>{children}</Text>
+
+  return (
+    <Text position="relative" top="-3px" color={color}>
+      {children}
+    </Text>
+  );
 };
 MainText.defaultProps = defaultPropsMainText;
 
@@ -88,8 +94,15 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           border={theme.borderBottom}
           boxShadow={theme.boxShadow}
         >
-          <Text font={smallText} position="relative" top="-2px">{tl}</Text>
-          <Text font={smallText} position="relative" top="-2px" color={theme.orange}>
+          <Text font={smallText} position="relative" top="-2px">
+            {tl}
+          </Text>
+          <Text
+            font={smallText}
+            position="relative"
+            top="-2px"
+            color={theme.orange}
+          >
             {tr}
           </Text>
         </TextBox>
@@ -108,7 +121,9 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           border={theme.borderBottom}
           boxShadow={theme.boxShadow}
         >
-          <MainText color={p1s > p2s ? theme.orange : theme.white}>{p1s}</MainText>
+          <MainText color={p1s > p2s ? theme.orange : theme.white}>
+            {p1s}
+          </MainText>
         </TextBox>
         <TextBox
           // player 2 name
@@ -125,7 +140,9 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           border={theme.borderBottom}
           boxShadow={theme.boxShadow}
         >
-          <MainText color={p2s > p1s ? theme.orange : theme.white}>{p2s}</MainText>
+          <MainText color={p2s > p1s ? theme.orange : theme.white}>
+            {p2s}
+          </MainText>
         </TextBox>
         <TextBox
           // bottom text

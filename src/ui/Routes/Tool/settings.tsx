@@ -41,7 +41,8 @@ const SettingsAccordion = (props: IToolSettingsAccordionProps) => {
         <Grid container alignItems="flex-start" spacing={2}>
           <Grid item xs={12}>
             <Typography variant="overline" display="block" gutterBottom>
-              Get Players from Challonge/Smash.gg Tournament, and/or matches from Challonge
+              Get Players from Challonge/Smash.gg Tournament, and/or matches
+              from Challonge
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6}>

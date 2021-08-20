@@ -14,7 +14,7 @@ import AspectRatio from "@material-ui/icons/AspectRatio";
 import SettingsBrightnessIcon from "@material-ui/icons/SettingsBrightness";
 import PictureInPictureIcon from "@material-ui/icons/PictureInPicture";
 import QueuePlayNext from "@material-ui/icons/QueuePlayNext";
-import AccountTreeOutlinedIcon from '@material-ui/icons/AccountTreeOutlined';
+import AccountTreeOutlinedIcon from "@material-ui/icons/AccountTreeOutlined";
 import { toggleDarkMode } from "../../Services/helper";
 
 const Home = (props) => (

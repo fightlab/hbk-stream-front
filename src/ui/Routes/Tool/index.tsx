@@ -24,7 +24,6 @@ const styles = {
   },
 };
 
-
 export interface IToolUpdate {
   (e: React.FormEvent<HTMLFormElement>, key: string): void;
 }

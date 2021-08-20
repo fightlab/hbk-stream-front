@@ -24,12 +24,11 @@ const styles: Styles = {
     top: "177px",
     left: "300px",
     zIndex: "1",
-    boxShadow: theme.boxShadow
-  }
+    boxShadow: theme.boxShadow,
+  },
 };
 
 const { transparent, cabin, orange, lightGrey, white } = theme;
-
 
 const smallText: IThemeFont = merge({}, theme.rawlineBold, {
   fontSize: "20pt",
@@ -45,8 +44,8 @@ const identifierText: IThemeFont = merge(
 );
 
 interface MatchProps {
-  top: number,
-  right?: number,
+  top: number;
+  right?: number;
   hideScores?: boolean;
   match: IMatch;
   identifierShift?: boolean;
@@ -58,7 +57,7 @@ const getColor = (name: string, ps: number, os: number, identifier: string) => {
   if (name.includes("From")) return lightGrey;
   if (ps > os) return orange;
   return white;
-}
+};
 
 const Match = ({
   top,
@@ -66,59 +65,74 @@ const Match = ({
   hideScores = false,
   match,
   identifierShift = true,
-  identifierColor
+  identifierColor,
 }: MatchProps) => {
-  const p1Color = getColor(match.player1DisplayName, match.player1Score, match.player2Score, match.identifier);
-  const p2Color = getColor(match.player2DisplayName, match.player2Score, match.player1Score, match.identifier);
-  
-  return (<>
-    {
-      match.identifier &&
-      <TextBox
-        top={top - 40}
-        right={right - (identifierShift ? 56 : 0)}
-        textAlign="right"
-        backgroundColor={transparent}
-      >
-        <Text
-          color={identifierColor}
-          font={identifierText}
+  const p1Color = getColor(
+    match.player1DisplayName,
+    match.player1Score,
+    match.player2Score,
+    match.identifier
+  );
+  const p2Color = getColor(
+    match.player2DisplayName,
+    match.player2Score,
+    match.player1Score,
+    match.identifier
+  );
+
+  return (
+    <>
+      {match.identifier && (
+        <TextBox
+          top={top - 40}
+          right={right - (identifierShift ? 56 : 0)}
+          textAlign="right"
+          backgroundColor={transparent}
         >
-          {match.identifier}
-        </Text>
-      </TextBox>
-    }
-    <TextBox
-      top={top}
-      right={right}
-      textAlign="right"
-      border={theme.borderBottom}
-      boxShadow={theme.boxShadow}
-      maxWidth="270px"
-      width="270px"
-      backgroundColor={theme.greyTranslucent}
-      truncate
-    >
-      <Text position="relative" top="-5px" font={smallText} color={p1Color}>{match.player1DisplayName}</Text>
-      <br/>
-      <Text position="relative" top="-5px" font={smallText} color={p2Color}>{match.player2DisplayName}</Text>
-    </TextBox>
-    {
-      !hideScores &&
+          <Text color={identifierColor} font={identifierText}>
+            {match.identifier}
+          </Text>
+        </TextBox>
+      )}
       <TextBox
         top={top}
-        right={right && right - 52}
+        right={right}
+        textAlign="right"
         border={theme.borderBottom}
         boxShadow={theme.boxShadow}
+        maxWidth="270px"
+        width="270px"
         backgroundColor={theme.greyTranslucent}
+        truncate
       >
-        <Text position="relative" top="-5px" font={smallText} color={p1Color}>{match.player1Score}</Text>
-        <br/>
-        <Text position="relative" top="-5px" font={smallText} color={p2Color}>{match.player2Score}</Text>
+        <Text position="relative" top="-5px" font={smallText} color={p1Color}>
+          {match.player1DisplayName}
+        </Text>
+        <br />
+        <Text position="relative" top="-5px" font={smallText} color={p2Color}>
+          {match.player2DisplayName}
+        </Text>
       </TextBox>
-    }
-</>)
-}
+      {!hideScores && (
+        <TextBox
+          top={top}
+          right={right && right - 52}
+          border={theme.borderBottom}
+          boxShadow={theme.boxShadow}
+          backgroundColor={theme.greyTranslucent}
+        >
+          <Text position="relative" top="-5px" font={smallText} color={p1Color}>
+            {match.player1Score}
+          </Text>
+          <br />
+          <Text position="relative" top="-5px" font={smallText} color={p2Color}>
+            {match.player2Score}
+          </Text>
+        </TextBox>
+      )}
+    </>
+  );
+};
 
 interface IDEWT8Props extends WithStylesProps<typeof styles> {}
 
@@ -127,24 +141,24 @@ interface IDEWT8State {
   bracket: string;
 }
 
-class DET8 extends React.Component<IDEWT8Props, IDEWT8State> {  
+class DET8 extends React.Component<IDEWT8Props, IDEWT8State> {
   private io = new Socket();
-  
+
   constructor(props) {
     super(props);
-    
+
     const defaultMatch: IMatch = {
       identifier: "N/A",
       player1DisplayName: "N/A",
       player2DisplayName: "N/A",
       player1Score: 0,
       player2Score: 0,
-    }
-    
+    };
+
     this.state = {
       bracket: "https://hbk.challonge.com",
-      matches: Array(10).fill(defaultMatch)
-    }
+      matches: Array(10).fill(defaultMatch),
+    };
 
     this.io.on("matches", ({ bracket, matches }) => {
       this.setState({ matches, bracket });
@@ -187,7 +201,14 @@ class DET8 extends React.Component<IDEWT8Props, IDEWT8State> {
         {/* Winners Final */}
         <Match top={265} right={420} match={matches[8]} />
         {/* Grand Final */}
-        <Match top={440} right={36} hideScores match={matches[9]} identifierShift={false} identifierColor={orange} />
+        <Match
+          top={440}
+          right={36}
+          hideScores
+          match={matches[9]}
+          identifierShift={false}
+          identifierColor={orange}
+        />
       </Camera>
     );
   }
