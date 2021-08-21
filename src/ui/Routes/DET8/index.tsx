@@ -156,17 +156,25 @@ class DET8 extends React.Component<IDEWT8Props, IDEWT8State> {
     };
 
     this.state = {
-      bracket: "https://hbk.challonge.com",
+      bracket: "",
       matches: Array(10).fill(defaultMatch),
     };
 
     this.io.on("matches", ({ bracket, matches }) => {
+      console.log("received matches");
       this.setState({ matches, bracket });
     });
   }
 
   componentDidMount() {
     this.io.emit("matches-get");
+    setInterval(() => {
+      const { bracket } = this.state;
+      if (bracket) {
+        console.log('get bracket matches', bracket);
+        this.io.emit("bracket-get-matches", bracket);
+      }
+    }, 60 * 1000)
   }
 
   render() {
