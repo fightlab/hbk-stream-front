@@ -28,10 +28,10 @@
   },
   "scripts": {
     "build": "parcel build src/index.html",
+    "build:prod": "NODE_ENV=production && rimraf dist && npm run build",
     "dev": "set -e && tsc --noEmit --watch & parcel ./src/index.html",
     "tar": "tar -cvf ./deploy.tar --exclude='*.map' ./captain-definition ./dist/*",
-    "buildProd": "NODE_ENV=production && rimraf .cache && rimraf dist && npm run build",
-    "deploy": "npm run buildProd && npm run tar && caprover deploy -t ./deploy.tar",
+    "deploy": "npm run build:prod && npm run tar && caprover deploy -t ./deploy.tar",
     "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write ."
   },
