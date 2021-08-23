@@ -52,8 +52,7 @@ interface MatchProps {
   identifierColor?: string;
 }
 
-const getColor = (name: string, ps: number, os: number, identifier: string) => {
-  if (identifier.includes("Grand Final")) return white;
+const getColor = (name: string, ps: number, os: number) => {
   if (name.includes("From")) return lightGrey;
   if (ps > os) return orange;
   return white;
@@ -70,14 +69,12 @@ const Match = ({
   const p1Color = getColor(
     match.player1DisplayName,
     match.player1Score,
-    match.player2Score,
-    match.identifier
+    match.player2Score
   );
   const p2Color = getColor(
     match.player2DisplayName,
     match.player2Score,
-    match.player1Score,
-    match.identifier
+    match.player1Score
   );
 
   return (
