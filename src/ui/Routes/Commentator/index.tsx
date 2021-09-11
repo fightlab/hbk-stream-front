@@ -68,50 +68,62 @@ const Commentator: React.FunctionComponent<ICommentatorProps> = (
 
   return (
     <div className={classes.root}>
-      <TextBox
-        // comm 1 name
-        right={1216}
-        bottom={0}
-        textAlign="right"
-        border={theme.borderBottom}
-        boxShadow={theme.boxShadow}
-      >
-        <MainText>{cl}</MainText>
-      </TextBox>
-      <TextBox
-        // comm 1 twitter
-        right={1216}
-        bottom={52}
-        textAlign="right"
-        border={theme.borderBottom}
-        boxShadow={theme.boxShadow}
-      >
-        <Text font={smallText} position="relative" top="-2px">
-          {clTwitter}
-        </Text>
-      </TextBox>
-      <TextBox
-        // comm 2 name
-        left={1216}
-        bottom={0}
-        textAlign="left"
-        border={theme.borderBottom}
-        boxShadow={theme.boxShadow}
-      >
-        <MainText>{cr}</MainText>
-      </TextBox>
-      <TextBox
-        // comm 2 twitter
-        left={1216}
-        bottom={52}
-        textAlign="left"
-        border={theme.borderBottom}
-        boxShadow={theme.boxShadow}
-      >
-        <Text font={smallText} position="relative" top="-2px">
-          {crTwitter}
-        </Text>
-      </TextBox>
+      {
+        cl &&
+        <TextBox
+          // comm 1 name
+          right={1216}
+          bottom={0}
+          textAlign="right"
+          border={theme.borderBottom}
+          boxShadow={theme.boxShadow}
+        >
+          <MainText>{cl}</MainText>
+        </TextBox>
+      }
+      {
+        clTwitter &&
+        <TextBox
+          // comm 1 twitter
+          right={1216}
+          bottom={52}
+          textAlign="right"
+          border={theme.borderBottom}
+          boxShadow={theme.boxShadow}
+        >
+          <Text font={smallText} position="relative" top="-2px">
+            {clTwitter}
+          </Text>
+        </TextBox>
+      }
+      {
+        cr &&
+        <TextBox
+          // comm 2 name
+          left={1216}
+          bottom={0}
+          textAlign="left"
+          border={theme.borderBottom}
+          boxShadow={theme.boxShadow}
+        >
+          <MainText>{cr}</MainText>
+        </TextBox>
+      }
+      {
+        crTwitter &&
+        <TextBox
+          // comm 2 twitter
+          left={1216}
+          bottom={52}
+          textAlign="left"
+          border={theme.borderBottom}
+          boxShadow={theme.boxShadow}
+        >
+          <Text font={smallText} position="relative" top="-2px">
+            {crTwitter}
+          </Text>
+        </TextBox>
+      }
     </div>
   );
 };
