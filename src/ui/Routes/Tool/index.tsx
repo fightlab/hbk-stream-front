@@ -12,11 +12,13 @@ import SettingsAccordion from "./settings";
 import NightbotAccordion from "./nightbot";
 import PreStreamAccordion from "./prestream";
 import SocialAccordion from "./social";
+import CommentatorAccordion from "./commentator";
 
 import { ICamera, ISocial } from "~/ui/Routes/Camera";
 import { IScoreboardState } from "../Scoreboard";
 import { IMatch } from "../DET8";
 import { IPreStreamState } from "../PreStream";
+import { ICommentatorState } from "../Commentator";
 
 const styles = {
   form: {
@@ -38,6 +40,7 @@ interface IToolUnsaved {
   prestream: boolean;
   social: boolean;
   nightbot: boolean;
+  commentator: boolean;
 }
 
 export interface IToolPlayer {
@@ -67,6 +70,7 @@ interface IToolState {
   social: ISocial;
   unsaved: IToolUnsaved;
   matches: Array<IMatch>;
+  commentator: ICommentatorState;
   [key: string]: any;
 }
 
@@ -137,12 +141,19 @@ class Tool extends React.Component<IToolProps, IToolState> {
         twitter: "fight_lab",
         web: "hbk.gg",
       },
+      commentator: {
+        cl: '',
+        cr: '',
+        clTwitter: '',
+        crTwitter: '',
+      },
       unsaved: {
         camera: false,
         nightbot: false,
         prestream: false,
         scoreboard: false,
         social: false,
+        commentator: false,
       },
       matches: [],
     };
@@ -184,6 +195,10 @@ class Tool extends React.Component<IToolProps, IToolState> {
     this.io.on("matches", ({ bracket, matches }) => {
       this.setState({ bracket, matches });
     });
+    
+    this.io.on("commentator", (commentator) => {
+      this.setState({ commentator })
+    });
 
     this.importFileReader.onload = (event) => {
       const json = event.target.result;
@@ -200,6 +215,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
     this.io.emit("nightbot-get");
     this.io.emit("prestream-get");
     this.io.emit("social-get");
+    this.io.emit("commentator-get");
   }
 
   private update: IToolUpdate = (e, key) => {
@@ -294,6 +310,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
       prestream,
       social,
       unsaved,
+      commentator,
     } = this.state;
 
     return (
@@ -314,6 +331,14 @@ class Tool extends React.Component<IToolProps, IToolState> {
               swap={this.swap}
               toolKey="scoreboard"
               unsaved={unsaved.scoreboard}
+            />
+            <CommentatorAccordion
+              classes={classes}
+              commentator={commentator}
+              update={this.update}
+              change={this.change}
+              toolKey="commentator"
+              unsaved={unsaved.commentator}
             />
             <CameraAccordion
               classes={classes}

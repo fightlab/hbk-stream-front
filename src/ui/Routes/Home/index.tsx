@@ -56,6 +56,12 @@ const Home = (props) => (
             </ListItemIcon>
             <ListItemText primary="Pre-stream" />
           </ListItem>
+          <ListItem button component={Link} to="/commentator">
+            <ListItemIcon>
+              <QueuePlayNext />
+            </ListItemIcon>
+            <ListItemText primary="Commentator Camera" />
+          </ListItem>
           <ListItem button onClick={() => props.setDarkMode(toggleDarkMode())}>
             <ListItemIcon>
               <SettingsBrightnessIcon />

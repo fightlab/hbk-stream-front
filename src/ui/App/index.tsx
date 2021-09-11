@@ -12,6 +12,7 @@ import Tool from "~/ui/Routes/Tool";
 import Playground from "~/ui/Routes/Playground";
 import PreStream from "~/ui/Routes/PreStream";
 import DET8 from "~/ui/Routes/DET8";
+import Commentator from "~/ui/Routes/Commentator";
 
 import CameraMaskImage from "~/ui/Routes/Camera/mask.png";
 
@@ -52,6 +53,9 @@ const App = () => {
         </Route>
         <Route exact path="/det8">
           <DET8 />
+        </Route>
+        <Route exact path="/commentator">
+          <Commentator />
         </Route>
       </Switch>
     </ThemeProvider>

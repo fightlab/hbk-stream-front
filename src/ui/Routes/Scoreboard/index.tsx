@@ -4,7 +4,7 @@ import { merge } from "lodash";
 
 import Socket from "~/ui/Services/socket";
 import TextBox from "~/ui/Components/TextBox";
-import Text, { ITextProps } from "~/ui/Components/Text";
+import Text from "~/ui/Components/Text";
 import theme, { IThemeFont } from "~/theme";
 
 const styles: Styles = {
