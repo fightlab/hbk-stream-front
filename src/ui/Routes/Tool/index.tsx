@@ -197,7 +197,9 @@ class Tool extends React.Component<IToolProps, IToolState> {
     });
     
     this.io.on("commentator", (commentator) => {
-      this.setState({ commentator })
+      const { unsaved } = this.state;
+      unsaved.commentator = false;
+      this.setState({ commentator, unsaved })
     });
 
     this.importFileReader.onload = (event) => {
