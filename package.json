@@ -43,7 +43,7 @@
     "@mdi/js": "^5.9.55",
     "@mdi/react": "^1.5.0",
     "lodash": "^4.17.21",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "qrcode.react": "^1.0.1",
     "react": "^17.0.2",
     "react-countdown": "^2.3.2",
