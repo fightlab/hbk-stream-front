@@ -4,8 +4,10 @@ import { merge } from "lodash";
 
 import Socket from "~/ui/Services/socket";
 import TextBox from "~/ui/Components/TextBox";
+import Image from "~/ui/Components/Image";
 import Text from "~/ui/Components/Text";
 import theme, { IThemeFont } from "~/theme";
+import screen from './screen.png';
 
 const styles: Styles = {
   root: theme.container,
@@ -41,7 +43,7 @@ const MainText: React.FunctionComponent<MainTextProps> = (
   const { children, color } = props;
 
   return (
-    <Text position="relative" top="-3px" color={color}>
+    <Text position="relative" color={color} font={theme.engschrift}>
       {children}
     </Text>
   );
@@ -79,20 +81,22 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
 
   render() {
     const { classes } = this.props;
-    const { p1n, p2n, p1s, p2s, tl, tr, bl, br, p1l, p2l, lTag } = this.state;
+    const { p1n, p2n, p1s, p2s, tl, tr, p1l, p2l, lTag } = this.state;
 
-    const smallText: IThemeFont = merge({}, theme.rawlineBold, {
+    const smallText: IThemeFont = merge({}, theme.engschrift, {
       fontSize: "24pt",
     });
+    
+    const { transparent } = theme;
 
     return (
       <div className={classes.root}>
+        <Image src={screen} left={0} top={0}></Image>
         <TextBox
           // hbk text
           left={0}
           right={0}
-          border={theme.borderBottom}
-          boxShadow={theme.boxShadow}
+          backgroundColor={transparent}
         >
           <Text font={smallText} position="relative" top="-2px">
             {tl}
@@ -101,59 +105,43 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
             font={smallText}
             position="relative"
             top="-2px"
-            color={theme.orange}
           >
             {tr}
           </Text>
         </TextBox>
         <TextBox
           // player 1 name
-          right={1216}
+          right={1225}
           textAlign="right"
-          border={theme.borderBottom}
-          boxShadow={theme.boxShadow}
+          backgroundColor={transparent}
         >
           <MainText>{`${p1n}${p1l ? ` ${lTag}` : ""}`}</MainText>
         </TextBox>
         <TextBox
           // player 1 score
-          left={714}
-          border={theme.borderBottom}
-          boxShadow={theme.boxShadow}
+          left={770}
+          backgroundColor={transparent}
         >
-          <MainText color={p1s > p2s ? theme.orange : theme.white}>
+          <MainText>
             {p1s}
           </MainText>
         </TextBox>
         <TextBox
           // player 2 name
-          left={1216}
+          left={1225}
           textAlign="left"
-          border={theme.borderBottom}
-          boxShadow={theme.boxShadow}
+          backgroundColor={transparent}
         >
           <MainText>{`${p2n}${p2l ? ` ${lTag}` : ""}`}</MainText>
         </TextBox>
         <TextBox
           // player 2 score
-          right={714}
-          border={theme.borderBottom}
-          boxShadow={theme.boxShadow}
+          right={770}
+          backgroundColor={transparent}
         >
-          <MainText color={p2s > p1s ? theme.orange : theme.white}>
+          <MainText>
             {p2s}
           </MainText>
-        </TextBox>
-        <TextBox
-          // bottom text
-          left={0}
-          right={0}
-          bottom={0}
-          border={theme.borderTop}
-          boxShadow={theme.boxShadow}
-        >
-          <MainText>{bl}</MainText>
-          <MainText color={theme.orange}>{br}</MainText>
         </TextBox>
       </div>
     );

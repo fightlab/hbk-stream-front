@@ -12,6 +12,7 @@ interface ITheme extends Styles {
   raleway: IThemeFont;
   rawlineBold: IThemeFont;
   ralewayBold: IThemeFont;
+  engschrift: IThemeFont;
   border: IThemeBorder;
   borderTop: IThemeBorder;
   borderBottom: IThemeBorder;
@@ -76,6 +77,11 @@ const theme: ITheme = {
     fontWeight: "700",
     fontStyle: "normal",
     fontVariant: "small-caps",
+  },
+  engschrift: {
+    fontFamily: "'TGL 0-1451 Engschrift', serif",
+    fontStyle: "normal",
+    fontSize: "32pt"
   },
   border: {
     borderRadius: "3px",
