@@ -4,11 +4,9 @@ import { merge } from "lodash";
 
 import Socket from "~/ui/Services/socket";
 import TextBox from "~/ui/Components/TextBox";
-import Image from "~/ui/Components/Image";
 import Text from "~/ui/Components/Text";
 import PlayerFlag from "~/ui/Components/PlayerFlag";
 import theme, { IThemeFont } from "~/theme";
-import screen from './screen.png';
 
 const styles: Styles = {
   root: theme.container,
@@ -92,7 +90,6 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
 
     return (
       <div className={classes.root}>
-        <Image src={screen} left={0} top={0}></Image>
         <TextBox
           // hbk text
           left={0}
