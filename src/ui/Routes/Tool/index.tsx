@@ -275,6 +275,8 @@ class Tool extends React.Component<IToolProps, IToolState> {
       scoreboard.p2n = "";
       scoreboard.p1l = false;
       scoreboard.p2l = false;
+      scoreboard.bl = "";
+      scoreboard.br = "";
     }
     if (scores) {
       scoreboard.p1s = 0;
@@ -290,6 +292,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
     if (names) {
       [scoreboard.p1n, scoreboard.p2n] = [scoreboard.p2n, scoreboard.p1n];
       [scoreboard.p1l, scoreboard.p2l] = [scoreboard.p2l, scoreboard.p1l];
+      [scoreboard.bl, scoreboard.br] = [scoreboard.br, scoreboard.bl];
     }
 
     if (scores) {

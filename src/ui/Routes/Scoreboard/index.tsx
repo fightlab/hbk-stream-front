@@ -6,6 +6,7 @@ import Socket from "~/ui/Services/socket";
 import TextBox from "~/ui/Components/TextBox";
 import Image from "~/ui/Components/Image";
 import Text from "~/ui/Components/Text";
+import PlayerFlag from "~/ui/Components/PlayerFlag";
 import theme, { IThemeFont } from "~/theme";
 import screen from './screen.png';
 
@@ -81,7 +82,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
 
   render() {
     const { classes } = this.props;
-    const { p1n, p2n, p1s, p2s, tl, tr, p1l, p2l, lTag } = this.state;
+    const { p1n, p2n, p1s, p2s, tl, tr, p1l, p2l, lTag, bl, br } = this.state;
 
     const smallText: IThemeFont = merge({}, theme.engschrift, {
       fontSize: "24pt",
@@ -126,6 +127,12 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
             {p1s}
           </MainText>
         </TextBox>
+        <PlayerFlag
+          // player 1 flag
+          top={2}
+          left={699}
+          code={bl}
+        />
         <TextBox
           // player 2 name
           left={1225}
@@ -143,6 +150,12 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
             {p2s}
           </MainText>
         </TextBox>
+        <PlayerFlag
+          // player 2 flag
+          top={2}
+          left={1157}
+          code={br}
+        />
       </div>
     );
   }

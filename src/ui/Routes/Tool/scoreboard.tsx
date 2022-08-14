@@ -132,6 +132,22 @@ const ScoreboardAccordion = (props: IToolScoreboardAccordionProps) => {
               />
             </Grid>
             <Grid item xs={6} sm={6}>
+              <TextField
+                label="Player 1 Flag"
+                fullWidth
+                value={scoreboard.bl}
+                onChange={(e) => change(toolKey, "bl", e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={6} sm={6}>
+              <TextField
+                label="Player 2 Flag"
+                fullWidth
+                value={scoreboard.br}
+                onChange={(e) => change(toolKey, "br", e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={6} sm={6}>
               <FormControlLabel
                 control={
                   <Switch
@@ -181,7 +197,7 @@ const ScoreboardAccordion = (props: IToolScoreboardAccordionProps) => {
             </Grid>
             <Grid item xs={6} sm={3}>
               <TextField
-                label="Top (White/Left)"
+                label="Top (Left)"
                 fullWidth
                 value={scoreboard.tl}
                 onChange={(e) => change(toolKey, "tl", e.target.value)}
@@ -189,26 +205,10 @@ const ScoreboardAccordion = (props: IToolScoreboardAccordionProps) => {
             </Grid>
             <Grid item xs={6} sm={3}>
               <TextField
-                label="Top (Orange/Right)"
+                label="Top (Right)"
                 fullWidth
                 value={scoreboard.tr}
                 onChange={(e) => change(toolKey, "tr", e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={6} sm={3}>
-              <TextField
-                label="Bottom (Orange/Left)"
-                fullWidth
-                value={scoreboard.bl}
-                onChange={(e) => change(toolKey, "bl", e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={6} sm={3}>
-              <TextField
-                label="Bottom (White/Right)"
-                fullWidth
-                value={scoreboard.br}
-                onChange={(e) => change(toolKey, "br", e.target.value)}
               />
             </Grid>
             <Grid item xs={6} sm={3}>
