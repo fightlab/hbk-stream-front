@@ -34,14 +34,16 @@ const MainText: React.FunctionComponent<MainTextProps> = (
   const { children, color } = props;
 
   return (
-    <Text position="relative" top="-3px" color={color}>
+    <Text position="relative" color={color} font={merge({}, theme.engschrift, {
+      fontSize: "38pt",
+    })}>
       {children}
     </Text>
   );
 };
 MainText.defaultProps = defaultPropsMainText;
 
-const smallText: IThemeFont = merge({}, theme.rawlineBold, {
+const smallText: IThemeFont = merge({}, theme.engschrift, {
   fontSize: "24pt",
 });
 
@@ -58,6 +60,8 @@ const Commentator: React.FunctionComponent<ICommentatorProps> = (
   
   const { cl, clTwitter, cr, crTwitter } = state;
   
+  const { transparent } = theme;
+  
   React.useEffect(() => {
     const io = new Socket()
     io.on("commentator", (commentator) => {
@@ -72,11 +76,10 @@ const Commentator: React.FunctionComponent<ICommentatorProps> = (
         cl &&
         <TextBox
           // comm 1 name
-          right={1216}
-          bottom={0}
+          right={1195}
+          bottom={90}
           textAlign="right"
-          border={theme.borderBottom}
-          boxShadow={theme.boxShadow}
+          backgroundColor={transparent}
         >
           <MainText>{cl}</MainText>
         </TextBox>
@@ -85,11 +88,10 @@ const Commentator: React.FunctionComponent<ICommentatorProps> = (
         clTwitter &&
         <TextBox
           // comm 1 twitter
-          right={1216}
-          bottom={52}
+          right={1195}
+          bottom={37}
           textAlign="right"
-          border={theme.borderBottom}
-          boxShadow={theme.boxShadow}
+          backgroundColor={transparent}
         >
           <Text font={smallText} position="relative" top="-2px">
             {clTwitter}
@@ -100,11 +102,10 @@ const Commentator: React.FunctionComponent<ICommentatorProps> = (
         cr &&
         <TextBox
           // comm 2 name
-          left={1216}
-          bottom={0}
+          left={1195}
+          bottom={90}
           textAlign="left"
-          border={theme.borderBottom}
-          boxShadow={theme.boxShadow}
+          backgroundColor={transparent}
         >
           <MainText>{cr}</MainText>
         </TextBox>
@@ -113,11 +114,10 @@ const Commentator: React.FunctionComponent<ICommentatorProps> = (
         crTwitter &&
         <TextBox
           // comm 2 twitter
-          left={1216}
-          bottom={52}
+          left={1195}
+          bottom={37}
           textAlign="left"
-          border={theme.borderBottom}
-          boxShadow={theme.boxShadow}
+          backgroundColor={transparent}
         >
           <Text font={smallText} position="relative" top="-2px">
             {crTwitter}
