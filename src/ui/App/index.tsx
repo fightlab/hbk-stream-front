@@ -14,6 +14,7 @@ import PreStream from "~/ui/Routes/PreStream";
 import DET8 from "~/ui/Routes/DET8";
 import Commentator from "~/ui/Routes/Commentator";
 import BreakWithoutVideo from "~/ui/Routes/BreakWithoutVideo";
+import BreakWithVideo from "~/ui/Routes/BreakWithVideo";
 
 import CameraMaskImage from "~/ui/Routes/Camera/mask.png";
 
@@ -60,6 +61,9 @@ const App = () => {
         </Route>
         <Route exact path="/break-without-video">
           <BreakWithoutVideo />
+        </Route>
+        <Route exact path="/break-with-video">
+          <BreakWithVideo />
         </Route>
       </Switch>
     </ThemeProvider>

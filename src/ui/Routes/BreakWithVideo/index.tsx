@@ -12,9 +12,9 @@ const styles: Styles = {
   root: theme.container,
 };
 
-interface IBreakWithoutVideoProps extends WithStylesProps<typeof styles> {}
+interface IBreakWithVideoProps extends WithStylesProps<typeof styles> {}
 
-export interface IBreakWithoutVideoState {
+export interface IBreakWithVideoState {
   event: string;
   game: string;
   countdown: number;
@@ -35,8 +35,8 @@ const TimerComplete: any = (
   fontSize = "50px"
 ) => (
   <TextBox
-    top={685}
-    left={150}
+    top={133}
+    left={313}
     textAlign="left"
     width="100%"
     padding={0}
@@ -61,8 +61,8 @@ const countdownRenderer =
     }
     return (
       <TextBox
-        top={685}
-        left={150}
+        top={133}
+        left={313}
         textAlign="left"
         width="100%"
         padding={0}
@@ -80,7 +80,7 @@ const countdownRenderer =
     );
   };
 
-class BreakWithoutVideo extends React.Component<IBreakWithoutVideoProps, IBreakWithoutVideoState> {
+class BreakWithVideo extends React.Component<IBreakWithVideoProps, IBreakWithVideoState> {
   private io = new Socket();
 
   constructor(props) {
@@ -115,8 +115,8 @@ class BreakWithoutVideo extends React.Component<IBreakWithoutVideoProps, IBreakW
       <div className={classes.root}>
         <TextBox
           // event text
-          top={620}
-          left={470}
+          top={65}
+          left={1195}
           textAlign="left"
           width="100%"
           padding={0}
@@ -132,8 +132,8 @@ class BreakWithoutVideo extends React.Component<IBreakWithoutVideoProps, IBreakW
         </TextBox>
         <TextBox
           // venue text
-          top={685}
-          left={470}
+          top={133}
+          left={1195}
           textAlign="left"
           width="100%"
           padding={0}
@@ -148,8 +148,8 @@ class BreakWithoutVideo extends React.Component<IBreakWithoutVideoProps, IBreakW
           </Text>
         </TextBox>
         <TextBox
-          top={620}
-          left={150}
+          top={65}
+          left={313}
           textAlign="left"
           width="100%"
           padding={0}
@@ -174,4 +174,4 @@ class BreakWithoutVideo extends React.Component<IBreakWithoutVideoProps, IBreakW
   }
 }
 
-export default withStyles(styles)(BreakWithoutVideo);
+export default withStyles(styles)(BreakWithVideo);
