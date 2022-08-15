@@ -47,6 +47,8 @@ const styles = {
     textOverflow: props.truncate && "clip",
     whiteSpace: props.truncate && "nowrap",
     overflow: props.truncate && "hidden",
+    // uncomment border for debug
+    // border: "1px solid red"
   }),
 };
 
