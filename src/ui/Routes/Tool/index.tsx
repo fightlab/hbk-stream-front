@@ -345,14 +345,14 @@ class Tool extends React.Component<IToolProps, IToolState> {
               toolKey="commentator"
               unsaved={unsaved.commentator}
             />
-            <CameraAccordion
+            {/* <CameraAccordion
               classes={classes}
               camera={camera}
               update={this.update}
               change={this.change}
               toolKey="camera"
               unsaved={unsaved.camera}
-            />
+            /> */}
             <PreStreamAccordion
               classes={classes}
               prestream={prestream}

@@ -15,6 +15,7 @@ import DET8 from "~/ui/Routes/DET8";
 import Commentator from "~/ui/Routes/Commentator";
 import BreakWithoutVideo from "~/ui/Routes/BreakWithoutVideo";
 import BreakWithVideo from "~/ui/Routes/BreakWithVideo";
+import SplitScreen2 from "~/ui/Routes/SplitScreen2";
 
 import CameraMaskImage from "~/ui/Routes/Camera/mask.png";
 
@@ -64,6 +65,9 @@ const App = () => {
         </Route>
         <Route exact path="/break-with-video">
           <BreakWithVideo />
+        </Route>
+        <Route exact path="/split-screen-2">
+          <SplitScreen2 />
         </Route>
       </Switch>
     </ThemeProvider>
