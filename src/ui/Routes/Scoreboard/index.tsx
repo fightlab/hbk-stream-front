@@ -108,7 +108,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
         </TextBox>
         <TextBox
           // player 1 name
-          right={1216}
+          right={1236}
           textAlign="right"
           border={theme.borderBottom}
           boxShadow={theme.boxShadow}
@@ -117,7 +117,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
         </TextBox>
         <TextBox
           // player 1 score
-          left={714}
+          left={694}
           border={theme.borderBottom}
           boxShadow={theme.boxShadow}
         >
@@ -127,7 +127,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
         </TextBox>
         <TextBox
           // player 2 name
-          left={1216}
+          left={1236}
           textAlign="left"
           border={theme.borderBottom}
           boxShadow={theme.boxShadow}
@@ -136,7 +136,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
         </TextBox>
         <TextBox
           // player 2 score
-          right={714}
+          right={694}
           border={theme.borderBottom}
           boxShadow={theme.boxShadow}
         >
