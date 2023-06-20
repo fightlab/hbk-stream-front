@@ -1,7 +1,7 @@
 import * as React from "react";
 import withStyles, { WithStylesProps, Styles } from "react-jss";
 import Icon from "@mdi/react";
-import { mdiWeb, mdiTwitter, mdiFacebook } from "@mdi/js";
+import { mdiWeb, mdiTwitter } from "@mdi/js";
 import { merge } from "lodash";
 
 import Socket from "~/ui/Services/socket";
@@ -12,21 +12,15 @@ import GlassImage from "~/ui/Components/GlassImage";
 
 const styles: Styles = {
   root: theme.container,
-  iconFacebook: {
-    position: "absolute",
-    bottom: "105px",
-    right: "5px",
-    zIndex: "1",
-  },
   iconTwitter: {
     position: "absolute",
-    bottom: "55px",
+    bottom: "50px",
     right: "5px",
     zIndex: "1",
   },
   iconWeb: {
     position: "absolute",
-    bottom: "5px",
+    bottom: "105px",
     right: "5px",
     zIndex: "1",
   },
@@ -34,7 +28,6 @@ const styles: Styles = {
 
 export interface ISocial {
   web: string;
-  facebook: string;
   twitter: string;
 }
 
@@ -74,7 +67,6 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
       },
       social: {
         web: "hbk.gg",
-        facebook: "fightlabbrighton",
         twitter: "fight_lab",
       },
     };
@@ -97,7 +89,7 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
     const { classes, children, maskImage } = this.props;
     const { camera, social } = this.state;
     const { hbk, brewdog, fgc, date, game, bg } = camera;
-    const { web, twitter, facebook } = social;
+    const { web, twitter } = social;
 
     const { transparent, orange, cabin, rawline, rawlineBold } = theme;
 
@@ -170,35 +162,8 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
           </Text>
         </TextBox>
         <TextBox
-          // facebook text
-          bottom={`${5 + 50 * 2}px`}
-          right={`${50 * 1}px`}
-          textAlign="right"
-          backgroundColor={transparent}
-        >
-          <Text
-            lowerCase
-            font={merge(
-              {},
-              {
-                fontVariant: "small-caps",
-                fontSize: "36pt",
-              },
-              cabin
-            )}
-          >
-            {facebook}
-          </Text>
-        </TextBox>
-        <Icon
-          className={classes.iconFacebook}
-          path={mdiFacebook}
-          size="36pt"
-          color={orange}
-        />
-        <TextBox
           // twitter text
-          bottom={`${5 + 50 * 1}px`}
+          bottom={`${50 * 1}px`}
           right={`${50 * 1}px`}
           textAlign="right"
           backgroundColor={transparent}
@@ -208,8 +173,7 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
             font={merge(
               {},
               {
-                fontVariant: "small-caps",
-                fontSize: "36pt",
+                fontSize: "32pt",
               },
               cabin
             )}
@@ -225,7 +189,7 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
         />
         <TextBox
           // web text
-          bottom={`${5 + 50 * 0}px`}
+          bottom={`${5 + 50 * 2}px`}
           right={`${50 * 1}px`}
           textAlign="right"
           backgroundColor={transparent}
@@ -235,8 +199,7 @@ class Camera extends React.Component<ICameraProps, ICameraState> {
             font={merge(
               {},
               {
-                fontVariant: "small-caps",
-                fontSize: "36pt",
+                fontSize: "32pt",
               },
               cabin
             )}

@@ -47,14 +47,6 @@ const SocialAccordion = (props: IToolSocialAccordionProps) => {
             </Grid>
             <Grid item xs={12} sm={4}>
               <TextField
-                label="Facebook"
-                fullWidth
-                value={social.facebook}
-                onChange={(e) => change(toolKey, "facebook", e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <TextField
                 label="Twitter"
                 fullWidth
                 value={social.twitter}

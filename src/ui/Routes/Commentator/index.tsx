@@ -11,7 +11,7 @@ const styles: Styles = {
   root: theme.container,
 };
 
-interface ICommentatorProps extends WithStylesProps<typeof styles> { }
+interface ICommentatorProps extends WithStylesProps<typeof styles> {}
 
 export interface ICommentatorState {
   cl: string;
@@ -50,26 +50,25 @@ const Commentator: React.FunctionComponent<ICommentatorProps> = (
 ) => {
   const { classes } = props;
   const [state, setState] = React.useState<ICommentatorState>({
-    cl: 'CommentatorLeft',
-    clTwitter: '@LeftTwitter',
-    cr: 'CommentatorRight',
-    crTwitter: '@RightTwitter',
-  })
-  
+    cl: "CommentatorLeft",
+    clTwitter: "@LeftTwitter",
+    cr: "CommentatorRight",
+    crTwitter: "@RightTwitter",
+  });
+
   const { cl, clTwitter, cr, crTwitter } = state;
-  
+
   React.useEffect(() => {
-    const io = new Socket()
+    const io = new Socket();
     io.on("commentator", (commentator) => {
       setState(commentator);
-    })
+    });
     io.emit("commentator-get");
   }, []);
 
   return (
     <div className={classes.root}>
-      {
-        cl &&
+      {cl && (
         <TextBox
           // comm 1 name
           right={1216}
@@ -80,9 +79,8 @@ const Commentator: React.FunctionComponent<ICommentatorProps> = (
         >
           <MainText>{cl}</MainText>
         </TextBox>
-      }
-      {
-        clTwitter &&
+      )}
+      {clTwitter && (
         <TextBox
           // comm 1 twitter
           right={1216}
@@ -95,9 +93,8 @@ const Commentator: React.FunctionComponent<ICommentatorProps> = (
             {clTwitter}
           </Text>
         </TextBox>
-      }
-      {
-        cr &&
+      )}
+      {cr && (
         <TextBox
           // comm 2 name
           left={1216}
@@ -108,9 +105,8 @@ const Commentator: React.FunctionComponent<ICommentatorProps> = (
         >
           <MainText>{cr}</MainText>
         </TextBox>
-      }
-      {
-        crTwitter &&
+      )}
+      {crTwitter && (
         <TextBox
           // comm 2 twitter
           left={1216}
@@ -123,7 +119,7 @@ const Commentator: React.FunctionComponent<ICommentatorProps> = (
             {crTwitter}
           </Text>
         </TextBox>
-      }
+      )}
     </div>
   );
 };

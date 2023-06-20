@@ -50,10 +50,11 @@ interface MatchProps {
   match: IMatch;
   identifierShift?: boolean;
   identifierColor?: string;
+  isReset?: boolean;
 }
 
 const getColor = (name: string, ps: number, os: number) => {
-  if (name.includes("From")) return lightGrey;
+  if (name === "N/A" || name.includes("From")) return lightGrey;
   if (ps > os) return orange;
   return white;
 };
@@ -65,6 +66,7 @@ const Match = ({
   match,
   identifierShift = true,
   identifierColor,
+  isReset = false,
 }: MatchProps) => {
   const p1Color = getColor(
     match.player1DisplayName,
@@ -87,7 +89,7 @@ const Match = ({
           backgroundColor={transparent}
         >
           <Text color={identifierColor} font={identifierText}>
-            {match.identifier}
+            {match.identifier + (isReset ? " Reset" : "")}
           </Text>
         </TextBox>
       )}
@@ -136,6 +138,7 @@ interface IDEWT8Props extends WithStylesProps<typeof styles> {}
 interface IDEWT8State {
   matches: IMatch[];
   bracket: string;
+  hasReset: boolean;
 }
 
 class DET8 extends React.Component<IDEWT8Props, IDEWT8State> {
@@ -155,27 +158,34 @@ class DET8 extends React.Component<IDEWT8Props, IDEWT8State> {
     this.state = {
       bracket: "",
       matches: Array(10).fill(defaultMatch),
+      hasReset: false,
     };
 
     this.io.on("matches", ({ bracket, matches }) => {
       console.log("received matches");
-      this.setState({ matches, bracket });
+      let hasReset = false;
+      if (
+        matches[10] &&
+        matches[10].player1DisplayName !== "N/A" &&
+        matches[10].player2DisplayName !== "N/A"
+      ) {
+        hasReset = true;
+      }
+      this.setState({ matches, bracket, hasReset });
     });
   }
 
   componentDidMount() {
     this.io.emit("matches-get");
-    setInterval(() => {
-      const { bracket } = this.state;
-      if (bracket) {
-        console.log('get bracket matches', bracket);
-        this.io.emit("bracket-get-matches", bracket);
-      }
-    }, 60 * 1000)
+    const { bracket } = this.state;
+    if (bracket) {
+      console.log("get bracket matches", bracket);
+      this.io.emit("bracket-get-matches", bracket);
+    }
   }
 
   render() {
-    const { matches, bracket } = this.state;
+    const { matches, bracket, hasReset } = this.state;
     const { classes } = this.props;
     return (
       <Camera>
@@ -207,13 +217,21 @@ class DET8 extends React.Component<IDEWT8Props, IDEWT8State> {
         <Match top={265} right={420} match={matches[8]} />
         {/* Grand Final */}
         <Match
-          top={440}
-          right={36}
-          hideScores
+          top={hasReset ? 400 : 440}
+          right={hasReset ? 150 : 100}
           match={matches[9]}
-          identifierShift={false}
           identifierColor={orange}
         />
+        {/* Reset Grand Final */}
+        {hasReset && (
+          <Match
+            top={520}
+            right={75}
+            match={matches[10]}
+            identifierColor={orange}
+            isReset={hasReset}
+          />
+        )}
       </Camera>
     );
   }

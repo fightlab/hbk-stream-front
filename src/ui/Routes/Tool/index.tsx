@@ -125,7 +125,7 @@ class Tool extends React.Component<IToolProps, IToolState> {
       nightbot: {
         bracket: "https://hbk.challonge.com",
         social:
-          "• FOLLOW US ON • WEB: https://hbk.gg • FACEBOOK: https://www.facebook.com/FightLabBrighton/ • TWITTER: https://twitter.com/fight_lab • DISCORD: https://discord.gg/rjpDJdz •",
+          "Enjoying the Stream? Please give us a follow 🥰!• WEB: https://fightlab.gg • TWITTER: https://twitter.com/fight_lab • DISCORD: https://discord.gg/rjpDJdz",
       },
       prestream: {
         event: "Habrewken #000",
@@ -137,15 +137,14 @@ class Tool extends React.Component<IToolProps, IToolState> {
         startText: "Starts",
       },
       social: {
-        facebook: "fightlabbrighton",
         twitter: "fight_lab",
         web: "hbk.gg",
       },
       commentator: {
-        cl: '',
-        cr: '',
-        clTwitter: '',
-        crTwitter: '',
+        cl: "",
+        cr: "",
+        clTwitter: "",
+        crTwitter: "",
       },
       unsaved: {
         camera: false,
@@ -195,11 +194,11 @@ class Tool extends React.Component<IToolProps, IToolState> {
     this.io.on("matches", ({ bracket, matches }) => {
       this.setState({ bracket, matches });
     });
-    
+
     this.io.on("commentator", (commentator) => {
       const { unsaved } = this.state;
       unsaved.commentator = false;
-      this.setState({ commentator, unsaved })
+      this.setState({ commentator, unsaved });
     });
 
     this.importFileReader.onload = (event) => {
