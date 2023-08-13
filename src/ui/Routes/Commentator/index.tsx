@@ -11,7 +11,7 @@ const styles: Styles = {
   root: theme.container,
 };
 
-interface ICommentatorProps extends WithStylesProps<typeof styles> { }
+interface ICommentatorProps extends WithStylesProps<typeof styles> {}
 
 export interface ICommentatorState {
   cl: string;
@@ -34,16 +34,20 @@ const MainText: React.FunctionComponent<MainTextProps> = (
   const { children, color } = props;
 
   return (
-    <Text position="relative" color={color} font={merge({}, theme.engschrift, {
-      fontSize: "38pt",
-    })}>
+    <Text
+      position="relative"
+      color={color}
+      font={merge({}, theme.dinCondensedRegular, {
+        fontSize: "38pt",
+      })}
+    >
       {children}
     </Text>
   );
 };
 MainText.defaultProps = defaultPropsMainText;
 
-const smallText: IThemeFont = merge({}, theme.engschrift, {
+const smallText: IThemeFont = merge({}, theme.dinCondensedRegular, {
   fontSize: "24pt",
 });
 
@@ -52,44 +56,42 @@ const Commentator: React.FunctionComponent<ICommentatorProps> = (
 ) => {
   const { classes } = props;
   const [state, setState] = React.useState<ICommentatorState>({
-    cl: 'CommentatorLeft',
-    clTwitter: '@LeftTwitter',
-    cr: 'CommentatorRight',
-    crTwitter: '@RightTwitter',
-  })
-  
+    cl: "COMM 1",
+    clTwitter: "@COMM",
+    cr: "COMM 2",
+    crTwitter: "@COMM",
+  });
+
   const { cl, clTwitter, cr, crTwitter } = state;
-  
+
   const { transparent } = theme;
-  
+
   React.useEffect(() => {
-    const io = new Socket()
+    const io = new Socket();
     io.on("commentator", (commentator) => {
       setState(commentator);
-    })
+    });
     io.emit("commentator-get");
   }, []);
 
   return (
     <div className={classes.root}>
-      {
-        cl &&
+      {cl && (
         <TextBox
           // comm 1 name
-          right={1195}
-          bottom={90}
+          right={1194}
+          bottom={78}
           textAlign="right"
           backgroundColor={transparent}
         >
           <MainText>{cl}</MainText>
         </TextBox>
-      }
-      {
-        clTwitter &&
+      )}
+      {clTwitter && (
         <TextBox
           // comm 1 twitter
-          right={1195}
-          bottom={37}
+          right={1200}
+          bottom={32}
           textAlign="right"
           backgroundColor={transparent}
         >
@@ -97,25 +99,23 @@ const Commentator: React.FunctionComponent<ICommentatorProps> = (
             {clTwitter}
           </Text>
         </TextBox>
-      }
-      {
-        cr &&
+      )}
+      {cr && (
         <TextBox
           // comm 2 name
-          left={1195}
-          bottom={90}
+          left={1194}
+          bottom={78}
           textAlign="left"
           backgroundColor={transparent}
         >
           <MainText>{cr}</MainText>
         </TextBox>
-      }
-      {
-        crTwitter &&
+      )}
+      {crTwitter && (
         <TextBox
           // comm 2 twitter
-          left={1195}
-          bottom={37}
+          left={1191}
+          bottom={32}
           textAlign="left"
           backgroundColor={transparent}
         >
@@ -123,7 +123,7 @@ const Commentator: React.FunctionComponent<ICommentatorProps> = (
             {crTwitter}
           </Text>
         </TextBox>
-      }
+      )}
     </div>
   );
 };
