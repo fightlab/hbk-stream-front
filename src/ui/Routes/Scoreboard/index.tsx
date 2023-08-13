@@ -42,12 +42,20 @@ const MainText: React.FunctionComponent<MainTextProps> = (
   const { children, color } = props;
 
   return (
-    <Text position="relative" color={color} font={theme.engschrift}>
+    <Text position="relative" color={color} font={theme.dinCondensedRegular}>
       {children}
     </Text>
   );
 };
 MainText.defaultProps = defaultPropsMainText;
+
+const smallText: IThemeFont = merge({}, theme.dinCondensedRegular, {
+  fontSize: "20pt",
+});
+
+const scoreText: IThemeFont = merge({}, theme.dinCondensedRegular, {
+  fontSize: "38pt",
+});
 
 class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
   private io = new Socket();
@@ -56,16 +64,16 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
     super(props);
 
     this.state = {
-      p1n: "",
-      p2n: "",
+      p1n: "PLAYER 1",
+      p2n: "PLAYER 2",
       p1s: 0,
       p2s: 0,
       p1l: false,
       p2l: false,
-      tl: "HBK",
-      tr: "#000",
-      bl: "Brewdog",
-      br: "Brighton",
+      tl: "WINNERS ",
+      tr: "SEMIS",
+      bl: "GB",
+      br: "GB",
       lTag: "[L]",
     };
 
@@ -82,10 +90,6 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
     const { classes } = this.props;
     const { p1n, p2n, p1s, p2s, tl, tr, p1l, p2l, lTag, bl, br } = this.state;
 
-    const smallText: IThemeFont = merge({}, theme.engschrift, {
-      fontSize: "24pt",
-    });
-    
     const { transparent } = theme;
 
     return (
@@ -94,22 +98,20 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
           // hbk text
           left={0}
           right={0}
+          top={5}
           backgroundColor={transparent}
         >
-          <Text font={smallText} position="relative" top="-2px">
+          <Text font={smallText} position="relative">
             {tl}
           </Text>
-          <Text
-            font={smallText}
-            position="relative"
-            top="-2px"
-          >
+          <Text font={smallText} position="relative">
             {tr}
           </Text>
         </TextBox>
         <TextBox
           // player 1 name
-          right={1225}
+          right={1226}
+          top={6}
           textAlign="right"
           backgroundColor={transparent}
         >
@@ -118,21 +120,20 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
         <TextBox
           // player 1 score
           left={770}
+          top={2}
           backgroundColor={transparent}
         >
-          <MainText>
-            {p1s}
-          </MainText>
+          <Text font={scoreText}>{p1s}</Text>
         </TextBox>
         <PlayerFlag
           // player 1 flag
-          top={2}
-          left={699}
+          left={698}
           code={bl}
         />
         <TextBox
           // player 2 name
-          left={1225}
+          left={1228}
+          top={6}
           textAlign="left"
           backgroundColor={transparent}
         >
@@ -140,17 +141,15 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
         </TextBox>
         <TextBox
           // player 2 score
-          right={770}
+          right={769}
+          top={2}
           backgroundColor={transparent}
         >
-          <MainText>
-            {p2s}
-          </MainText>
+          <Text font={scoreText}>{p2s}</Text>
         </TextBox>
         <PlayerFlag
           // player 2 flag
-          top={2}
-          left={1157}
+          left={1152}
           code={br}
         />
       </div>

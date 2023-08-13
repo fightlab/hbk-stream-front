@@ -1,6 +1,6 @@
 import * as React from "react";
 import withStyles from "react-jss";
-import Flag from 'react-world-flags'
+import Flag from "react-world-flags";
 
 interface IPlayerFlagProps {
   width?: number | string;
@@ -24,6 +24,7 @@ const styles = {
     zIndex: props.zIndex,
     width: props.width,
     height: props.height,
+    objectFit: "cover",
   }),
 };
 
@@ -32,12 +33,12 @@ class PlayerFlag extends React.PureComponent<IPlayerFlagProps> {
     code: "",
     alt: "",
     position: "absolute",
-    top: 0,
+    top: 2,
     left: 0,
     zIndex: -1,
     classes: { root: "" },
-    width: 66,
-    height: 48
+    width: 72,
+    height: 47,
   };
 
   render() {

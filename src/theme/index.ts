@@ -13,6 +13,7 @@ interface ITheme extends Styles {
   rawlineBold: IThemeFont;
   ralewayBold: IThemeFont;
   engschrift: IThemeFont;
+  dinCondensedRegular: IThemeFont;
   border: IThemeBorder;
   borderTop: IThemeBorder;
   borderBottom: IThemeBorder;
@@ -81,7 +82,13 @@ const theme: ITheme = {
   engschrift: {
     fontFamily: "'TGL 0-1451 Engschrift', serif",
     fontStyle: "normal",
-    fontSize: "32pt"
+    fontSize: "32pt",
+  },
+  dinCondensedRegular: {
+    fontFamily: "'DIN Condensed', sans-serif",
+    fontStyle: "normal",
+    fontWeight: "bold",
+    fontSize: "32pt",
   },
   border: {
     borderRadius: "3px",
