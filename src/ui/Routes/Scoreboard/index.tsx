@@ -128,7 +128,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
         <PlayerFlag
           // player 1 flag
           left={698}
-          code={bl}
+          code={bl ? bl.split("|")[1] : undefined}
         />
         <TextBox
           // player 2 name
@@ -150,7 +150,7 @@ class Scoreboard extends React.Component<IScoreboardProps, IScoreboardState> {
         <PlayerFlag
           // player 2 flag
           left={1152}
-          code={br}
+          code={br ? br.split("|")[1] : undefined}
         />
       </div>
     );
