@@ -19,7 +19,10 @@ interface ISplitScreen2State {
   info: IBreakWithVideoState;
 }
 
-class SplitScreen2 extends React.Component<ISplitScreen2Props, ISplitScreen2State> {
+class SplitScreen2 extends React.Component<
+  ISplitScreen2Props,
+  ISplitScreen2State
+> {
   private io = new Socket();
 
   constructor(props) {
@@ -33,9 +36,9 @@ class SplitScreen2 extends React.Component<ISplitScreen2Props, ISplitScreen2Stat
         venue: "BrewDog Brighton",
         showTimer: false,
         startText: "Starts",
-      }
+      },
     };
-    
+
     this.io.on("prestream", (prestream) => {
       this.setState({ info: prestream });
     });
@@ -53,16 +56,16 @@ class SplitScreen2 extends React.Component<ISplitScreen2Props, ISplitScreen2Stat
         {/* Game info */}
         <TextBox
           // event text
-          top={247}
-          left={1430}
-          textAlign="left"
+          top={255}
+          left={1435}
+          textAlign="middle"
           width="100%"
           padding={0}
           backgroundColor={theme.transparent}
         >
           <Text
-            font={merge({}, theme.engschrift, {
-              fontSize: "52px",
+            font={merge({}, theme.dinCondensedRegular, {
+              fontSize: "50px",
             })}
           >
             {info.event}

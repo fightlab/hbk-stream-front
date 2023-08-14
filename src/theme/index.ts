@@ -89,6 +89,7 @@ const theme: ITheme = {
     fontStyle: "normal",
     fontWeight: "bold",
     fontSize: "32pt",
+    fontVariant: "small-caps",
   },
   border: {
     borderRadius: "3px",

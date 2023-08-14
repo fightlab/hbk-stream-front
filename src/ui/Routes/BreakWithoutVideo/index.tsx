@@ -24,19 +24,19 @@ export interface IBreakWithoutVideoState {
 }
 
 const formatTime = ({ hours = 0, minutes = 0, seconds = 0 }): string =>
-  `in ${hours ? `${hours}h` : ""} ${
-    minutes ? `${minutes}m` : ""
-  } ${seconds ? `${seconds}s` : ""}`;
+  `in ${hours ? `${hours}h` : ""} ${minutes ? `${minutes}m` : ""} ${
+    seconds ? `${seconds}s` : "00s"
+  }`;
 
 const TimerComplete: any = (
-  text = "soon",
+  text = "Shortly",
   color = theme.white,
-  font = theme.engschrift,
+  font = theme.dinCondensedRegular,
   fontSize = "50px"
 ) => (
   <TextBox
-    top={685}
-    left={150}
+    bottom={110}
+    left={595}
     textAlign="left"
     width="100%"
     padding={0}
@@ -54,15 +54,15 @@ const TimerComplete: any = (
 );
 
 const countdownRenderer =
-  (color = theme.white, font = theme.engschrift, fontSize = "50px") =>
+  (color = theme.white, font = theme.dinCondensedRegular, fontSize = "50px") =>
   ({ hours, minutes, seconds, completed }): JSX.Element => {
     if (completed) {
       return TimerComplete();
     }
     return (
       <TextBox
-        top={685}
-        left={150}
+        bottom={110}
+        left={595}
         textAlign="left"
         width="100%"
         padding={0}
@@ -80,7 +80,10 @@ const countdownRenderer =
     );
   };
 
-class BreakWithoutVideo extends React.Component<IBreakWithoutVideoProps, IBreakWithoutVideoState> {
+class BreakWithoutVideo extends React.Component<
+  IBreakWithoutVideoProps,
+  IBreakWithoutVideoState
+> {
   private io = new Socket();
 
   constructor(props) {
@@ -106,24 +109,23 @@ class BreakWithoutVideo extends React.Component<IBreakWithoutVideoProps, IBreakW
 
   render() {
     const { classes } = this.props;
-    const { event, countdown, venue, showTimer, startText } =
-      this.state;
+    const { event, countdown, venue, showTimer, startText } = this.state;
 
-    const { transparent, engschrift } = theme;
+    const { transparent, dinCondensedRegular } = theme;
 
     return (
       <div className={classes.root}>
         <TextBox
           // event text
-          top={620}
-          left={470}
+          bottom={163}
+          left={915}
           textAlign="left"
           width="100%"
           padding={0}
           backgroundColor={transparent}
         >
           <Text
-            font={merge({}, engschrift, {
+            font={merge({}, dinCondensedRegular, {
               fontSize: "60px",
             })}
           >
@@ -132,15 +134,15 @@ class BreakWithoutVideo extends React.Component<IBreakWithoutVideoProps, IBreakW
         </TextBox>
         <TextBox
           // venue text
-          top={685}
-          left={470}
+          bottom={110}
+          left={915}
           textAlign="left"
           width="100%"
           padding={0}
           backgroundColor={transparent}
         >
           <Text
-            font={merge({}, engschrift, {
+            font={merge({}, dinCondensedRegular, {
               fontSize: "50px",
             })}
           >
@@ -148,15 +150,15 @@ class BreakWithoutVideo extends React.Component<IBreakWithoutVideoProps, IBreakW
           </Text>
         </TextBox>
         <TextBox
-          top={620}
-          left={150}
+          bottom={163}
+          left={595}
           textAlign="left"
           width="100%"
           padding={0}
           backgroundColor={transparent}
         >
           <Text
-            font={merge({}, engschrift, {
+            font={merge({}, dinCondensedRegular, {
               fontSize: "60px",
             })}
           >

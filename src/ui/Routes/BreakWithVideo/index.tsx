@@ -24,18 +24,18 @@ export interface IBreakWithVideoState {
 }
 
 const formatTime = ({ hours = 0, minutes = 0, seconds = 0 }): string =>
-  `in ${hours ? `${hours}h` : ""} ${
-    minutes ? `${minutes}m` : ""
-  } ${seconds ? `${seconds}s` : ""}`;
+  `in ${hours ? `${hours}h` : ""} ${minutes ? `${minutes}m` : ""} ${
+    seconds ? `${seconds}s` : "00s"
+  }`;
 
 const TimerComplete: any = (
-  text = "soon",
+  text = "Shortly",
   color = theme.white,
-  font = theme.engschrift,
+  font = theme.dinCondensedRegular,
   fontSize = "50px"
 ) => (
   <TextBox
-    top={133}
+    top={140}
     left={313}
     textAlign="left"
     width="100%"
@@ -54,14 +54,14 @@ const TimerComplete: any = (
 );
 
 const countdownRenderer =
-  (color = theme.white, font = theme.engschrift, fontSize = "50px") =>
+  (color = theme.white, font = theme.dinCondensedRegular, fontSize = "50px") =>
   ({ hours, minutes, seconds, completed }): JSX.Element => {
     if (completed) {
       return TimerComplete();
     }
     return (
       <TextBox
-        top={133}
+        top={140}
         left={313}
         textAlign="left"
         width="100%"
@@ -80,7 +80,10 @@ const countdownRenderer =
     );
   };
 
-class BreakWithVideo extends React.Component<IBreakWithVideoProps, IBreakWithVideoState> {
+class BreakWithVideo extends React.Component<
+  IBreakWithVideoProps,
+  IBreakWithVideoState
+> {
   private io = new Socket();
 
   constructor(props) {
@@ -106,16 +109,15 @@ class BreakWithVideo extends React.Component<IBreakWithVideoProps, IBreakWithVid
 
   render() {
     const { classes } = this.props;
-    const { event, countdown, venue, showTimer, startText } =
-      this.state;
+    const { event, countdown, venue, showTimer, startText } = this.state;
 
-    const { transparent, engschrift } = theme;
+    const { transparent, dinCondensedRegular } = theme;
 
     return (
       <div className={classes.root}>
         <TextBox
           // event text
-          top={65}
+          top={75}
           left={1195}
           textAlign="left"
           width="100%"
@@ -123,7 +125,7 @@ class BreakWithVideo extends React.Component<IBreakWithVideoProps, IBreakWithVid
           backgroundColor={transparent}
         >
           <Text
-            font={merge({}, engschrift, {
+            font={merge({}, dinCondensedRegular, {
               fontSize: "60px",
             })}
           >
@@ -132,7 +134,7 @@ class BreakWithVideo extends React.Component<IBreakWithVideoProps, IBreakWithVid
         </TextBox>
         <TextBox
           // venue text
-          top={133}
+          top={140}
           left={1195}
           textAlign="left"
           width="100%"
@@ -140,7 +142,7 @@ class BreakWithVideo extends React.Component<IBreakWithVideoProps, IBreakWithVid
           backgroundColor={transparent}
         >
           <Text
-            font={merge({}, engschrift, {
+            font={merge({}, dinCondensedRegular, {
               fontSize: "50px",
             })}
           >
@@ -148,7 +150,7 @@ class BreakWithVideo extends React.Component<IBreakWithVideoProps, IBreakWithVid
           </Text>
         </TextBox>
         <TextBox
-          top={65}
+          top={75}
           left={313}
           textAlign="left"
           width="100%"
@@ -156,7 +158,7 @@ class BreakWithVideo extends React.Component<IBreakWithVideoProps, IBreakWithVid
           backgroundColor={transparent}
         >
           <Text
-            font={merge({}, engschrift, {
+            font={merge({}, dinCondensedRegular, {
               fontSize: "60px",
             })}
           >
